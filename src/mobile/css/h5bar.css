@@ -1,0 +1,117 @@
+/**
+ * 工具条
+ **/
+.mwt-bar-tb {width:100%;height:100%;border-collapse:collapse;}
+.mwt-bar-tb td {text-align:center;color:#fff;background:#0e90d2;}
+.mwt-bar-tb td.active {color: #FBE468;}
+.mwt-bar-tb hr {
+	height:30px;border:none;
+	-webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+	border-left: 1px solid #ccc;
+	-webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+}
+.mwt-bar-tb button {color:inherit;background:none;border:none;outline:0;font:inherit;position:relative;}
+.mwt-bar-tb select {
+	background:none;color:inherit;
+	appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+	background: url("imgs/icons/arrow.png") no-repeat scroll right center transparent;
+}
+
+.mwt-bar-tb select option {background: #ccc;}
+.mwt-bar-tb h1 {margin:0;padding:0;font-size:20px;letter-spacing:2px;}
+
+/* radio按钮组*/
+.mwt-rdo-btns {display:inline-block;background:#fff;border-radius:300px;padding:1px;display:inline-block;}
+.mwt-rdo-btns>label {cursor:pointer;display:inline-block;}
+.mwt-rdo-btns>label>input {display:none;}
+.mwt-rdo-btns>label>span {margin-left:-5px;padding:0px 12px;display:inline-block;font-size:16px;color:#0e90d2;}
+.mwt-rdo-btns>label:first-child>span {border-top-left-radius: 300px;border-bottom-left-radius: 300px;margin-left:0;}
+.mwt-rdo-btns>label:last-child>span {border-top-right-radius:300px;border-bottom-right-radius: 300px;}
+.mwt-rdo-btns>label>input:checked+span {color:#fff;background:#0e90d2;;}
+
+/* 搜索框 */
+.mwt-text-search {
+    border:none;display:block;border-radius:2px;background:#fff;
+    white-space: nowrap;
+	position:relative;
+	height:30px;
+	width:100%;
+}
+.mwt-text-search>input {border:none;outline:none;line-height:19px;
+	position: absolute;
+    left: 5px;
+    height: 100%;
+    width: 90%;
+}
+.mwt-text-search>i {color:#999;font-size:14px;cursor:pointer;
+	position:absolute;
+	top: 50%;
+    margin-top:-7px;
+	right: 5px;
+}
+.mwt-text-search>input:focus+i, .mwt-text-search>i:hover {color:#666;}
+.mwt-text-search.round {border-radius:36px;}
+
+
+.mwt-h5bar {
+    position:absolute;
+	position:fixed;
+    left:0;
+    right:0;
+    background-color:#666;
+    color: #fff;
+}
+/*
+.mwt-h5bar.mwt-primary {background-color: #0e90d2;color:#fff;}
+.mwt-h5bar.mwt-secondary {background-color: #3bb4f2;color:#fff;}
+.mwt-h5bar.mwt-success {background-color: #006B00;color:#fff;}
+.mwt-h5bar.mwt-warning  {background-color: #FF6E1A;color:#fff;}
+.mwt-h5bar.mwt-danger {background-color: #BB0000;color:#fff;}
+.mwt-h5bar .navtab {
+    width:100%;height:100%;border-collapse:collapse;cellspacing:0px;cellpadding:0px;padding:0;margin:0;
+    color:#fff;
+}
+.mwt-h5bar .navtab td {
+    text-align:center;
+    vertical-align:middle;
+    font-family: 'microsoft yahei';
+    font-size: 14px;
+    padding:0;
+}
+.mwt-h5bar .navtab i {
+    font-size: 16px;
+    margin: 0 3px;
+    display: block;
+}
+.mwt-h5bar .navtab button {
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+    font: inherit;
+    position: relative;
+    text-align:center;
+}
+.mwt-h5bar .navtab button.active { color: #FBE468; }
+.mwt-h5bar .navtab .subdiv {
+    position: absolute;
+    display:none;
+    z-index:99;
+    background:#fff;
+    color: #333;
+}
+.mwt-h5bar .navtab .sep {
+    border-left:solid 1px #fff;
+    display:block;
+}
+*/
+
+

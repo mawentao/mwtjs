@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>消息显示</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt.min.js" charset="utf-8"></script>
+</head>
+<body style="padding:10px;">
+<script>
+
+function alert_msg()
+{
+    MWT.alert({
+        title: '消息标题（自定义）',
+        msg: '消息内容',
+        animate: 'flipInX'
+    });
+}
+
+function confirm_msg()
+{
+    MWT.confirm({
+        title: '请确认（自定义）',
+        msg: '确定要执行此操作吗？',
+        animate: 'rubberBand'
+     },function(res){
+        if (res) {
+            alert("确认");
+        } else {
+            alert("取消");
+        }
+    });
+}
+
+</script>
+
+自定义标题和弹出动画<br>
+<button class='mwt-btn mwt-btn-default' onclick='alert_msg();'>MWT.alert</button>
+<button class='mwt-btn mwt-btn-default' onclick='confirm_msg();'>MWT.confirm</button>
+
+</body>
+</html>

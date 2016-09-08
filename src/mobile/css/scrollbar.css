@@ -1,0 +1,13 @@
+.mwt-scrollbar-a {
+	font-size:16px;
+	color:#666;
+	text-decoration:none;
+	text-align:center;
+	padding: 4px 4px;
+	overflow: hidden;                                                                      
+    white-space: nowrap;                                                                   
+    text-overflow: ellipsis;  
+}
+.mwt-scrollbar-a.active {
+	color:#ff8904;
+}

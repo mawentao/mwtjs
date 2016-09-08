@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>ComboxField DEMON</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt.min.js"></script>
+  <script>
+	var fd,store, grid;
+
+    function query() {
+		store.baseParams = {
+            "key": get_value("so-key")
+        };
+		grid.load();
+	};
+
+	function create_grid(divid) {
+		store = new MWT.Store({
+            "url": "../../ui/ajax.php"
+        });
+		grid = new MWT.Grid({
+			render: divid,
+            store: store,
+			noheader: true,
+            pagebar: true, //!< false 表示不分页
+            pageSize: 10,
+			pagebarSimple: true,
+            multiSelect:false, 
+            bordered: false,
+            cm: new MWT.Grid.ColumnModel([
+              {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
+              {head:"姓名", dataIndex:"name", width:300},
+              {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+                return v==1 ? "男" : "女";
+              }},
+              {head:"操作", dataIndex:"id",render:function(v,item){
+                return v;
+                //"<button class='mwt-btn mwt-btn-default mwt-btn-xs' "+
+                //"onclick=\"require('grid').show_detail("+v+");\">查看详情</button>";
+              }}
+            ]),
+            tbar: [
+              {type:"search",label:"GO",id:"so-key",width:300,placeholder:'ss',handler:query}
+            ],
+			rowclick: function(im) {
+				//print_r(im);
+				fd.setText(im.name);
+				fd.setValue(im.id);
+			}
+        });
+		grid.create();
+	}
+
+    $(function(){
+        fd = new MWT.ComboxField({
+            render:"dom-div",
+            cls:'radius',
+            style:'width:100px;', 
+			popStyle: 'width:400px',
+            value:'',
+			empty:false,
+			errmsg: '请选择用户'
+        });
+		fd.on('create',function(){
+			create_grid(fd.getPopDivId());
+		});
+		fd.on('pop',function(){
+			if (store.size()==0) {
+				grid.load();
+			}
+		});
+        fd.create();
+		
+/*
+        fd.on("change",function(t){
+            var v = t.value;
+            alert(v);
+        });
+*/
+        $("#set-btn").click(function(){
+            fd.setValue(0);
+        });
+        $("#get-btn").click(function(){
+            alert(fd.getValue());
+        });
+        $("#reset-btn").click(function(){
+            fd.reset();
+        });
+    });
+  </script>
+</head>
+<body style="padding:10px;">
+
+<br>
+<br>
+<div id='dom-div'></div>
+<br>
+<button id='set-btn' class='mwt-btn mwt-btn-default'>设值</button>
+<button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
+<button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
+
+</body>
+</html>

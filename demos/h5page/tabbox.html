@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>九宫格</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8" type="text/javascript"></script>
+  <script>
+    jQuery(function(){
+    	var h5page = new MWT.H5Page({
+            header: new MWT.H5Navbar({
+                position: 'top',
+                cls: 'mwt-primary',
+                items: [
+               		{label:'<h1>九宫格</h1>'}
+            	]
+            }),
+            bodyStyle: "background-color:#fff;padding:0px;",
+            pagebody: "<div id='tabbox-div'></div>"
+        });
+        h5page.create();
+		//
+		var tabbox = new MWT.TabBox({
+			render: 'tabbox-div',
+			size: '3x3',
+			border: true,
+			cellStyle: 'text-align:center;height:100px;line-height:100px;',
+			items: [
+				{html:'AAA',handler:function(){alert('aaa');}},
+				{html:'BBB',handler:function(){alert('bbb');}},
+				{html:'CCC',handler:function(){alert('ccc');}},
+				{html:'DDD',handler:function(){alert('ddd');}},
+				{html:'EEE',handler:function(){alert('eee');}},
+				{html:'FFF',handler:function(){alert('fff');}},
+				{html:'GGG',handler:function(){alert('ggg');}},
+				{html:'HHH',handler:function(){alert('hhh');}}
+			]
+		});
+		tabbox.show();
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>

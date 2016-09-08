@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>文本输入控件</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/dep/jquery/1.11.2/ajaxfileupload.js"></script>
+  <script src="../../static/mwt.min.js"></script>
+  <script>
+    jQuery(function(){
+        var fd = new MWT.TextField({
+            render   : 'dom-div',
+            type     : 'textarea',
+            style    : 'width:300px;height:200px;',
+            placeholder: '请输入评论',
+            value    : '',
+            empty    : false,
+            errmsg   : "请输入评价,评价内容不超过10个字符",
+            checkfun : function(v) {
+                return v.length<=10;
+            }
+        });
+        fd.create();
+
+        jQuery("#set-btn").click(function(){
+            fd.setValue("浙J5FU91");
+        });
+        jQuery("#get-btn").click(function(){
+            alert(fd.getValue());
+        });
+        jQuery("#reset-btn").click(function(){
+            fd.reset();
+        });
+    });
+  </script>
+</head>
+<body style="padding:10px;">
+<br>
+<br>
+<br>
+身份证号：<div id='dom-div'></div>
+<br>
+<button id='set-btn' class='mwt-btn mwt-btn-default'>设值</button>
+<button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
+<button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
+
+
+
+</body>
+</html>

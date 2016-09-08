@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>侧边栏</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  
+</head>
+<body id='main-body'>
+<script>
+
+var h5page;
+
+$(document).ready(function(){
+
+    var leftSide = new MWT.SideBar({
+        render: 'sidebar',
+        //position: 'right',
+        width: '50%',
+        bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
+        pagebody: "side bar"
+    });
+	var rightSide = new MWT.SideBar({
+        render: 'sideright',
+        position: 'right',
+        width: '50%',
+        bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
+        pagebody: "side bar"
+    });
+
+    h5page = new MWT.H5Page({
+        render: 'main-body',
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            items: [
+               {icon:'fa-angle-left',width:40,handler:function(){leftSide.open();}},
+               {'label':'<h1>侧边栏</h1>'},
+               {icon:'fa-angle-right',width:40,handler:function(){rightSide.open();}}
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
+        pagebody: ""
+    });
+    h5page.create();
+});
+</script>
+</body>
+</html>

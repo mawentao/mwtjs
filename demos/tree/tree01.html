@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>简单树</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt.min.js" charset="utf-8"></script>
+</head>
+<body style="padding:10px;">
+<script>
+var tree;
+$(document).ready(function(){
+    var data = {
+        node_id:0,
+        node_name:"所有模块",
+        node_value: 0,
+        children: [
+            {node_id:1, node_name:"Discuz!Mobile接口模块", node_value:1, children:[
+                {node_id:'1-1', node_name:"用户登录相关", node_value:1},
+                {node_id:'1-2', node_name:"好友管理", node_value:2}
+            ]},
+            {node_id:2, node_name:"BkSvr接口模块", node_value:2, expand:false, children:[
+                {node_id:'2-3', node_name:"用相关", node_value:3},
+                {node_id:'2-4', node_name:"管理", node_value:4}
+            ]}
+        ]
+    };
+    tree = new MWT.Tree({    
+        render: 'tree-div',
+        showRoot: false,
+    });
+    tree.on("click-node",function(obj){
+        var node = obj.clicked_node;
+        print_r(node);
+        $(".tree-node").removeClass("active");
+        $("#tn-"+node.node_id).addClass("active");
+    });
+    tree.load(data);
+    //tree.click_node(data.children[0].node_id);
+});
+</script>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-xs' onclick='tree.unfold();'>全部展开</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-xs' onclick='tree.fold();'>全部折叠</button>
+  <br><br>
+  <div id='tree-div' style='border:solid 1px #ccc;padding:10px;width:200px;'></div>
+</body>
+</html>

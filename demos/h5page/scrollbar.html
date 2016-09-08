@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>滚动工具条</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8" type="text/javascript"></script>
+  <script>
+	function initbar()
+	{
+		var bar = new MWT.ScrollBar({
+			render: 'scrollbar-div',
+			items: [
+				{label:'头条',handler:function(idx){alert(idx+'. 头条');}},
+				{label:'体育',handler:function(idx){alert(idx+'. 体育');}},
+				{label:'娱乐',handler:function(idx){alert(idx+'. 娱乐');}},
+				{label:'财经',handler:function(idx){alert(idx+'. 财经');}},
+				{label:'电影',handler:function(idx){alert(idx+'. 电影');}},
+				{label:'音乐',handler:function(idx){alert(idx+'. 音乐');}},
+				{label:'游戏',handler:function(idx){alert(idx+'. 游戏');}},
+				{label:'NBA',handler:function(idx){alert(idx+'. NBA');}},
+				{label:'读书',handler:function(idx){alert(idx+'. 读书');}},
+				{label:'教育',handler:function(idx){alert(idx+'. 教育');}},
+				{label:'医疗',handler:function(idx){alert(idx+'. 医疗');}},
+				{label:'户外运动', width:60, handler:function(idx){alert(idx+'. 户外运动');}},
+			]
+		});
+		bar.create();
+	}
+
+    jQuery(function(){
+    	h5page = new MWT.H5Page({
+            header: new MWT.H5Navbar({
+                position: 'top',
+                cls: 'mwt-primary',
+                items: [
+               		{label:'<h1>滚动工具条</h1>'}
+            	]
+            }),
+            bodyStyle: "background-color:#fff;padding:0px;",
+            pagebody: "<div id='scrollbar-div' class='mwt-border-bottom' style='background:#fff;'></div>"
+        });
+        h5page.create();
+		initbar();
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5页面</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  
+</head>
+<body>
+<script>
+
+var h5page;
+
+$(document).ready(function(){
+    h5page = new MWT.H5Page({
+        render: 'main-body',
+        animate:  'slideLeft',
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            bordered: true,
+            bodyStyle: 'background:#ccc',
+            height: 40,
+            items: [
+               {'label':'首页', handler:function(){alert('phone');}},
+               {icon:'fa-share-square-o','label':'分享'},
+               {icon:'fa-share-square-o','label':'分享'}
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2",
+        footer: new MWT.H5Navbar({
+           position: 'bottom',
+           cls: 'mwt-primary',
+           //height: 40,
+           items: [
+               {icon:'fa-phone','label':'呼叫', layout:'horizontal',handler:function(){alert('phone');}},
+               {icon:'fa-share-square-o','label':'分享'},
+               {icon:'fa-commenting','label':'消息'},
+               {icon:'fa-user','label':'我的'}
+           ]
+        }),
+        pagebody: "<p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p><p>aaaa</p>"
+    });
+    h5page.create();
+
+    h5page.getFooter().active(0);
+});
+</script>
+</body>
+</html>

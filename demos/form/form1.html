@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>表单</title>
+  <link href='../../libs/jquery-ui/jquery-ui.min.css' rel="stylesheet"/>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js" charset="utf-8"></script>
+  <script src="../../static/dep/jquery/1.11.2/ajaxfileupload.js" charset="utf-8"></script>
+  <script src="../../libs/jquery-ui/jquery-ui.min.js" charset="utf-8"></script>
+  <script src="../../static/mwt.min.js" charset="utf-8"></script>
+  <script>
+    jQuery(function(){
+        var form = new MWT.Form({
+            fields: [
+                {render:'hidden-div',type:'hidden',name:'id',value:'0'},
+                {render:'text-div',type:'text',name:'name',value:'',
+                 empty  :false,
+                 errmsg : "请输入用户名,不超过10个字符",
+                 checkfun: function(v){return v.length<=10;}
+                },
+                {render:'password-div',type:'password',name:'passwd',value:'',
+                 empty  :false,
+                 errmsg : "请输入密码,6-15个字符",
+                 checkfun: function(v){return v.length>=6 & v.length<=15;}
+                },
+                {render:'image-div',type:'image',name:'photo',value:'',
+                 imgupapi : 'http://139.196.29.35:8008/mawt/index.php/toolkit/ajax/upimg',
+                 errmsg : "请上传图片",
+                 style: 'border:solid 1px #ccc;'
+                }
+            ]
+        });
+        var txtfd = new MWT.TextField({
+            render   : 'textarea-div',
+            type     : 'textarea',
+            style    : 'width:300px;height:200px;',
+            value    : '',
+            empty    : false,
+            errmsg   : "请输入介绍，不超过50个字符",
+            checkfun : function(v) { return v.length<=50; }
+        });
+        form.addField('desc',txtfd);
+		var dtimefd = new MWT.DateTimePicker({
+            render:"datetimepic",
+            format: "yy-mm-dd",
+            style:'width:200px;float:left'
+        });
+		form.addField('dtm',dtimefd);
+
+        form.create();
+
+        jQuery("#subbtn").click(function(){
+            var data = form.getData();
+            print_r(data);
+        });
+        jQuery("#rstbtn").click(function(){
+            form.reset();
+        });
+        jQuery('#loadbtn').click(function(){
+            var data = {
+                id: date('YmdHis'),
+                name: 'conan',
+                passwd: '123456',
+                desc: 'hello, my name is conan'
+            };
+            form.set(data);
+        });
+
+        jQuery('#getbtn').click(function(){
+            var fd1 = form.getField(0);
+            var fd2 = form.getFieldByName('passwd');
+            var data = {
+                id: fd1.getValue(),
+                passwd: fd2.getValue()
+            };
+            print_r(data);
+        });
+    });
+  </script>
+</head>
+<body style="padding:10px;">
+  <h1>表单</h1>
+  <table>
+    <tr><td>hidden</td><td><div id="hidden-div"></div></td></tr>
+    <tr><td>text</td><td><div id="text-div"></div></td></tr>
+    <tr><td>password</td><td><div id="password-div"></div></td></tr>
+    <tr><td>image</td><td><div id="image-div"></div></td></tr>
+    <tr><td>textarea</td><td><div id="textarea-div"></div></td></tr>
+    <tr><td>datetime</td><td><div id="datetimepic"></div></td></tr>
+  </table>
+  <button id="subbtn" class="mwt-btn mwt-btn-default">提交</button>
+  <button id="rstbtn" class="mwt-btn mwt-btn-default">重置</button>
+  <button id="loadbtn" class="mwt-btn mwt-btn-default">加载</button>
+
+  <button id="getbtn" class="mwt-btn mwt-btn-default">获取Field的值</button>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5列表页面</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  
+</head>
+<body id='main-body'>
+<script>
+
+var h5page;
+var store = new MWT.Store({
+    "url": "../../ui/ajax.php"
+});
+var listview;
+
+
+$(document).ready(function(){
+    h5page = new MWT.H5Page({
+        render: 'main-body',
+		animate: 'slideRight',
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            items: [
+               {icon:'fa-angle-left',width:30, iconStyle:'font-size:30px;', handler:function(){window.location="page02.html";}},
+               {icon:'fa-home',width:30, handler:function(){alert('home');}},
+               {'label':'<h1>列表页</h1>'},
+               {'label':'刷新', width:60, handler:function(){listview.load();}},
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2;padding:0px;",
+        pagebody: "<div id='lvdiv'></div>"
+    });
+    h5page.create();
+
+    listview = new MWT.ListView({
+        render: "lvdiv",
+        store: store,
+        pageSize: 10,
+        bodyCls: 'weui_cells weui_cells_access',
+        bodyStyle: "margin-top:0;",
+        pageStyle: "color:gray;",
+        cellfun: function(item){
+            var gender = item.sex==1 ? "男" : "女";
+            return '<a name="cellbtn" class="weui_cell" href="javascript:;" data-id="'+item.id+'">'+
+                '<div class="weui_cell_bd weui_cell_primary">'+
+                    '<p>['+item.id+'] '+item.name+'</p>'+
+                '</div>'+
+                '<div class="weui_cell_ft">'+gender+'</div>'+
+            '</a>';
+        },
+        emptyfun: function() {
+            return "查询不到数据";
+        }
+    });
+    listview.create();
+    listview.load();
+    store.on("load",function(){
+        jQuery("[name=cellbtn]").unbind('click').click(function(){
+            var id = jQuery(this).data('id');
+            alert(id);
+        });
+    });
+});
+</script>
+
+</body>
+</html>

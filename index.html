@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>MwtJs在线学习平台</title>
+  <link rel="stylesheet" href="static/dep/extjs/3.0/resources/css/ext-all.css">
+  <style>
+    body,p,b,span,div {font-family:"微软雅黑";}
+  </style>
+  <script src="static/dep/extjs/3.0/ext-base.js"></script>
+  <script src="static/dep/extjs/3.0/ext-all.js"></script>
+  <script src="static/dep/extjs/3.0/ext-lang-zh_CN.js"></script>
+  <script src="static/dep/requirejs/2.1.9/require.js"></script>
+</head>
+<body>
+    <!-- Demo对话框 -->
+    <div id="demowin_div"></div>
+    <!-- 源代码输入框 -->
+    <textarea id="source" style="width:100%;height:100%;"></textarea>
+    <!-- 显示页面 -->
+	<iframe id="main_area" name="ifm" src="demos/tmp/hello.html" width="100%" height="100%"></iframe>
+
+<script>
+    require.config({
+		baseUrl: 'assets/',
+		paths: {},
+		packages: [
+			{name:'jquery', location:'../static/dep/jquery/1.11.2', main:'jquery.min'},
+			{name:'er',     location:'../static/dep/er/3.0.3', main:'main'}
+		]
+	});
+	
+	require(['main'], function (main) {
+        main.init();
+    });
+</script>
+</body>
+</html>

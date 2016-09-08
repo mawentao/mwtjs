@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5幻灯片滑动</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  <script>
+var h5page;
+
+$(document).ready(function(){
+    h5page = new MWT.H5Page({
+        render: 'main-body',
+		animate: 'slideRight',
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            items: [
+               {icon:'fa-angle-left',width:30, iconStyle:'font-size:30px;', handler:function(){window.location="page02.html";}},
+               {icon:'fa-home',width:30, handler:function(){alert('home');}},
+               {'label':'<h1>幻灯片</h1>'},
+               {'label':'注册', width:60, handler:function(){alert('注册');}},
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2;padding:10px;",
+        pagebody: '<div id="slidediv" style="width:100%;height:200px;background:#e00;"></div>'
+    });
+    h5page.create();
+
+    var slide=new MWT.Slide({
+        render: 'slidediv',
+        autoplay: 0,
+        images: [
+			{url:'http://139.196.29.35:8008/discuz/data/attachment/portal/201608/12/093803u9kk30b851zbpbpo.jpg.thumb.jpg',
+			 href: 'http://139.196.29.35:8008/discuz/',
+             title: 'discuz站点'
+			}/*,
+            {url:'http://img.mm522.net/flashAll/20120206/13285185634aUfhU.jpg',
+             style:'height:200px',
+             handler:function(){alert("f1");}
+            },
+            {url:'http://ww3.sinaimg.cn/thumbnail/62eeaba5jw1f294ir18xij20fa0a6dgt.jpg',
+             handler:function(){alert("f2");}
+            },
+            {url:'http://img.mm522.net/flashAll/20120206/1328518595gHstPk.jpg',
+             handler:function(){alert("f2");}
+            },
+            {url:'http://img.mm522.net/flashAll/20120206/1328518621H7WRFQ.jpg',
+             handler:function(){alert("f3");}
+            }*/
+        ]
+    });
+    slide.create();
+});
+</script>
+
+</head>
+<body id='main-body'>
+</body>
+</html>

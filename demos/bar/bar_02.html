@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>多行工具栏</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
+</head>
+<body style="padding:10px;">
+
+<script>
+define("grid", function(require){
+    require("jquery");
+    require("mwt");
+    var o = {};
+    o.init = function() {
+        var thiso=this;
+        var option = [
+            {"value":0,"text":"男"},
+            {"value":1,"text":"女"}
+        ];
+        var bar = new MWT.Bar({
+            "render":"bar-div",
+            "style": "border:solid 1px #ccc;background-color:#efefef;",
+            "items": [
+                {"label":"add",class:'mwt-btn mwt-btn-primary',handler:function(){alert("ss");}},
+                {"label":"delete",class:'mwt-btn mwt-btn-primary',handler:function(){alert("delete");}},
+                {"label":"性别",id:"sel",type:'select',width:50,value:'1',options:option,handler:function(){alert("delete");}},
+                {"label":"delete",type:'search',id:'ds',width:300,handler:function(){alert("search");}},
+                {"html":"<div id='ss'>sss</div>"},
+                '->',
+                {"label":"edit",handler:thiso.edit},
+                '-',
+                {"label":"edit",class:'mwt-btn-success',handler:thiso.edit},
+                {"label":"性别",id:"sel2",type:'select',width:50,value:'1',options:option,handler:function(){alert("delete");}},
+                {"label":"delete",type:'search',class:'success',id:'dsd',width:300,handler:function(){alert("search");}},
+                '-',
+                {"label":"edit",class:'mwt-btn-warning',handler:thiso.edit},
+                {"label":"delete",type:'search',class:'warning',handler:function(){alert("search");}},
+                '-',
+                {"label":"edit",class:'mwt-btn-danger',handler:thiso.edit},
+                {"label":"delete",type:'search',class:'danger',handler:function(){alert("search");}},
+                '-',
+                {label:"用户名",type:"text",width:150,id:"fm-uname",handler:o.login},
+                {label:"密码",type:"password",width:150,id:"fm-pass",handler:o.login},
+                {label:"登录",class:'mwt-btn mwt-btn-success',handler:o.login}
+            ]
+        });
+        bar.create();
+    };
+    o.edit=function(){
+        alert("edit");
+    };
+    o.login=function(){
+        var params = {uname:get_text_value("fm-uname"),pass:get_text_value("fm-pass")};
+        print_r(params);
+    };
+    return o;
+});
+
+
+  require.config({
+      baseUrl: "../../static/dep",
+      packages: [
+          {name:'jquery', location:'jquery/1.11.2', main:'jquery.min'},
+          {name:'mwt', location:'../', main:'mwt.min'}
+      ]
+  });
+  require(["grid"], function(grid){
+      grid.init();
+  });
+</script>
+
+<div id='bar-div'></div>
+
+</body>
+</html>

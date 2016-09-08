@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="full-screen" content="yes">
+  <!-- UC应用模式 -->
+  <meta name="browsermode" content="application">
+  <!-- QQ应用模式 -->
+  <meta name="x5-page-mode" content="app">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5页面</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <style>
+    .mwt-primary td {background:darkred;}
+    .mwt-primary td.active {color:gold;}
+  </style>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  
+</head>
+<body id='main-body'>
+<script>
+
+var h5page;
+
+$(document).ready(function(){
+    var code = '<div style="margin:50px 0;">';
+	for (var i=0; i<100; i++) {
+        code += "<p>"+(i+1)+". aaaaa</p>";
+	}
+    code+="</div>";
+	jQuery('body').append(code);
+
+	var tbar = new MWT.H5Navbar({
+		position: 'top',
+		cls: 'mwt-primary',
+		items: [
+		   {type:'back',width:40,style:"font-size:22px;"},
+           {icon:'fa-home',width:30, handler:function(){alert('home');}},
+           {'label':'<h1>标题</h1>'},
+           {icon:'fa-bars', 'label':'asd', width:30},
+           {icon:'fa-bars',width:30, iconStyle:'font-size:28px;',sub:'asdasdsa', subStyle:'right:0;width:200px;'}
+        ]
+	});
+	tbar.create();
+
+	var bbar = new MWT.H5Navbar({
+       position: 'bottom',
+       cls: 'mwt-primary',
+       //height: 40,
+       items: [
+           {icon:'fa-phone','label':'呼叫', iconStyle:'display:inline-block;',handler:function(){alert('phone');}},
+           {icon:'fa-share-square-o','label':'分享',sub:'asdasdsa', subStyle:'left:0;width:100px;'},
+           {'label':'呼叫'},
+           {icon:'fa-commenting','label':'消息'},
+           {icon:'fa-user','label':'我的'}
+       ]
+    });
+	bbar.create();
+    bbar.active(2);
+});
+</script>
+</body>
+</html>

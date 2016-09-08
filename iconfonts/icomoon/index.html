@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>icomoon</title>
+  <link rel='stylesheet' type='text/css' href='icomoon/icon.css'/>
+  <style>
+    body {background:#ff8904;font-family:Arial;}
+    ul {display:inline-block;width:80%;}
+    li {display:inline-block;float:left;margin-right:40px;color:#fff;font-size:16px;
+      line-height:30px;    width: 100px; text-align: left;
+    }
+  </style>
+  <script language="javascript">
+    var icons = [
+        'activity','wegene','contact','about','protect','drug','hear','ear',
+        'beat','23','good','bad','format','strike','full','gene','count','order',
+        'google','facebook','twitter','cart','bulb','download','home','bar','right',
+        'left','unlock','verify','date','log','forbid','transfer','reader','phone',
+        'file', 'ol', 'undo', 'redo', 'bold', 'italic', 'underline', 'ul', 'image',
+        'video', 'quote', 'code', 'preview', 'help', 'h', 'prestige', 'v', 'score',
+        'plus', 'followed', 'mytopic', 'up', 'trash', 'fold', 'thank', 'report', 'qzone',
+        'at', 'attach', 'bell', 'triangle', 'wechat', 'lock', 'i', 'bubble', 'flag',
+        'txweibo', 'bestbg', 'best', 'job', 'favor', 'down', 'location', 'bind',
+        'weibo', 'qq', 'signup', 'users', 'topic', 'login', 'logout', 'insert', 
+        'setting', 'inbox', 'pic', 'user', 'delete', 'comment', 'share', 'loading', 
+        'inviteask', 'list', 'ask', 'search', 'more', 'agree', 'disagree', 'reply',
+        'draft', 'check', 'invite', 'edit'
+    ];
+    function load()
+    {
+        for (var i=0; i<icons.length; ++i) {
+            var nm = icons[i];
+            //var code = '<li><i class="icon icon-'+nm+'"></i>nm</li>';
+            var node=document.createElement("LI");
+            node.innerHTML = '<i class="icon icon-'+nm+'"></i> '+nm;
+            document.getElementById("iconul").appendChild(node);
+        }
+    }
+  </script>
+</head>
+<body onload="load();">
+  <center>
+    <ul id="iconul"></ul>
+  </center>
+</body>
+</html>

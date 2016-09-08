@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>弹出框</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/dep/jquery/1.11.2/ajaxfileupload.js"></script>
+  <script src="../../static/mwt.min.js"></script>
+  <script>
+    jQuery(function(){
+        var pop1 = new MWT.Popover({
+            anchor : 'btn1',
+            html   : '<b>弹出框</b>'
+        });
+        var pop2 = new MWT.Popover({
+            anchor : 'btn2',
+            cls    : 'mwt-popover-danger',
+            html   : '<b>弹出框，文字多点啊，哈哈哈哈</b>'
+        });
+        jQuery("#btn1").click(function(){pop1.toggle();});
+        jQuery("#btn2").click(function(){pop2.toggle();});
+    });
+  </script>
+</head>
+<body style="padding:10px;">
+
+<br>
+<br>
+<br>
+<center>
+  <button id="btn1" class="mwt-btn mwt-btn-default">Popover Default</button>
+  <button id="btn2" class="mwt-btn mwt-btn-default">Popover Danger</button>
+</center>
+
+
+
+</body>
+</html>

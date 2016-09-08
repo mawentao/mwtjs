@@ -1,0 +1,56 @@
+/* form.css, (c) 2016 mawentao */
+
+/* 图片上传控件 */
+.upimg {cursor:pointer;}
+
+.mwt-imgup-ul {margin:0;padding:0;display:inline-block;}
+.mwt-imgup-ul>li {list-style:none;padding:0 15px 10px 0;display:inline-block;position:relative;}
+.mwt-imgup-ul>li>i {position:absolute;top:0;right:5px;color:red;}
+
+
+.date-pop {display:none;width:520px;border:solid 1px #aaa;border-radius:4px;padding:5px;position:absolute;}
+.date-pop>.btn-bar {
+    margin:0 0 5px;
+    padding:5px;
+    background: #ddd;
+}
+.date-pop>.btn-bar>.fr {float:right;}
+.date-pop>.btn-bar>button {margin-right:2px;}
+
+.mwt-field {position:relative;}
+.mwt-field>a>span {float:left;}
+.mwt-field>a>i {float:right;margin-top:3px;color:#aaa;}
+.mwt-field-pop {
+	position:absolute;
+    display:none;
+    margin-top:2px;
+    padding:0;
+    z-index: 9;
+	min-width:100px;
+	height:auto;
+    border: 1px solid #999;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    background-color: #fff;
+}
+
+/* 推荐词弹框样式 */
+.mwt-pop-words {padding:10px;}
+.mwt-pop-words>a {
+	color:blue;
+	font-size:14px;
+	float:right;
+	margin-bottom:10px;
+}
+.mwt-pop-words>ul {margin:0;padding:0;}
+.mwt-pop-words>ul>li {
+	list-style:none;
+	margin:0;
+	padding:2px 5px;
+	font-size:14px;
+	color:#333;
+}

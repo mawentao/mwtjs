@@ -1,0 +1,4 @@
+/* jquery-ui-mine.css, (c) 2016 mawentao */
+#ui-datepicker-div, .ui-datepicker{ font-size: 90%; }
+.ui-widget button {font-size:13px;font-family:'microsoft yahei';border-radius:2px;}
+.ui-priority-primary {font-weight:200;}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>SelectField DEMON</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js"></script>
+  <script>
+    $(function(){
+        var fd = new MWT.RatingField({
+            render:"dom-div",
+            //style:'width:100px;',
+            starStyle: 'color:gold;margin-right:5px;font-size:22px;',
+            noteStyle: 'color:red;',
+            notes: {
+                1: '1分',
+                2: '2分',
+                3: '3分',
+                4: '4分',
+                5: '5分'
+            },
+            value:0
+        });
+        fd.create();
+        fd.on("change",function(t){
+            var v = t.value;
+            alert(v);
+        });
+
+        $("#set-btn").click(function(){
+            fd.setValue(3);
+        });
+        $("#get-btn").click(function(){
+            alert(fd.getValue());
+        });
+        $("#reset-btn").click(function(){
+            fd.reset();
+        });
+    });
+  </script>
+</head>
+<body style="padding:10px;">
+
+<div id='dom-div'></div>
+<br>
+<button id='set-btn' class='mwt-btn mwt-btn-default'>设值</button>
+<button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
+<button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
+
+</body>
+</html>

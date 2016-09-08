@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>带工具栏的Grid</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
+</head>
+<body style="padding:10px;">
+
+<script>
+define("grid", function(require){
+    require("jquery");
+    require("mwt");
+    var store,grid,o = {};
+    var sexOptions=[
+        {value:1,text:"男"},
+        {value:0,text:"女"}
+    ];
+
+    o.init = function(){
+        var thiso = this;
+        store = new MWT.Store({
+            "url": "../../ui/ajax.php"
+        });
+        grid = new MWT.Grid({
+            render: "grid-div",
+            store: store,
+            pagebar: true, //!< false 表示不分页
+            pageSize: 10,
+            multiSelect:true, 
+            bordered: true,
+            cm: new MWT.Grid.ColumnModel([
+              {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
+              {head:"姓名", dataIndex:"name", width:300},
+              {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+                return v==1 ? "男" : "女";
+              }},
+              {head:"操作", dataIndex:"id",render:function(v,item){
+                return v;
+                //"<button class='mwt-btn mwt-btn-default mwt-btn-xs' "+
+                //"onclick=\"require('grid').show_detail("+v+");\">查看详情</button>";
+              }}
+            ]),
+            tbar: [
+              {type:"select",label:"性别",id:"sex-sel",options:sexOptions,handler:thiso.query},
+              {type:"search",label:"GO",id:"so-key",width:300,handler:thiso.query,placeholder:'ss'},
+              {type:"text",label:"GO",id:"xx",width:200,handler:thiso.query,placeholder:'name'},
+              '->',
+              {"label":"add",class:'mwt-btn mwt-btn-primary',handler:function(){alert("ss");}},
+              {"label":"查看选中的记录",handler:thiso.show_select},
+              {"html":"<div id='ss'>sss</div>"},
+              {"label":"edit",handler:function(){alert("edit");}}
+            ]
+        });
+        grid.create();
+        this.query();
+    };
+
+    o.query = function() {
+        store.baseParams = {
+            "key": get_value("so-key"),
+            "sex": get_select_value("sex-sel")
+        };
+        grid.load();
+    };
+
+    o.show_select = function(){
+        var records=grid.getSelectedRecords();
+        if (records.length==0) alert("未选择记录");
+        else {
+		    //print_r(records);
+            var idarr=[];
+            for (var i=0;i<records.length;++i)
+                idarr.push(records[i].id);
+            var ids=idarr.join(",");
+            alert(ids);
+        }
+    };
+
+    o.show_detail = function(id) {
+		var item = grid.getRecord("id", id);
+		print_r(item);
+    };
+
+    return o;
+});
+
+
+  require.config({
+      baseUrl: "../../static/dep",
+      packages: [
+          {name:'jquery', location:'jquery/1.11.2', main:'jquery.min'},
+          {name:'mwt', location:'../', main:'mwt.min'}
+      ]
+  });
+  require(["grid"], function(grid){
+      grid.init();
+  });
+</script>
+
+<div id='grid-div'></div>
+
+</body>
+</html>

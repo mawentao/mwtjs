@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>简单窗口</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
+</head>
+<body style="padding:10px;">
+
+  <button class='mwt-btn mwt-btn-default mwt-btn-lg' onclick="require('main').open();">open dialog</button>
+
+<script>
+define("main", function(require){
+    require("jquery");
+    require("mwt");
+    var dialog,o={};
+
+    o.init = function() {
+		var animate="flipInX";   //<! 动画效果: bounceInDown, zoomIn, flipInX, rubberBand
+		dialog = new MWT.H5Dialog({
+			top: 50,
+            title  : '第一个窗口',
+			animate: animate,
+            body   : '<div style="padding:20px;">弹窗内容</div>',
+            buttons  : [
+                {label:"确定",cls:'primary',handler:function(){alert("sss");}},
+                {label:"关闭",type:'close'}
+            ]
+        });
+        dialog.on("open", function(){
+            dialog.setTitle("添加记录");
+        });
+        dialog.on("beforeOpen", function(){
+            //alert("beforeOpen");
+        });
+        dialog.on("beforeClose", function(){
+            //alert("beforeClose");
+        });
+        dialog.on("close", function(){
+            //alert("close");
+        });
+    };
+    o.open = function() {
+        dialog.open("");
+    };
+    return o;
+});
+
+  require.config({
+      baseUrl: "../../static/dep",
+      packages: [
+          {name:'jquery', location:'jquery/1.11.2', main:'jquery.min'},
+          {name:'mwt', location:'../', main:'mwt_mobile.min'}
+      ]
+  });
+  require(["main"], function(main){
+      main.init();
+  });
+</script>
+
+</body>
+</html>

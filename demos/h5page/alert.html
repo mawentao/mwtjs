@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5消息弹框</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+  <script>
+var h5page;
+
+$(document).ready(function(){
+    h5page = new MWT.H5Page({
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            items: [
+               {label:'<h1>消息弹框</h1>'}
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2;padding:10px;",
+        pagebody: '<button id="toastbtn" class="mwt-btn mwt-btn-secondary radius mwt-btn-block">MWT.toast</button><br>'+
+            '<button id="alertbtn" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.alert</button><br>'+
+            '<button id="alertbtn2" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.alert（无回调）</button><br>'+
+            '<button id="alertbtn3" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.show_loading</button><br>'+
+            '<button id="alertbtn4" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.prompt</button><br>'+
+            '<button id="alertbtn5" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.prompt textarea</button><br>'+
+            '<button id="alertbtn6" class="mwt-btn mwt-btn-secondary round mwt-btn-block">MWT.confirm</button><br>'
+    });
+    h5page.open();
+
+    jQuery("#toastbtn").click(function(){
+        MWT.toast({msg:"已完成",time:2000},function(){
+            alert("callback");
+        });
+    });
+    jQuery("#alertbtn").click(function(){
+        MWT.alert({msg:"无操作权限",time:1500},function(){
+            alert("callback");
+        });
+    });
+    jQuery("#alertbtn2").click(function(){
+        MWT.alert("无操作权限");
+    });
+    jQuery("#alertbtn3").click(function(){
+        MWT.show_loading('数据加载中...');
+        setTimeout(function(){
+            MWT.hide_loading();
+        },2000);
+    });
+    jQuery("#alertbtn4").click(function(){
+		MWT.prompt({title:'输入字符串',top:100},function(msg){
+			alert(msg);
+		});
+    });
+    jQuery("#alertbtn5").click(function(){
+		MWT.prompt({title:'输入文本框',top:50,animate:'bounceInDown',multiLine:true},function(msg){
+			alert(msg);
+		});
+    });
+    jQuery("#alertbtn6").click(function(){
+		MWT.confirm({msg:'确定要删除吗？',top:50,animate:'bounceInDown'},function(){
+			alert("确定删除");
+		});
+    });
+});
+</script>
+
+</head>
+<body>
+</body>
+</html>

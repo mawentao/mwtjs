@@ -1,0 +1,185 @@
+/* mwt_mobile.css, (c) 2016 mawentao */
+
+body {padding:0;margin:0;}
+body,td,th,span,b,p,label,div,a,input,button,select,option {font-family: Arial,Tahoma,Verdana,'microsoft yahei';}
+select,button,input[type=radio],input[type=checkbox] {cursor:pointer}
+a,button,i,div {-webkit-tap-highlight-color:transparent;}
+table.tablay {width:100%;height:100%;border-collapse:collapse;cellspacing:0px;cellpadding:0px;padding:0;margin:0;}
+
+/* ------------------ h5 border ------------------------------- */
+.mwt-border-top, .mwt-border-bottom, .mwt-border-left, .mwt-border-right {
+    position:relative;
+}
+.mwt-border-top:after, .mwt-border-bottom:after {
+	content: ''; 
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+.mwt-border-left:after, .mwt-border-right:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	height:100%;
+	-webkit-transform: scaleX(.5);
+	transform: scaleX(.5);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+}
+.mwt-border-top:after {top:0; border-top:1px solid #d9d9d9;}
+.mwt-border-bottom:after {bottom: 0; border-bottom: 1px solid #d9d9d9;}
+.mwt-border-left:after {left: 0;border-left: 1px solid #d9d9d9;}
+.mwt-border-right:after {right: 0;border-right: 1px solid #d9d9d9;}
+
+
+/* --------------------------- Form Css --------------------------------- */
+.mwt-formtab {width:100%;padding:0;margin:0;}
+.mwt-formtab tr {height:25px;}
+.mwt-formtab th {font-size:14px;color:#777;padding:0 5px;text-align:left;font-weight:normal;white-space:nowrap;width:1px;}
+.mwt-formtab td {font-size:14px;color:#777;padding:0 5px;text-align:right;}
+
+.form-control {
+    border:none;
+    outline:none;
+    font-size: 17px;
+}
+select.form-control {padding-right:10px;}
+
+/* -------------- loading ----------------- */
+#mwt-flash-msg-div {
+  z-index: 10000;
+  display: none;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: 0px;
+  font-size: 12px;
+  text-align: center;
+}
+#mwt-flash-msg-div>div {
+  display:inline-block;
+  line-height:40px;
+  border-radius:4px;
+  font-family:"microsoft yahei";
+  width: 7.6em;
+}
+#mwt-flash-msg-div>.loading {
+  background: url("imgs/extloading.gif") no-repeat 20px 6px;
+  padding: 0 20px 0 60px;
+  border:solid 2px #BCD2EF;
+}
+#mwt-flash-msg-div>.danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border:solid 2px #ebccd1;
+  padding:0 25px;
+  font-size: 13px;
+}
+#mwt-flash-msg-div>.warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border:solid 2px #faebcc;
+  padding:0 25px;
+  font-size: 13px;
+}
+#mwt-flash-msg-div>.info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border:solid 2px #bce8f1;
+  padding:0 25px;
+  font-size: 13px;
+}
+#mwt-flash-msg-div>.success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border:solid 2px #d6e9c6;
+  padding:0 25px;
+  font-size: 13px;
+}
+
+
+
+/* page animate */
+.mwt-h5page, .mwt-h5page-body {
+    margin:0;
+    padding: 0;
+    //position:absolute;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow: auto;
+}
+
+/* 侧边栏 */
+.sidebar {
+    position:fixed;
+    top:0;
+    bottom:0;
+    -webkit-box-shadow:0 0 10px #000;
+    -moz-box-shadow:0 0 10px #000;
+    box-shadow:0 0 10px #000;
+	overflow-y: auto;
+}
+.sidebar-cover {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:rgba(0,0,0,0);
+    display:none;
+}
+
+
+/* well */
+.mwt-h5well {
+    padding: 5px 10px;
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    background:#fff;
+}
+
+/* listview */
+.loadmore {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    font-family: 'microsoft yahei';
+    background: #e2e2e2;
+    color: #999;
+    text-align:center;
+    padding:5px 0;
+    margin-top:10px;
+}
+.loadmore:active {
+    background: #ccc;
+}
+
+/* slide */
+.slide-title {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    line-height: 25px;
+    background: rgba(0,0,0,0.5);
+    padding: 0 5px;
+}
+.slide-title span {
+    color: #fff;
+    font-size: 14px;
+	width:300px;
+	overflow: hidden;                                                                      
+    white-space: nowrap;                                                                   
+    text-overflow: ellipsis;
+}

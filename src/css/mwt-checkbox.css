@@ -1,0 +1,136 @@
+/* mwt-checkbox.css, (c) 2016 mawentao */
+
+/* 开关立体 */
+.mwt-cbx-switch {cursor:pointer;width:70px;height:20px;position:relative;display:inline-block;}
+.mwt-cbx-switch span {
+  display:block; width:100%; height:100%;
+  background: #a5a39d;
+  border-radius: 40px;
+  box-shadow:
+      inset 0 3px 8px 1px rgba(0,0,0,0.2),
+      0 1px 0 rgba(255,255,255,0.5);
+}
+.mwt-cbx-switch span:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -6px; right: -6px; bottom: -6px; left: -6px;
+  border-radius: inherit;
+  background: #f2f2f2;
+  background: -moz-linear-gradient(#f2f2f2, #ababab);
+  background: -ms-linear-gradient(#f2f2f2, #ababab);
+  background: -o-linear-gradient(#f2f2f2, #ababab);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#ababab));
+  background: -webkit-linear-gradient(#f2f2f2, #ababab);
+  background: linear-gradient(#f2f2f2, #ababab);
+}
+.mwt-cbx-switch span i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  background: silver;
+  position: absolute;
+  z-index: 2;
+  right: 50%;
+  top: 0;
+  background: #b2ac9e;
+  background: -moz-linear-gradient(#f7f2f6, #b2ac9e);
+  background: -ms-linear-gradient(#f7f2f6, #b2ac9e);
+  background: -o-linear-gradient(#f7f2f6, #b2ac9e);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#f7f2f6), to(#b2ac9e));
+  background: -webkit-linear-gradient(#f7f2f6, #b2ac9e);
+  background: linear-gradient(#f7f2f6, #b2ac9e);
+  box-shadow:
+      inset 0 1px 0 white,
+      0 0 8px rgba(0,0,0,0.3),
+      0 5px 5px rgba(0,0,0,0.2);
+}
+.mwt-cbx-switch span i:after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  width: 70%;
+  height: 50%;
+  background: #d2cbc3;
+  background: -moz-linear-gradient(#cbc7bc, #d2cbc3);
+  background: -ms-linear-gradient(#cbc7bc, #d2cbc3);
+  background: -o-linear-gradient(#cbc7bc, #d2cbc3);
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(#cbc7bc), to(#d2cbc3));
+  background: -webkit-linear-gradient(#cbc7bc, #d2cbc3);
+  background: linear-gradient(#cbc7bc, #d2cbc3);
+  border-radius: inherit;
+}
+.mwt-cbx-switch span i:before {
+  content: "off";
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  color: rgba(0,0,0,0.4);
+  text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  position: absolute;
+  top: 50%;
+  margin-top: -7px;
+  right: -80%;
+}
+.mwt-cbx-switch input:checked + span {
+  background: #9abb82;
+}
+.mwt-cbx-switch input:checked + span i {
+  right: -1%;
+}
+.mwt-cbx-switch input:checked + span i:before {
+  content: "on";
+  right: 125%;
+  color: #82a06a;
+  text-shadow:
+    0 1px 0 #afcb9b,
+    0 -1px 0 #6b8659;
+}
+.mwt-cbx-switch input[type=checkbox] {display:none;}
+
+/* 开关-plain */
+.mwt-cbx-switch-plain {cursor:pointer;width:60px;height:20px;position:relative;display:inline-block;}
+.mwt-cbx-switch-plain span {display:block;width:100%;height:100%;background:#a5a39d;border-radius:40px;}
+.mwt-cbx-switch-plain span i { 
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  position: absolute;
+  z-index: 2;
+  right: 50%;
+  top: 0;
+  background: #ddd;
+  box-shadow:
+      inset 0 1px 0 white,
+      0 0 2px rgba(0,0,0,0.3),
+      0 1px 1px rgba(0,0,0,0.2);
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.mwt-cbx-switch-plain span i:before {
+  content: " ";
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  color: rgba(0,0,0,0.4);
+  text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  margin-top: -7px;
+  right: -80%;
+}
+.mwt-cbx-switch-plain input:checked + span { background:#5cb85c; }
+.mwt-cbx-switch-plain input:checked + span i { right:-1%; }
+.mwt-cbx-switch-plain input:checked + span i:before { content:" "; right:120%; color:green; text-shadow:0 1px 0 #65E256;}
+.mwt-cbx-switch-plain input[type=checkbox] {display:none;}
+

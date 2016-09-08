@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>数据格式判断函数</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/mwt.min.js" charset="utf-8"></script>
+</head>
+<body style="padding:10px;">
+<script>
+  function judge(fun) {
+      var res = fun(get_text_value("in"));
+      set_html("out", json2str(res));
+  }
+</script>
+
+<input type='text' class='form-control' id='in'><br>
+<span id='out' style='margin-top:5px;color:red;'></span>
+<br><br>
+
+<button class='mwt-btn mwt-btn-default' onclick='judge(is_number);'>is_number</button>
+<button class='mwt-btn mwt-btn-default' onclick='judge(is_decimal);'>is_decimal</button>
+<button class='mwt-btn mwt-btn-default' onclick='judge(is_phone);'>is_phone</button>
+<button class='mwt-btn mwt-btn-default' onclick='judge(is_email);'>is_email</button>
+<button class='mwt-btn mwt-btn-default' onclick='judge(is_url);'>is_url</button>
+
+</body>
+</html>

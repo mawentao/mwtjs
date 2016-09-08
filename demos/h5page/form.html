@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>H5表单页面</title>
+  <link href='../../static/mwt_mobile.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../../static/dep/jquery/1.11.2/ajaxfileupload.js"></script>
+  <script src="../../static/mwt_mobile.min.js" charset="utf-8"></script>
+</head>
+<body>
+<script>
+
+var h5page;
+
+jQuery(document).ready(function(){
+    h5page = new MWT.H5Page({
+        header: new MWT.H5Navbar({
+            position: 'top',
+            cls: 'mwt-primary',
+            items: [
+               {'label':'<h1>表单页</h1>'},
+            ]
+        }),
+        bodyStyle: "background-color:#f2f2f2;padding:0px;",
+        pagebody: '<div class="weui_cells weui_cells_form">'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">头像</label></div>'+
+              '<div id="avarardiv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">姓名</label></div>'+
+              '<div id="namediv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">性别</label></div>'+
+              '<div id="genderdiv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">职业</label></div>'+
+              '<div id="professiondiv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">生日</label></div>'+
+              '<div id="birthdaydiv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+            '<div class="weui_cell">'+
+              '<div class="weui_cell_hd"><label class="weui_label">兴趣</label></div>'+
+              '<div id="interestdiv" class="weui_cell_bd weui_cell_primary"></div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="weui_btn_area">'+
+            '<button id="subbtn" class="mwt-btn mwt-btn-secondary radius mwt-btn-block">提交</button>'+
+          '</div>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'+
+		  '<p>aaa</p>'
+    });
+    h5page.create();
+
+	form = new MWT.Form();
+        form.addField('avatar', new MWT.ImageUploadField({
+            render  : 'avarardiv',
+            imgupapi: 'http://139.196.29.35:8008/mawt/index.php/toolkit/ajax/upimg',
+            value   : 'http://mobfile.youzu.com/gips/img?pic=11054529065484119915',
+            empty   : false,
+            errmsg  : "请上传图片",
+            style   : 'border:solid 1px #ccc;width:50px;height:50px;'
+        }));
+        form.addField('name', new MWT.TextField({
+            render: 'namediv',
+            value: '',
+            placeholder: '请输入姓名',
+            errmsg: '请输入姓名，不超过5个字符',
+            checkfun: function(v){return v.length<=5;}
+        }));
+        form.addField('gender', new MWT.RadioField({
+            render  : 'genderdiv',
+            options : [{text:'保密',value:0},{text:"男",value:1},{text:"女",value:2}],
+            value   : '',
+            errmsg  : '请选择性别',
+            empty   : false
+        }));
+        form.addField('profession', new MWT.SelectField({
+            render  : 'professiondiv',
+            options : [{text:'保密',value:0},{text:"学生",value:1},{text:"工人",value:2}],
+            value   : '0',
+            errmsg  : '请选择职业'
+        }));
+        form.addField('birthday', new MWT.TextField({
+            render  : 'birthdaydiv',
+            type    : 'date',
+            value   : '1990-01-01'
+        }));
+        form.addField('interest', new MWT.CheckboxField({
+            render: 'interestdiv',
+            options: [{text:'体育',value:0},{text:"音乐",value:1},{text:"电影",value:2},{text:"看书",value:3},{text:"游戏",value:4},{text:"篮球",value:5}],
+            value: [1,2],
+            empty: false,
+            errmsg: "请选择1~3个兴趣",
+            checkfun: function(v){return v.length<=3;}
+        }));
+    form.create();
+
+	h5page.iscroll();
+
+    jQuery('#subbtn').click(function(){
+        var data = form.getData();
+        print_r(data);
+    });
+});
+</script>
+</body>
+</html>
