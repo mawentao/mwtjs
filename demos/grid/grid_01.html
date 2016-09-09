@@ -13,8 +13,11 @@
 
 <script>
 
+  var loadingdivid;
   var store = new MWT.Store({
-      "url": "../../ui/ajax.php"
+      url: "../../ui/ajax.php",
+      beforeLoad: function(){loadingdivid=mwt.notify("数据加载中...",0,'loading');},
+      afterLoad: function(){mwt.notify_destroy(loadingdivid);}
   });
 
   var pagebar = new MWT.Pagebar({

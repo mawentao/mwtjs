@@ -4,45 +4,69 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>日期区间选择控件</title>
-  <link href='../../libs/jquery-ui/jquery-ui.min.css' rel="stylesheet"/>
+  <title>Grid-独立的分页条</title>
   <link href='../../static/mwt.min.css' rel="stylesheet"/>
   <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
-  <script src="../../libs/jquery-ui/jquery-ui.min.js" charset="utf-8"></script>
   <script src="../../static/mwt.min.js" charset="utf-8"></script>
-  <script>
-    $(function(){
-        var dp = new MWT.DateRangePicker({
-            render:"datepic",
-            format: "yy/mm/dd",
-            value: 0
-        });
-        dp.create();
-        dp.on("change",function(t){
-            var v = t.value;
-            alert(v);
-        });
-
-        var dp2 = new MWT.DateRangePicker({
-            render:"datepic2",
-            float: "right",
-            format: "yymmdd",
-            id:'sss',
-            style:'width:160px'
-        });
-        dp2.create();
-        dp2.on("change",function(t){
-            var v = t.value;
-            alert(v);
-        });
-    });
-  </script>
 </head>
 <body style="padding:10px;">
 
-<p>Date: <div id='datepic'></div></p>
+<script>
 
-<div id='datepic2' style="float:right;"></div>
+  var store = new MWT.Store({
+      "url": "../../ui/ajax.php",
+      beforeLoad: function(){alert("aa")}
+  });
+
+  var pagebar = new MWT.Pagebar({
+      "store"  : store,
+      "render" : "pagebar-div"
+  });
+    
+  function load()
+  {
+      store.on("load", function(){
+          //异常处理
+          var res = store.loadres;
+          if (res.errmsg) {
+              MWT.alert(res.errmsg);
+              return;
+          }      
+          show_table();
+      });
+      pagebar.changePage(1);
+  }
+
+  function show_table() {
+      var code = "<table class='mwt-table'>"+
+            "<thead><tr>"+
+              "<td width='200'>ID</td>"+
+              "<td width='150'>NAME</td>"+
+              "<td>SEX</td></tr></thead>"+
+            "<tbody>";
+      for(var i=0; i<store.size(); ++i) {
+          var v = store.get(i);
+          code += "<tr><td>"+v.id+"</td><td>"+v.name+"</td><td>"+v.sex+"</td></tr>";
+      }
+      code += "</tbody></table>";
+      //alert(code);
+      document.getElementById("grid-div").innerHTML = code;
+  }
+
+  load();
+</script>
+
+<button onclick='pagebar.firstPage();'>首页</button>
+<button onclick='pagebar.prevPage();'>上一页</button>
+<button onclick='pagebar.nextPage();'>下一页</button>
+<button onclick='pagebar.lastPage();'>尾页</button>
+<button onclick='pagebar.changePagesize(10);'>一页10个</button>
+<button onclick='pagebar.changePagesize(20);'>一页20个</button>
+<button onclick='store.sort("sex","ASC")'>SEX升序</button>
+<button onclick='store.sort("sex","DESC")'>SEX降序</button>
+<br><br>
+<div id='grid-div'></div>
+<div id='pagebar-div'></div>
 
 </body>
 </html>

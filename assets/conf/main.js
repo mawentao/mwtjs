@@ -10,7 +10,9 @@ var conf = [
 	]},
 
     {name:'icon', items:[
-        ["icon01.html", "图标"]
+        ["icon01.html", "图标"],
+        ["icomoon.html","论坛图标"],
+        ["sicons.html","细线图标"]
     ]},
 
     {name:"field", items:[
@@ -59,7 +61,8 @@ var conf = [
 	]},
 
 	{name:"msg", items:[
-		["loading.html", "loading"],
+		["notify.html", "消息通知"],
+		["progress.html", "顶部进度条"],
         ["msg.html", "消息框"],
         ["msg2.html", "自定义标题和弹出动画"]
 	]},
@@ -98,7 +101,8 @@ var conf = [
 		["util_01.html", "Get/Set"],
 		["util_02.html", "PHP同名函数"],
 		["util_03.html", "时间日期函数"],
-		["util_04.html", "数据格式判断函数"]
+		["util_04.html", "数据格式判断函数"],
+		["number.html","数字格式化函数"]
 	]}
 ];
 

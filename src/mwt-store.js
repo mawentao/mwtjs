@@ -11,9 +11,12 @@ MWT.Store=function(cnf)
     this.root=[];
     this.annex={};
 	this.loadres;
+	var beforeLoad,afterLoad;
 
     if (cnf) {
         if (cnf.url) this.url=cnf.url;
+        if (cnf.beforeLoad) beforeLoad=cnf.beforeLoad;
+        if (cnf.afterLoad) afterLoad=cnf.afterLoad;
     }
     // 返回当前data的个数
     this.size=function() {return this.root.length;};
@@ -87,7 +90,7 @@ MWT.Store=function(cnf)
         // Ajax Load（jquery）
         else {
             var thiso=this;
-            MWT.show_loading();
+			if(beforeLoad)beforeLoad();
             jQuery.ajax({
                 type: "post", 
                 async: true,
@@ -95,7 +98,7 @@ MWT.Store=function(cnf)
                 data: this.baseParams,
                 dataType: "json", 
                 complete: function() {
-                    MWT.hide_loading();
+					if(afterLoad)afterLoad();
                 },
                 success: function (res) { 
 					thiso.loadres=res;
@@ -110,6 +113,7 @@ MWT.Store=function(cnf)
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     var errmsg = "Error("+XMLHttpRequest.readyState+") : "+textStatus;
 					thiso.loadres={errmsg:errmsg};
+					console.log(errmsg);
                     //alert(XMLHttpRequest.status);
                     //alert(errmsg); 
                 }

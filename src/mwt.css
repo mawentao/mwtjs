@@ -309,58 +309,6 @@ i.leaf{background-image:url(imgs/tree/leaf.gif);background-position: 0;}
 .mwt-toolbar ul li.sep:after{content:'\10'}
 .mwt-toolbar ul.right{float:right;}
 
-/* -------------- loading ----------------- */
-#mwt-flash-msg-div {
-  z-index: 10000;
-  display: none;
-  position: fixed;
-  top: 100px;
-  left: 0;
-  right: 0;
-  margin: 0px;
-  font-size: 12px;
-  text-align: center;
-}
-#mwt-flash-msg-div>div {
-  display:inline-block;
-  line-height:40px;
-  border-radius:4px;
-  min-width: 300px;
-}
-#mwt-flash-msg-div>.loading {
-  background: url("imgs/extloading.gif") no-repeat 20px 6px;
-  padding: 0 20px 0 60px;
-  border:solid 2px #BCD2EF;
-}
-#mwt-flash-msg-div>.danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border:solid 2px #ebccd1;
-  padding:0 25px;
-  font-size: 13px;
-}
-#mwt-flash-msg-div>.warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border:solid 2px #faebcc;
-  padding:0 25px;
-  font-size: 13px;
-}
-#mwt-flash-msg-div>.info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border:solid 2px #bce8f1;
-  padding:0 25px;
-  font-size: 13px;
-}
-#mwt-flash-msg-div>.success {
-  color: #3c763d;
-  background-color: #dff0d8;
-  border:solid 2px #d6e9c6;
-  padding:0 25px;
-  font-size: 13px;
-}
-
 /* -------------- nav --------------- */
 .mwt-nav {
     margin: 0;

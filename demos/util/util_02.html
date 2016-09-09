@@ -30,9 +30,17 @@
       alert(isin);
   } 
 
+  function test_array_keys()
+  {
+      var user = {uid: 1001, uname:"mwt"};
+      var keys = array_keys(user);
+      print_r(keys);
+  }
+
 </script>
 <button class='mwt-btn mwt-btn-default' onclick='test_isset();'>isset</button><br><br>
 <button class='mwt-btn mwt-btn-default' onclick='test_in_array();'>in_array</button><br><br>
+<button class='mwt-btn mwt-btn-default' onclick='test_array_keys();'>array_keys</button><br><br>
 
 </body>
 </html>

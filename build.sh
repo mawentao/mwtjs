@@ -8,7 +8,7 @@
 # @brief:  build.sh
 ####################################################
 
-version=3.2
+version=3.3
 product=mwt
 author="mawentao"
 date=`date +"%Y-%m-%d %H:%M:%S"`
@@ -56,14 +56,13 @@ function mergecss_mobile()
 }
 
 mergejs \
-$src/mwt-util.js \
+$src/common/*.js \
 $src/mwt.js \
 $src/mwt-event.js \
 $src/mwt-popover.js \
 $src/mwt-store.js \
 $src/mwt-field.js \
 $src/fields/*.js \
-$src/dialog/mwt-dialog.js \
 $src/mwt-widget.js \
 $src/widgets/*.js \
 $src/mwt-form.js \
@@ -71,21 +70,19 @@ $src/mwt-tree.js \
 $src/mwt-bar.js \
 $src/mwt-grid.js \
 $src/mwt-nav.js \
-$src/mwt-msg.js
+$src/pc/*.js
 
 mergecss \
 $src/*.css \
 $src/css/*.css \
-$src/dialog/*.css \
+$src/pc/*.css \
 $src/fields/form.css \
-$src/fontawesome/font-awesome.min.css \
-$src/fontawesome/mwt-icons.css \
-$src/fontawesome/icomoon.css \
+$src/fontawesome/*.css \
 $src/widgets/*.css 
 
 #libs/iscroll/iscroll.js \
 mergejs_mobile \
-$src/mwt-util.js \
+$src/common/*.js \
 $src/mwt.js \
 $src/mwt-event.js \
 $src/mobile/mwt-store.js \
@@ -110,10 +107,8 @@ mergecss_mobile \
 $src/mobile/css/*.css \
 $src/mobile/weui.css \
 $src/mobile/mwt_mobile.css \
-$src/fontawesome/font-awesome.min.css \
+$src/fontawesome/*.css \
 $src/css/*.css \
-$src/fontawesome/mwt-icons.css \
-$src/fontawesome/icomoon.css \
 $src/mobile/swiper.css \
 $src/fields/form.css \
 $src/mwt-popover.css \
