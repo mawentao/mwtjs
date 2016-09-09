@@ -1,0 +1,34 @@
+/* 消息通知模块样式 */
+#mwt-notify-container {
+    z-index: 10000;
+	position: fixed;
+	top: 50px;
+	left:0;
+	right:0;
+	text-align:center;
+}
+.mwt-notify {
+	display:inline-block;
+	padding:10px 20px;
+	margin:3px 0;
+	border-radius:4px;
+	text-align: center;
+	-webkit-animation-duration: .4s; 
+	animation-duration: .4s; 
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	font-size: 13px;
+	background:rgba(0,0,0,0.5);
+    color:#fff;
+}
+.mwt-notify i {
+    float: left;
+	padding:0;
+	margin:1px 8px 1px 0;
+	font-size:17px;
+}
+/* 消息框主题 */
+.mwt-notify.info {background:rgba(217,237,247,0.5);color:#31708f;}
+.mwt-notify.warning{background:rgba(255,224,188,0.5);color:#AF6D00;}
+.mwt-notify.danger{background:rgba(242,222,222,0.5);color:#a94442;}
+.mwt-notify.success{background:rgba(223,240,216,0.5);color:#3c763d;}

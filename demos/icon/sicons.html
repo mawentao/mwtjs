@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>simple-line-icons</title>
+  <link rel='stylesheet' type='text/css' href='../../static/mwt.min.css'/>
+  <style>
+    body {background:#ff8904;font-family:Arial;}
+    ul {display:inline-block;width:80%;}
+    li {display:inline-block;float:left;margin-right:40px;color:#fff;font-size:16px;
+      line-height:30px;    width: 150px; text-align: left;
+    }
+  </style>
+  <script language="javascript">
+    var icons = [
+		'action-redo','action-undo','anchor','arrow-down','arrow-left','arrow-right',
+		'arrow-up','badge','bag','ban','bar-chart','basket','basket-loaded','bell','book-open','briefcase','bubble','bubbles','bulb','calculator','calendar','call-end','call-in','call-out','camcorder','camera','check','chemistry','clock',
+		'close','cloud-download','cloud-upload','compass','control-end','control-forward','control-pause','control-play','control-rewind','control-start','credit-card','crop','cup','cursor','cursor-move','diamond','direction','directions','disc','dislike','doc','docs','drawer','drop','earphones','earphones-alt','emoticon-smile','energy','envelope','envelope-letter','envelope-open','equalizer','eye','eyeglasses','feed','film','fire','flag','folder','folder-alt','frame','game-controller','ghost','globe','globe-alt','graduation','graph','grid','handbag','heart','home','hourglass','info','key','layers','like','link','list','lock','lock-open','login','logout','loop','magic-wand','magnet','magnifier','magnifier-add','magnifier-remove','map','microphone','mouse','moustache','music-tone','music-tone-alt','note','notebook','paper-clip','paper-plane','pencil','picture','pie-chart','pin','plane','playlist','plus','pointer','power','present','printer','puzzle','question','refresh','reload','rocket','screen-desktop','screen-smartphone','screen-tablet','settings','share','share-alt','shield','shuffle',
+		'size-actual','size-fullscreen','social-dribbble','social-dropbox','social-facebook','social-tumblr','social-twitter','social-youtube','speech','speedometer','star','support','symbol-female','symbol-male','tag','target','trash','trophy','umbrella','user','user-female','user-follow','user-following','user-unfollow','users','vector','volume-1','volume-2','volume-off','wallet','wrench'
+    ];
+    function load()
+    {
+        for (var i=0; i<icons.length; ++i) {
+            var nm = icons[i];
+            var node=document.createElement("LI");
+            node.innerHTML = '<i class="sicon-'+nm+'"></i> '+nm;
+            document.getElementById("iconul").appendChild(node);
+        }
+    }
+  </script>
+</head>
+<body onload="load();">
+  <center>
+    <ul id="iconul"></ul>
+  </center>
+</body>
+</html>
