@@ -1,0 +1,29 @@
+/* sidebar.css, (c) 2016 mawentao */
+
+/* 边栏 */
+.sidebar {
+    position:fixed;
+    -webkit-box-shadow:0 0 10px #000;
+    -moz-box-shadow:0 0 10px #000;
+    box-shadow:0 0 10px #000;
+}
+
+/* 边栏弹出后的下层遮盖层 */
+.sidebar-cover {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:none;
+}
+
+/* 左侧边栏 */
+.sidebar.left {top:0;bottom:0;left:0;overflow-y:auto;}
+/* 右侧边栏 */
+.sidebar.right {top:0;bottom:0;right:0;overflow-y:auto;}
+/* 顶部边栏 */
+.sidebar.top {top:0;left:0;right:0;}
+/* 底部边栏 */
+.sidebar.bottom {bottom:0;left:0;right:0;}
+

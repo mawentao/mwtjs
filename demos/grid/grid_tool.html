@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>使用Grid底部的工具</title>
+  <link href='../../static/mwt.min.css' rel="stylesheet"/>
+  <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
+</head>
+<body style="padding:10px;">
+
+<script>
+define("grid", function(require){
+    require("jquery");
+    require("mwt");
+    var store,grid,o = {};
+    o.init = function(){
+        var thiso = this;
+        store = new MWT.Store({
+            "url": "../../ui/ajax.php"
+        });
+        grid = new MWT.Grid({
+            render: "grid-div",
+            store: store,
+            pagebar: true, //!< false 表示不分页
+            pageSize: 10,
+            multiSelect:true, 
+            bordered: true,
+			striped: true,
+			filename: '示例表格.xls',
+            cm: new MWT.Grid.ColumnModel([
+              {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
+              {head:"姓名", dataIndex:"name", width:300},
+              {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+                return v==1 ? "男" : "女";
+              }},
+              {head:"操作", dataIndex:"id",render:function(v,item){
+                return v;
+              }}
+            ])
+        });
+        grid.create();
+        this.query();
+    };
+
+    o.query = function() {
+        grid.load();
+    };
+    return o;
+});
+
+
+  require.config({
+      baseUrl: "../../static/dep",
+      packages: [
+          {name:'jquery', location:'jquery/1.11.2', main:'jquery.min'},
+          {name:'mwt', location:'../', main:'mwt.min'}
+      ]
+  });
+  require(["grid"], function(grid){
+      grid.init();
+  });
+</script>
+
+<div id='grid-div'></div>
+
+</body>
+</html>

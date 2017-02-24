@@ -1,0 +1,43 @@
+/* 流程步骤组件样式 */
+.step-tb {width:100%;position:relative;z-index:1;margin-bottom:15px;}
+.step-tb td {text-align:center;vertical-align: middle; position: relative; }
+.step-tb button:after {
+	position: absolute; left: 0; right: 0; top: 50%;
+	display:block;
+	content: '';
+    z-index: -1;
+    border-top: solid 1px #ccc;
+}
+.step-tb button { 
+	padding: 2px 10px;
+	background: #fff;
+	border-color: #357ebd; 
+	color: #333;
+}
+
+.step-tb.default button, .step-tb.default button:after { border-color: #ccc; }
+.step-tb.default button:hover, .step-tb.default button.active { background: #999; color: #fff; }
+
+.step-tb.primary button, .step-tb.primary button:after { border-color: #357ebd; }
+.step-tb.primary button:hover, .step-tb.primary button.active { background: #428bca; color: #fff; }
+
+.step-tb.secondary button, .step-tb.secondary button:after { border-color: #3bb4f2; }
+.step-tb.secondary button:hover, .step-tb.secondary button.active { background: #3bb4f2; color: #fff; }
+
+.step-tb.info button, .step-tb.info button:after { border-color: #46b8da; }
+.step-tb.info button:hover, .step-tb.info button.active { background: #5bc0de; color: #fff; }
+
+.step-tb.warning button, .step-tb.warning button:after { border-color: #eea236; }
+.step-tb.warning button:hover, .step-tb.warning button.active { background: #f0ad4e; color: #fff; }
+
+.step-tb.danger button, .step-tb.danger button:after { border-color: #d43f3a; }
+.step-tb.danger button:hover, .step-tb.danger button.active { background: #d9534f; color: #fff; }
+
+.step-tb.success button, .step-tb.success button:after { border-color: #398439; }
+.step-tb.success button:hover, .step-tb.success button.active { background: #47a447; color: #fff; }
+
+
+/* 步骤流程-panel样式 */
+.step-panel {display:none;}
+.step-panel.active {display:block;}
+
