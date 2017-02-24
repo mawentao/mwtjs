@@ -64,10 +64,10 @@
 .mwt-h5bar {
     position:absolute;
 	position:fixed;
-    left:0;
-    right:0;
     background-color:#666;
     color: #fff;
+	width:100%;
+	max-width:640px;
 }
 /*
 .mwt-h5bar.mwt-primary {background-color: #0e90d2;color:#fff;}

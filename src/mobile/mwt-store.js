@@ -10,9 +10,12 @@ MWT.Store=function(cnf)
     this.totalProperty=0;
     this.root=[];
     this.annex={};
+	var beforeLoad,afterLoad;
 
     if (cnf) {
         if (cnf.url) this.url=cnf.url;
+        if (cnf.beforeLoad) beforeLoad=cnf.beforeLoad;
+        if (cnf.afterLoad) afterLoad=cnf.afterLoad;
     }
     // 返回当前data的个数
     this.size=function() {return this.root.length;};
@@ -77,7 +80,7 @@ MWT.Store=function(cnf)
         // Ajax Load（jquery）
         else {
             var thiso=this;
-            //MWT.show_loading();
+			if(beforeLoad)beforeLoad();
             thiso.fire("beforeLoad");
             jQuery.ajax({
                 type: "post",
@@ -87,6 +90,7 @@ MWT.Store=function(cnf)
                 dataType: "json", 
                 complete: function() {
                     //MWT.hide_loading();
+					if(afterLoad)afterLoad();
                     thiso.fire("afterLoad");
                 },
                 success: function (res) { 

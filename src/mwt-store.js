@@ -11,12 +11,13 @@ MWT.Store=function(cnf)
     this.root=[];
     this.annex={};
 	this.loadres;
-	var beforeLoad,afterLoad;
+	this.beforeLoad;
+	this.afterLoad;
 
     if (cnf) {
         if (cnf.url) this.url=cnf.url;
-        if (cnf.beforeLoad) beforeLoad=cnf.beforeLoad;
-        if (cnf.afterLoad) afterLoad=cnf.afterLoad;
+        if (cnf.beforeLoad) this.beforeLoad=cnf.beforeLoad;
+        if (cnf.afterLoad) this.afterLoad=cnf.afterLoad;
     }
     // 返回当前data的个数
     this.size=function() {return this.root.length;};
@@ -90,7 +91,7 @@ MWT.Store=function(cnf)
         // Ajax Load（jquery）
         else {
             var thiso=this;
-			if(beforeLoad)beforeLoad();
+			if(this.beforeLoad)this.beforeLoad();
             jQuery.ajax({
                 type: "post", 
                 async: true,
@@ -98,7 +99,7 @@ MWT.Store=function(cnf)
                 data: this.baseParams,
                 dataType: "json", 
                 complete: function() {
-					if(afterLoad)afterLoad();
+					if(thiso.afterLoad)thiso.afterLoad();
                 },
                 success: function (res) { 
 					thiso.loadres=res;
@@ -233,7 +234,7 @@ MWT.Pagebar=function(cnf)
 				return;
 			}
 
-            var code="<table class='tablay' style='margin-top:3px;'><tr><td>";
+            var code="<table class='tablay'><tr><td>";
 
             // 页号列表
             var list_heaad=[

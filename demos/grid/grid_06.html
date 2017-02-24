@@ -34,8 +34,8 @@ define("grid", function(require){
             bordered: true,
             cm: new MWT.Grid.ColumnModel([
               {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
-              {head:"姓名", dataIndex:"name", width:300},
-              {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+              {head:"姓名", dataIndex:"name",poptitle:"用户姓名", width:300},
+              {head:"性别", dataIndex:"sex", poptitle:"用户性别", sort:true, render:function(v){
                 return v==1 ? "男" : "女";
               }},
               {head:"操作", dataIndex:"id",render:function(v,item){

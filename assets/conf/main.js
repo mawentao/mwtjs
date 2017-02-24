@@ -38,7 +38,8 @@ var conf = [
 		["grid_03.html", "Grid"],
 		["grid_04.html", "Grid-自定义分页工具条"],
 		["grid_05.html", "带checkbox的Grid"],
-        ["grid_06.html", "带工具栏的Grid"]
+        ["grid_06.html", "带工具栏的Grid"],
+        ["grid_tool.html", "使用Grid底部的工具"]
 	]},
 
     {name:"bar", items:[
@@ -53,7 +54,8 @@ var conf = [
 	]},
 
 	{name:"popover", items:[
-		["popover01.html", "弹出框"]
+		["popover01.html", "弹出框"],
+		["popover02.html", "弹出框-更简单的代码"]
 	]},
 
 	{name:"tree", items:[
@@ -78,7 +80,8 @@ var conf = [
 
     {name:"widgets", items:[
 		["calendar.html", "日历组件"],
-		["tab.html", "Tab组件"]
+		["tab.html", "Tab组件"],
+		["step.html", "步骤流程组件"]
 	]},
 
 	{name:"h5page", items:[

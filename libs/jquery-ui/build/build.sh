@@ -39,11 +39,10 @@ function mergecss()
 
 
 mergejs \
-$jqueryui/jquery-ui.min.js \
-$src/jquery-ui-timepicker/*.js \
-$src/jquery-ui-timepicker/i18n/jquery-ui-timepicker-addon-i18n.min.js \
-$src/jquery-ui-timepicker/i18n/jquery-ui-timepicker-zh-CN.js \
-$src/jquery-ui-zh.js 
+$jqueryui/jquery-ui.js \
+$src/jquery-ui-timepicker/*.js 
+#$src/jquery-ui-timepicker/i18n/jquery-ui-timepicker-zh-CN.js 
+#$src/jquery-ui-timepicker/i18n/jquery-ui-timepicker-addon-i18n.min.js 
 
 mergecss \
 $jqueryui/jquery-ui.min.css \

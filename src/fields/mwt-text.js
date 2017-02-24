@@ -35,8 +35,9 @@ MWT.TextField=function(opt)
         } else {
 			code = '<div style="position:relative">'+
 				'<input type="'+type+'" id="'+tid+'" class="form-control '+this.cls+'" placeholder="'+placeholder+'"'+
-                  ' style="'+this.style+';padding-right:20px;">'+
-				'<i id="'+tid+'-clear" class="fa fa-times-circle" style="display:none;color:#999;font-size:14px;margin-left:-20px;"></i>'+
+                  ' style="'+this.style+';padding:0 20px 0 5px;">'+
+				'<i id="'+tid+'-clear" class="fa fa-times-circle" '+
+                    'style="display:none;color:#999;font-size:14px;margin-left:-20px;vertical-align:middle;"></i>'+
 				'<div id="'+optdivid+'" class="mwt-field-pop" style="'+popStyle+'">'+
 			'</div>';
         }

@@ -1,8 +1,10 @@
 
 .mwt-popover {
-    position:absolute;
     display: none;
-    max-width: 276px;
+    z-index: 999;
+
+    position:absolute; 
+	max-width: 276px;
     padding: 1px;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
@@ -13,7 +15,6 @@
     line-break: auto;
 	background-color: #fff;
     color: #333;
-    z-index: 999;
 }
 
 .mwt-popover>.content {
@@ -24,6 +25,9 @@
     word-wrap: normal;
     white-space: normal;
     font-size: 13px;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	font-smoothing:antialiased;
 }
 
 .mwt-popover>.arrow,
@@ -60,15 +64,27 @@
 }
 
 
-/* danger */
-.mwt-popover-danger {
-    border-color: #d9534f;
-    background: #d9534f;
-    color: #fff;
-}
-.mwt-popover-danger.top>.arrow {
-    border-top-color: rgba(255,0,0,.25);
-}
-.mwt-popover-danger.top>.arrow:after {
-    border-top-color: #d9534f;
-}
+/* 主题 */
+.mwt-popover-primary { border-color: #428bca; background: #428bca; color: #fff; }
+.mwt-popover-primary.top>.arrow { border-top-color: rgba(0,0,0,.25); }
+.mwt-popover-primary.top>.arrow:after { border-top-color: #428bca; }
+
+.mwt-popover-secondary { border-color: #3bb4f2; background: #3bb4f2; color: #fff; }
+.mwt-popover-secondary.top>.arrow { border-top-color: rgba(0,0,0,.25); }
+.mwt-popover-secondary.top>.arrow:after { border-top-color: #3bb4f2; }
+
+.mwt-popover-success { border-color: #5cb85c; background: #5cb85c; color: #fff; }
+.mwt-popover-success.top>.arrow { border-top-color: rgba(0,0,0,.25); }
+.mwt-popover-success.top>.arrow:after { border-top-color: #5cb85c; }
+
+.mwt-popover-warning { border-color: #f0ad4e; background: #f0ad4e; color: #fff; }
+.mwt-popover-warning.top>.arrow { border-top-color: rgba(0,0,0,.25); }
+.mwt-popover-warning.top>.arrow:after { border-top-color: #f0ad4e; }
+
+.mwt-popover-danger { border-color: #d9534f; background: #d9534f; color: #fff; }
+.mwt-popover-danger.top>.arrow { border-top-color: rgba(0,0,0,.25); }
+.mwt-popover-danger.top>.arrow:after { border-top-color: #d9534f; }
+
+
+
+

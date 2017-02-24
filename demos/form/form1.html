@@ -82,20 +82,21 @@
   </script>
 </head>
 <body style="padding:10px;">
-  <h1>表单</h1>
-  <table>
-    <tr><td>hidden</td><td><div id="hidden-div"></div></td></tr>
-    <tr><td>text</td><td><div id="text-div"></div></td></tr>
-    <tr><td>password</td><td><div id="password-div"></div></td></tr>
-    <tr><td>image</td><td><div id="image-div"></div></td></tr>
-    <tr><td>textarea</td><td><div id="textarea-div"></div></td></tr>
-    <tr><td>datetime</td><td><div id="datetimepic"></div></td></tr>
+  <table class="mwt-formtab">
+	<tr><td colspan="3" class="partition">表单示例</td></tr>
+    <tr><td width="100">hidden</td><td width="300"><div id="hidden-div"></div></td><td class="tips">隐藏字段</td></tr>
+    <tr><td>text</td><td><div id="text-div"></div></td><td class="tips">文本框</td></tr>
+    <tr><td>password</td><td><div id="password-div"></div></td><td class="tips">密码框</td></tr>
+    <tr><td>image</td><td><div id="image-div"></div></td><td class="tips">图片</td></tr>
+    <tr><td>textarea</td><td><div id="textarea-div"></div></td><td class="tips">多行文本框</td></tr>
+    <tr><td>datetime</td><td><div id="datetimepic"></div></td><td class="tips">日期</td></tr>
+	<tr><td></td><td colspan="2">
+  		<button id="subbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">提交</button>
+		<button id="rstbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">重置</button>
+		<button id="loadbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">加载</button>
+		<button id="getbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">获取Field的值</button>
+	</td></tr>
   </table>
-  <button id="subbtn" class="mwt-btn mwt-btn-default">提交</button>
-  <button id="rstbtn" class="mwt-btn mwt-btn-default">重置</button>
-  <button id="loadbtn" class="mwt-btn mwt-btn-default">加载</button>
-
-  <button id="getbtn" class="mwt-btn mwt-btn-default">获取Field的值</button>
 
 </body>
 </html>

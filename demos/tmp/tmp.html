@@ -4,69 +4,67 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Grid-独立的分页条</title>
+  <title>使用Grid底部的工具</title>
   <link href='../../static/mwt.min.css' rel="stylesheet"/>
-  <script src="../../static/dep/jquery/1.11.2/jquery.min.js"></script>
-  <script src="../../static/mwt.min.js" charset="utf-8"></script>
+  <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
 </head>
 <body style="padding:10px;">
 
 <script>
+define("grid", function(require){
+    require("jquery");
+    require("mwt");
+    var store,grid,o = {};
+    o.init = function(){
+        var thiso = this;
+        store = new MWT.Store({
+            "url": "../../ui/ajax.php"
+        });
+        grid = new MWT.Grid({
+            render: "grid-div",
+            store: store,
+            pagebar: true, //!< false 表示不分页
+            pageSize: 10,
+            multiSelect:true, 
+noheader: true,
+            bordered: true,
+			striped: true,
+			filename: '示例表格.xls',
+            cm: new MWT.Grid.ColumnModel([
+              {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
+              {head:"姓名", dataIndex:"name", width:300},
+              {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+                return v==1 ? "男" : "女";
+              }},
+              {head:"操作", dataIndex:"id",render:function(v,item){
+                return v;
+              }}
+            ])
+        });
+        grid.create();
+        this.query();
+    };
 
-  var store = new MWT.Store({
-      "url": "../../ui/ajax.php",
-      beforeLoad: function(){alert("aa")}
+    o.query = function() {
+        grid.load();
+    };
+    return o;
+});
+
+
+  require.config({
+      baseUrl: "../../static/dep",
+      packages: [
+          {name:'jquery', location:'jquery/1.11.2', main:'jquery.min'},
+          {name:'mwt', location:'../', main:'mwt.min'}
+      ]
   });
-
-  var pagebar = new MWT.Pagebar({
-      "store"  : store,
-      "render" : "pagebar-div"
+  require(["grid"], function(grid){
+      grid.init();
   });
-    
-  function load()
-  {
-      store.on("load", function(){
-          //异常处理
-          var res = store.loadres;
-          if (res.errmsg) {
-              MWT.alert(res.errmsg);
-              return;
-          }      
-          show_table();
-      });
-      pagebar.changePage(1);
-  }
-
-  function show_table() {
-      var code = "<table class='mwt-table'>"+
-            "<thead><tr>"+
-              "<td width='200'>ID</td>"+
-              "<td width='150'>NAME</td>"+
-              "<td>SEX</td></tr></thead>"+
-            "<tbody>";
-      for(var i=0; i<store.size(); ++i) {
-          var v = store.get(i);
-          code += "<tr><td>"+v.id+"</td><td>"+v.name+"</td><td>"+v.sex+"</td></tr>";
-      }
-      code += "</tbody></table>";
-      //alert(code);
-      document.getElementById("grid-div").innerHTML = code;
-  }
-
-  load();
 </script>
 
-<button onclick='pagebar.firstPage();'>首页</button>
-<button onclick='pagebar.prevPage();'>上一页</button>
-<button onclick='pagebar.nextPage();'>下一页</button>
-<button onclick='pagebar.lastPage();'>尾页</button>
-<button onclick='pagebar.changePagesize(10);'>一页10个</button>
-<button onclick='pagebar.changePagesize(20);'>一页20个</button>
-<button onclick='store.sort("sex","ASC")'>SEX升序</button>
-<button onclick='store.sort("sex","DESC")'>SEX降序</button>
-<br><br>
 <div id='grid-div'></div>
-<div id='pagebar-div'></div>
 
 </body>
 </html>

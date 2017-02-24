@@ -14,9 +14,11 @@
     $(function(){
         var dp = new MWT.DateRangePicker({
             render:"datepic",
-            format: "yy/mm/dd"
+            format: "yy/mm/dd",
+			value: 60
         });
         dp.create();
+		dp.setDefault(-1);
         dp.on("change",function(t){
             var v = t.value;
             alert(v);

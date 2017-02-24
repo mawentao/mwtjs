@@ -8,7 +8,7 @@
 # @brief:  build.sh
 ####################################################
 
-version=3.3
+version=3.5
 product=mwt
 author="mawentao"
 date=`date +"%Y-%m-%d %H:%M:%S"`
@@ -56,6 +56,7 @@ function mergecss_mobile()
 }
 
 mergejs \
+$src/libdepends/swiper/swiper.jquery.min.js \
 $src/common/*.js \
 $src/mwt.js \
 $src/mwt-event.js \
@@ -68,11 +69,11 @@ $src/widgets/*.js \
 $src/mwt-form.js \
 $src/mwt-tree.js \
 $src/mwt-bar.js \
-$src/mwt-grid.js \
 $src/mwt-nav.js \
 $src/pc/*.js
 
 mergecss \
+$src/libdepends/swiper/swiper.css \
 $src/*.css \
 $src/css/*.css \
 $src/pc/*.css \
@@ -85,7 +86,7 @@ mergejs_mobile \
 $src/common/*.js \
 $src/mwt.js \
 $src/mwt-event.js \
-$src/mobile/mwt-store.js \
+$src/mwt-store.js \
 $src/mobile/mwt-h5page.js \
 $src/mobile/mwt-sidebar.js \
 $src/mobile/mwt-h5bar.js \
@@ -93,7 +94,7 @@ $src/mobile/mwt-h5navbar.js \
 $src/mobile/mwt-listview.js \
 $src/mobile/mwt-slide.js \
 $src/mobile/scrollbar.js \
-$src/mobile/swiper.jquery.min.js \
+$src/libdepends/swiper/swiper.jquery.min.js \
 $src/mwt-form.js \
 $src/mwt-field.js \
 $src/mwt-popover.js \
@@ -109,7 +110,7 @@ $src/mobile/weui.css \
 $src/mobile/mwt_mobile.css \
 $src/fontawesome/*.css \
 $src/css/*.css \
-$src/mobile/swiper.css \
+$src/libdepends/swiper/swiper.css \
 $src/fields/form.css \
 $src/mwt-popover.css \
 $src/mobile/widgets/*.css

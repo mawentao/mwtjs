@@ -16,20 +16,42 @@
 var h5page;
 
 $(document).ready(function(){
-
+    /* 左侧边栏 */
     var leftSide = new MWT.SideBar({
         render: 'sidebar',
-        //position: 'right',
+        position: 'left',
         width: '50%',
         bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
         pagebody: "side bar"
     });
+    /* 右侧边栏 */
 	var rightSide = new MWT.SideBar({
         render: 'sideright',
         position: 'right',
         width: '50%',
+        cover: true,  //遮盖层
         bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
         pagebody: "side bar"
+    });
+	/* 顶部边栏 */
+    var topSide = new MWT.SideBar({
+        render: 'sidertop',
+        position: 'top',
+        height: '100%',
+        bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
+        pagebody: "top side bar<button id='closebtn' style='float:right'><i class='icon icon-delete'></i></button>"
+    });
+	topSide.on('open',function(){
+		//alert('top');
+		jQuery('#closebtn').unbind('click').click(topSide.close);
+	});
+	/* 底部边栏 */
+    var bottomSide = new MWT.SideBar({
+        render: 'siderbottom',
+        position: 'bottom',
+        height: '50%',
+        bodyStyle: "background-color:#f2f2f2;padding:20px 10px;",
+        pagebody: "bottom side bar"
     });
 
     h5page = new MWT.H5Page({
@@ -39,7 +61,9 @@ $(document).ready(function(){
             cls: 'mwt-primary',
             items: [
                {icon:'fa-angle-left',width:40,handler:function(){leftSide.open();}},
+               {icon:'fa-angle-up',width:40,handler:function(){topSide.open();}},
                {'label':'<h1>侧边栏</h1>'},
+               {icon:'fa-angle-down',width:40,handler:function(){bottomSide.open();}},
                {icon:'fa-angle-right',width:40,handler:function(){rightSide.open();}}
             ]
         }),

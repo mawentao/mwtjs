@@ -8,7 +8,9 @@
 .mwt-imgup-ul>li>i {position:absolute;top:0;right:5px;color:red;}
 
 
-.date-pop {display:none;width:520px;border:solid 1px #aaa;border-radius:4px;padding:5px;position:absolute;}
+.date-range {position:relative;}
+
+.date-pop {display:none;width:520px;border:solid 1px #aaa;border-radius:4px;padding:5px;position:absolute;background: #fff;}
 .date-pop>.btn-bar {
     margin:0 0 5px;
     padding:5px;
@@ -16,6 +18,8 @@
 }
 .date-pop>.btn-bar>.fr {float:right;}
 .date-pop>.btn-bar>button {margin-right:2px;}
+
+
 
 .mwt-field {position:relative;}
 .mwt-field>a>span {float:left;}

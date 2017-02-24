@@ -32,7 +32,7 @@ MWT.DateRangePicker=function(opt)
                   '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-sm radius" data-value="60">最近60天</button>'+
                   '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-sm radius" data-value="30">最近30天</button>'+
                   '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-sm radius" data-value="7">最近7天</button>'+
-                  '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-sm radius" data-value="0">今天</button>'+
+                  '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-sm radius" data-value="-1">今天</button>'+
                   '<button class="date-submit mwt-btn mwt-btn-danger mwt-btn-sm radius fr" data-value="cancel">取消</button>'+
                   '<button class="date-submit mwt-btn mwt-btn-primary mwt-btn-sm radius fr">确定</button>'+
                 "</div>"+
@@ -65,7 +65,7 @@ MWT.DateRangePicker=function(opt)
         var obj=jQuery('#'+rangeid);
         obj.find('.date-submit').click(function(){
             var btn = jQuery(this);
-            //if(btn.data('value')){
+            if(btn.data('value')){
                 var v=btn.data('value');
                 if(v=="cancel"){
                     jQuery("#"+rangeid).hide('fast');
@@ -76,12 +76,13 @@ MWT.DateRangePicker=function(opt)
                 fromdate.setTime(fromdate.getTime()-86400000*v);
 				if (v>0) {
 					todate.setTime(todate.getTime()-86400000);
-				} else {
+				} else if(v<0) {
+					fromdate.setTime(todate.getTime());
 					todate.setTime(todate.getTime());
 				}
                 fromdom.datepicker('setDate',fromdate); 
                 todom.datepicker('setDate',todate); 
-            //}
+            }
             var fv=fromdom.datepicker('getDate').format(thiso.format);
             var tv=todom.datepicker('getDate').format(thiso.format);
             thiso.value=fv+" ~ "+tv;
@@ -102,8 +103,10 @@ MWT.DateRangePicker=function(opt)
         var txtdom=jQuery("#"+txtid);
 		var fromdate=new Date();
 		var todate=new Date();
-		fromdate.setTime(fromdate.getTime()-86400000*v);
-		todate.setTime(todate.getTime()-86400000);
+		if (v>0) {
+			fromdate.setTime(fromdate.getTime()-86400000*v);
+			todate.setTime(todate.getTime()-86400000);
+		}
 		fromdom.datepicker('setDate',fromdate); 
 		todom.datepicker('setDate',todate); 
 		var fv=fromdom.datepicker('getDate').format(thiso.format);

@@ -26,7 +26,7 @@
       multiSelect:true, 
       cm: new MWT.Grid.ColumnModel([
         {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
-        {head:"姓名", dataIndex:"name", width:300},
+        {head:"姓名", dataIndex:"name", poptitle:"姓名aaa", width:300},
         {head:"性别", dataIndex:"sex", sort:true, render:function(v){
           return v==1 ? "男" : "女";
         }},

@@ -98,6 +98,7 @@ MWT.alert=function(msg,callback)
         title   : msg.title ? msg.title : "消息提示", 
         width   : 400,
         top     : msg.top ? msg.top : 50,
+		bodyStyle: 'max-height:450px',
         animate : msg.animate ? msg.animate : 'bounceInDown',
         buttons : [ 
             {"label":"确定",cls:'mwt-btn-primary',type:"close"}
@@ -120,6 +121,7 @@ MWT.confirm=function(msg,callfun)
         title  : msg.title ? msg.title : "请确认",
         width  : 400,
         top    : msg.top ? msg.top : 50,
+		bodyStyle: 'max-height:450px',
         animate : msg.animate ? msg.animate : 'bounceInDown',
         buttons  : [ 
             {"label":"取消",cls:'mwt-btn-default',handler:function(){dialog.close();callfun(false);}},
