@@ -1,6 +1,44 @@
 /* grid样式 */
 
-.mwt-grid {border:solid 1px #ddd;border-radius:2px;}
+
+.mwt-grid {border:none;}
+.mwt-grid table {width:100%;border-spacing:0;}
+.mwt-grid th,.mwt-grid td {
+	padding:7px;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	font-smoothing:antialiased;  
+	font-size: 13px;
+	font-weight: normal;
+}
+.mwt-grid-head td,.mwt-grid-head th,
+.mwt-grid-body td,.mwt-grid-body th {
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.mwt-grid thead th {background-color:#eee;color:#777;}
+.mwt-grid-tbar {border:solid 1px #ddd;margin-bottom:-1px;}
+.mwt-grid-head {border:solid 1px #ddd;margin-bottom:-1px;}
+.mwt-grid-body {border-left:solid 1px #ddd;border-right:solid 1px #ddd;}
+.mwt-grid-body tr {border-top:solid 1px #ddd;border-bottom:solid 1px #ddd;}
+.mwt-grid-foot {background:#f9f9f9;padding:7px;border:solid 1px #ddd;margin-top:-1px;}
+.mwt-grid-foot td {padding:0;}
+
+.mwt-grid-fixed {position:absolute;top:0;bottom:0;left:0;right:0;}
+.mwt-grid-fixed .mwt-grid-head {overflow-y:scroll;}
+.mwt-grid-fixed .mwt-grid-body {position:absolute;left:0;right:0;top:35px;bottom:30px;overflow-y:scroll;}
+.mwt-grid-fixed .mwt-grid-foot {position:absolute;left:0;right:0;bottom:0;}
+
+.mwt-grid-body.bordered td {border-left:solid 1px #ddd;border-right:solid 1px #ddd;}
+.mwt-grid-body td:first-child {border-left:none;}
+.mwt-grid-body td:last-child {border-right:none;}
+
+.mwt-grid-body .empty {border:none;}
+.mwt-grid-body .empty td {border:none;color:#999;line-height:50px;text-align:center;}
+
+
+
+/*
 .mwt-grid .tab {
     width:100%; background-color:transparent;
     border-spacing:0;
@@ -22,6 +60,7 @@
 .mwt-grid .tab tbody tr:hover {background-color:#f9f9f9; cursor:pointer;}
 .mwt-grid .tab tbody {min-height:50px;}
 .mwt-grid .nobbar {border-bottom:solid 0px #ddd;}
+*/
 
 /* 奇偶行变色 */
 .mwt-grid .striped tr:nth-child(2n+2) {background:#f2f2f2;}

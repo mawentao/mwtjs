@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>记录为空的Grid</title>
+  <title>使用Grid底部的工具</title>
   <link href='../../static/mwt.min.css' rel="stylesheet"/>
   <script src="../../static/dep/requirejs/2.1.9/require.js"></script>
 </head>
@@ -15,54 +15,40 @@ define("grid", function(require){
     require("jquery");
     require("mwt");
     var store,grid,o = {};
-    var sexOptions=[
-        {value:1,text:"男"},
-        {value:0,text:"女"}
-    ];
-
     o.init = function(){
         var thiso = this;
         store = new MWT.Store({
-            "url": "../../ui/ajax.php?empty=1"
+            "url": "../../ui/ajax.php"
         });
         grid = new MWT.Grid({
             render: "grid-div",
             store: store,
             pagebar: true, //!< false 表示不分页
             pageSize: 10,
+			position: 'fixed',  //!< 固定位置显示
             multiSelect:true, 
             bordered: true,
-            tbarStyle: 'margin-bottom:10px;',
-            emptyMsg: '没有找到记录哦',
-            position: 'relative',
-            bodyStyle: 'top:92px;',
+			striped: true,
+			filename: '示例表格.xls',
+			bodyStyle: 'top:33px;bottom:37px',
             cm: new MWT.Grid.ColumnModel([
               {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
-              {head:"姓名", dataIndex:"name",poptitle:"用户姓名", width:300},
-              {head:"性别", dataIndex:"sex", poptitle:"用户性别", sort:true, render:function(v){
+              {head:"姓名", dataIndex:"name", width:300},
+              {head:"性别", dataIndex:"sex", sort:true, align:'center', render:function(v){
                 return v==1 ? "男" : "女";
               }},
-              {head:"操作", dataIndex:"id",render:function(v,item){
+              {head:"操作",dataIndex:"id",width:100,render:function(v,item){
                 return v;
               }}
-            ]),
-            tbar: [
-              {type:"select",label:"性别",id:"sex-sel",options:sexOptions,handler:thiso.query},
-              {type:"search",label:"GO",id:"so-key",width:300,handler:thiso.query,placeholder:'搜索姓名'}
-            ]
+            ])
         });
         grid.create();
         this.query();
     };
 
     o.query = function() {
-        store.baseParams = {
-            sex: get_select_value("sex-sel"),
-            key: get_value("so-key")
-        };
         grid.load();
     };
-
     return o;
 });
 
@@ -79,7 +65,7 @@ define("grid", function(require){
   });
 </script>
 
-<div id='grid-div'></div>
+<div id='grid-div' style="position:absolute;top:10px;left:10px;right:10px;bottom:10px;"></div>
 
 </body>
 </html>

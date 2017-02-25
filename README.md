@@ -13,4 +13,5 @@ v3.5 更新内容
 2. 增加.y.z.cl通用样式
 3. 增加步骤流程组件
 4. 弹出框更简单的代码实现
+5. GRID支持emptyMsg, postion, tbarStyle, bodyStyle配置项
 

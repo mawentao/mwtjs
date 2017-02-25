@@ -39,7 +39,9 @@ var conf = [
 		["grid_04.html", "Grid-自定义分页工具条"],
 		["grid_05.html", "带checkbox的Grid"],
         ["grid_06.html", "带工具栏的Grid"],
-        ["grid_tool.html", "使用Grid底部的工具"]
+        ["grid_tool.html", "使用Grid底部的工具"],
+		["grid_fixed.html", "fixed布局"],
+		["grid_empty.html", "记录为空的GRID"]
 	]},
 
     {name:"bar", items:[

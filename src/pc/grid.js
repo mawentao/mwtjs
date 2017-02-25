@@ -15,7 +15,8 @@ MWT.Grid=function(opt)
     this._pagebar = {};
     this.pagebar=true;
     this.pageSize=10;
-	var pagebarSimple=false;
+	var pagebarSimple=false;   //!< 简单分页条
+	var position='relative';   //!< 位置(relative:相对位置,其他:固定头部和尾部)
 
     this.tbar=null;
 	this.cm={};
@@ -51,9 +52,13 @@ MWT.Grid=function(opt)
 		if(opt.rowclick)rowclick=opt.rowclick;
 		if(opt.pagebarSimple)pagebarSimple=true;
 		if(opt.filename)filename=opt.filename;
+		if(opt.position)position=opt.position;
 		tableid=this.render+"-tab";
 		if(filename=='')filename=tableid+'.xls';
 	}
+
+
+
 
     // 创建
     this.create=function(){
@@ -62,30 +67,22 @@ MWT.Grid=function(opt)
         this.grid_chkbox_id=this.grid_div+"-chkbox-id";
         this.grid_chkbox_name=this.grid_div+"-chkbox";
 		
-		/*
-		var code = '';
-		if (this.tbar) code+="<div id='tbar_div_"+opt.render+"' style='margin-bottom:10px;border:solid 1px #ddd;'></div>";
-		code += "<div class='mwt-grid' style='border-top:none;'>";*/
-		
-		var code="<div class='mwt-grid'";
+		// 相对布局
+		var fiexd = position=='relative' ? '' : ' mwt-grid-fixed';
+		var code='<div class="mwt-grid'+fiexd+'">';
+
+		// tbar
         if(this.tbar){
-            code+="><div id='tbar_div_"+opt.render+"'></div>";
-        }else{
-            code+=" style='border-top:solid 0px #ccc;'>";
+			var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
+            code+="<div class='mwt-grid-tbar' id='tbar_div_"+opt.render+"'"+style+"></div>";
         }
 
-        //create thead
+		// header
 		var columns=this.cm.getColumns();
-        code+="<table id='"+tableid+"' class='tab";
-        if(this.bordered)code+=" bordered";
-		if(striped)code+=" striped";
-        //if(!this.pagebar)code+=" nobbar";
-        code+="'>";
+		var headcode='';
 		if (!noheader) {
-		    code+="<thead><tr>";
-            if(this.multiSelect) code+="<td style='width:20px;text-align:center;'>"+
-                "<input id='"+this.grid_chkbox_id+"' type='checkbox' "+
-                   "onchange='set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></td>";
+			headcode+='<thead><tr>';
+            if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
 		    var len=columns.length;
 			var thname = this.grid_div+"-th";
 		    for(var i=0;i<len;++i){
@@ -93,17 +90,27 @@ MWT.Grid=function(opt)
 				var width="";
 				if (columns[i].width){width="width='"+columns[i].width+"'";}
 				var tdid = this.grid_div+"-"+columns[i].dataIndex+"-"+i;
-				code+="<td "+width+" id='"+tdid+"' name='"+thname+"' ";
-				if (isset(columns[i].align)) code+="align='"+columns[i].align+"' ";
-				if (isset(columns[i].valign))code+="valign='"+columns[i].valign+"' ";
-				if (isset(columns[i].style)) code+="style='"+columns[i].style+"' ";
-				if (columns[i].sort) code+="class='grid-sort' ";
-				if (columns[i].poptitle) code+="pop-title='"+columns[i].poptitle+"' ";
-                code+="data-id='"+columns[i].dataIndex+"'>"+columns[i].head+"</td>";
+				headcode+="<th "+width+" id='"+tdid+"' name='"+thname+"' ";
+				if (isset(columns[i].align)) headcode+="align='"+columns[i].align+"' ";
+				if (isset(columns[i].valign))headcode+="valign='"+columns[i].valign+"' ";
+				if (isset(columns[i].style)) headcode+="style='"+columns[i].style+"' ";
+				if (columns[i].sort) headcode+="class='grid-sort' ";
+				if (columns[i].poptitle) headcode+="pop-title='"+columns[i].poptitle+"' ";
+                headcode+="data-id='"+columns[i].dataIndex+"'>"+columns[i].head+"</th>";
 		    }
-		    code+="</tr></thead>";
+		    headcode+="</tr></thead>";
+			if (position!='relative') {
+				// fixed布局让head和body在两个table里
+				code+='<div class="mwt-grid-head"><table>'+headcode+'</table></div>';
+			}
         }
-		code+="<tbody id='"+this.grid_div+"'></tbody></table>";
+		// body
+		var bordered = this.bordered ? ' bordered' : '';
+		var striped = striped ? ' striped' : '';
+		var style = opt.bodyStyle ? ' style="'+opt.bodyStyle+'"' : '';
+		code += '<div id="'+tableid+'" class="mwt-grid-body'+bordered+striped+'"'+style+'><table>';
+		if (position=='relative') code+=headcode;
+		code += '<tbody id="'+this.grid_div+'"></tbody></table></div>';
 
 		// bottom
 		var act = striped ? 'active' : '';
@@ -111,11 +118,12 @@ MWT.Grid=function(opt)
 		var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
 		var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
 		var btns=[stripedbtn,refershbtn,exportbtn];
-		code+="<div style='background:#f9f9f9;padding:5px;'>"+
+		code+="<div class='mwt-grid-foot'>"+
             '<table width="100%"><tr><td id="'+this.page_div+'"></td><td align="right" width="94">'+
 				'<span class="seg"></span>'+btns.join('&nbsp;')+'</td></tr></table>'+
           '</div>'+
         "</div>";
+		code+='</div>';
 		jQuery("#"+this.render).html(code);
 		/////////////////////////////////////////////////
 		// 导出按钮
@@ -205,30 +213,35 @@ MWT.Grid=function(opt)
         var len=columns.length;
         var html="";
 		var size=this.store.size();
-        var trname = this.render+"row";
-		for(var i=0;i<size;++i){
-			var item=this.store.get(i);
-            item.store_index = i;
-			html+="<tr name='"+trname+"' data-idx='"+i+"'>";
-            if(this.multiSelect) 
-                html+="<td align='center'><input name='"+this.grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
-			for(var c=0;c<len;++c){
-				if (columns[c].hide){continue;}
-				var dataidx=columns[c].dataIndex;
-				var v = item[dataidx];
-				if (columns[c].render){
-					var func=columns[c].render;
-					v = func(v,item);
+		if (size==0) {
+			var emptymsg = opt.emptyMsg ? opt.emptyMsg : "查询记录为空";
+			html += '<tr class="empty"><td colspan="'+(len+1)+'">'+emptymsg+'</td></tr>';
+		} else {
+        	var trname = this.render+"row";
+			for(var i=0;i<size;++i){
+				var item=this.store.get(i);
+            	item.store_index = i;
+				html+="<tr name='"+trname+"' data-idx='"+i+"'>";
+            	if(this.multiSelect) 
+                	html+="<td style='width:20px;text-align:center;'><input name='"+this.grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
+				for(var c=0;c<len;++c){
+					if (columns[c].hide){continue;}
+					var dataidx=columns[c].dataIndex;
+					var v = item[dataidx];
+					if (columns[c].render){
+						var func=columns[c].render;
+						v = func(v,item);
+					}
+					html+="<td ";
+					var width="";
+					if (columns[c].width){html+="width='"+columns[c].width+"' ";}
+					if (isset(columns[c].align)) html+="align='"+columns[c].align+"' ";
+					if (isset(columns[c].valign))html+="valign='"+columns[c].valign+"' ";
+                	if (isset(columns[c].style)) html+="style='"+columns[c].style+"' ";
+					html+=">"+v+"</td>";
 				}
-				html+="<td ";
-				var width="";
-				if (columns[c].width){html+="width='"+columns[c].width+"' ";}
-				if (isset(columns[c].align)) html+="align='"+columns[c].align+"' ";
-				if (isset(columns[c].valign))html+="valign='"+columns[c].valign+"' ";
-                if (isset(columns[c].style)) html+="style='"+columns[c].style+"' ";
-				html+=">"+v+"</td>";
+				html+="</tr>";
 			}
-			html+="</tr>";
 		}
         jQuery("#"+this.grid_div).html(html);
 		if (rowclick) {

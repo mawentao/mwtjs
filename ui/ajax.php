@@ -5,6 +5,12 @@ $data = array(
 	"root" => array(),
 );
 
+if ($_GET['empty']==1) {
+	$data['totalProperty'] = 0;
+	echo json_encode(array("data"=>$data));
+	die(0);
+}
+
 
 // 构造数据
 $db = array();
