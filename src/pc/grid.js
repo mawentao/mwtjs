@@ -106,9 +106,9 @@ MWT.Grid=function(opt)
         }
 		// body
 		var bordered = this.bordered ? ' bordered' : '';
-		var striped = striped ? ' striped' : '';
+		var strip = striped ? ' striped' : '';
 		var style = opt.bodyStyle ? ' style="'+opt.bodyStyle+'"' : '';
-		code += '<div id="'+tableid+'" class="mwt-grid-body'+bordered+striped+'"'+style+'><table>';
+		code += '<div id="'+tableid+'" class="mwt-grid-body'+bordered+strip+'"'+style+'><table>';
 		if (position=='relative') code+=headcode;
 		code += '<tbody id="'+this.grid_div+'"></tbody></table></div>';
 

@@ -74,12 +74,12 @@ $src/pc/*.js
 
 mergecss \
 $src/libdepends/swiper/swiper.css \
-$src/*.css \
 $src/css/*.css \
 $src/pc/*.css \
 $src/fields/form.css \
 $src/fontawesome/*.css \
-$src/widgets/*.css 
+$src/widgets/*.css \
+$src/*.css 
 
 #libs/iscroll/iscroll.js \
 mergejs_mobile \
