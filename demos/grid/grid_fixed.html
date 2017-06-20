@@ -25,12 +25,12 @@ define("grid", function(require){
             store: store,
             pagebar: true, //!< false 表示不分页
             pageSize: 10,
-			position: 'fixed',  //!< 固定位置显示
+            position: 'fixed',  //!< 固定位置显示
             multiSelect:true, 
             bordered: true,
-			striped: true,
-			filename: '示例表格.xls',
-			bodyStyle: 'top:33px;bottom:37px',
+            striped: true,
+            filename: '示例表格.xls',
+            bodyStyle: 'top:33px;bottom:37px',
             cm: new MWT.Grid.ColumnModel([
               {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
               {head:"姓名", dataIndex:"name", width:300},

@@ -19,40 +19,42 @@ if [ ! -d $output ];then
     mkdir $output
 fi
 
+function insert_release_note_at_first_line()
+{
+	file=$@
+    endy=`date +"%Y"`
+	sed -ig "1i\\
+/*! $file v$version | (c) 2013-$endy,$author | release:$date */
+" $output/$file
+}
+
+
 function mergejs()
 {
     file=$product".min.js"
     uglifyjs $@ -m -o $output/$file
-    note="/*! $file v$version | (c) 2013-2016,$author | release:$date */"
-    cmd=1i\\$note
-    sed -i "$cmd" $output/$file
+    insert_release_note_at_first_line $file
 }
 
 function mergecss()
 {
 	file=$product".min.css"
     cleancss $@ --s0 --skip-rebase -o $output/$file
-    note="/*! $file v$version | (c) 2013-2016,$author | release:$date */"
-    cmd=1i\\$note
-    sed -i "$cmd" $output/$file   
+    insert_release_note_at_first_line $file
 }
 
 function mergejs_mobile()
 {
     file=$product"_mobile.min.js"
     uglifyjs $@ -m -o $output/$file
-    note="/*! $file v$version | (c) 2013-2016,$author | release:$date */"
-    cmd=1i\\$note
-    sed -i "$cmd" $output/$file
+    insert_release_note_at_first_line $file
 }
 
 function mergecss_mobile()
 {
 	file=$product"_mobile.min.css"
     cleancss $@ --s0 --skip-rebase -o $output/$file
-    note="/*! $file v$version | (c) 2013-2016,$author | release:$date */"
-    cmd=1i\\$note
-    sed -i "$cmd" $output/$file   
+    insert_release_note_at_first_line $file
 }
 
 mergejs \
