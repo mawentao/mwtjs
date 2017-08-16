@@ -1,1 +1,0 @@
-define("er/events",function(require){var e={notifyError:function(e){return"string"==typeof e&&(e=new Error(e)),this.fire("error",{error:e}),e}};return require("./Observable").enable(e),e});

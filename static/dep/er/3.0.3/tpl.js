@@ -1,1 +1,0 @@
-define("er/tpl",function(require){var e={load:function(e,t,r){function n(e){var t=require("./template");t.parse(e),r(e)}var o=t.toUrl(e);require("./ajax").get(o,null,!0).then(n)}};return e});
