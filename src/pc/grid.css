@@ -14,7 +14,7 @@
 	word-wrap: break-word;
 	word-break: break-all;
 }
-.mwt-grid thead th {background-color:#eee;color:#777;}
+.mwt-grid thead th {background-color:#eee;color:#777;text-align:left;}
 .mwt-grid-tbar {border:solid 1px #ddd;margin-bottom:-1px;}
 .mwt-grid-head {border:solid 1px #ddd;margin-bottom:-1px;}
 .mwt-grid-body {border-left:solid 1px #ddd;border-right:solid 1px #ddd;}

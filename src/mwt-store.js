@@ -10,9 +10,9 @@ MWT.Store=function(cnf)
     this.totalProperty=0;
     this.root=[];
     this.annex={};
-	this.loadres;
-	this.beforeLoad;
-	this.afterLoad;
+    this.loadres;
+    this.beforeLoad;
+    this.afterLoad;
 
     if (cnf) {
         if (cnf.url) this.url=cnf.url;
@@ -64,15 +64,15 @@ MWT.Store=function(cnf)
         this.root=[];
         this.fire("load");
     };
-	// 交换两个位置的数据
-	this.swap=function(p1,p2) {
-		var n=this.root.length;
-		if (p1>=n || p1<0 || p2>=n || p2<0 || p1==p2) return;
-		var tmp = this.root[p1];
-		this.root[p1] = this.root[p2];
-		this.root[p2] = tmp;
-		this.fire("load");
-	};
+    // 交换两个位置的数据
+    this.swap=function(p1,p2) {
+        var n=this.root.length;
+        if (p1>=n || p1<0 || p2>=n || p2<0 || p1==p2) return;
+        var tmp = this.root[p1];
+        this.root[p1] = this.root[p2];
+        this.root[p2] = tmp;
+        this.fire("load");
+    };
     
     // 编辑
     this.set=function(index,item) {
@@ -91,7 +91,7 @@ MWT.Store=function(cnf)
         // Ajax Load（jquery）
         else {
             var thiso=this;
-			if(this.beforeLoad)this.beforeLoad();
+            if(this.beforeLoad)this.beforeLoad();
             jQuery.ajax({
                 type: "post", 
                 async: true,
@@ -99,22 +99,22 @@ MWT.Store=function(cnf)
                 data: this.baseParams,
                 dataType: "json", 
                 complete: function() {
-					if(thiso.afterLoad)thiso.afterLoad();
+                    if(thiso.afterLoad)thiso.afterLoad();
                 },
                 success: function (res) { 
-					thiso.loadres=res;
-					if (isset(res['data'])) {
-						var data=res['data'];
-					    if (isset(data.totalProperty)) thiso.totalProperty=data.totalProperty;
-					    if (isset(data.root)) thiso.root=data.root;
+                    thiso.loadres=res;
+                    if (isset(res['data'])) {
+                        var data=res['data'];
+                        if (isset(data.totalProperty)) thiso.totalProperty=data.totalProperty;
+                        if (isset(data.root)) thiso.root=data.root;
                         if (isset(data.annex)) thiso.annex=data.annex;
-					}
+                    }
                     thiso.fire("load");
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     var errmsg = "Error("+XMLHttpRequest.readyState+") : "+textStatus;
-					thiso.loadres={errmsg:errmsg};
-					console.log(errmsg);
+                    thiso.loadres={errmsg:errmsg};
+                    console.log(errmsg);
                     //alert(XMLHttpRequest.status);
                     //alert(errmsg); 
                 }
@@ -147,7 +147,7 @@ MWT.Pagebar=function(cnf)
     this.pageNum=0;        //!< 当前页号
     this.pageCount=0;     //!< 总页数
     this.totalProperty=0;  //!< 总记录数
-	var simple=false;
+    var simple=false;
 
     if (cnf) {
         if (cnf.render) this.render=cnf.render;
@@ -164,7 +164,7 @@ MWT.Pagebar=function(cnf)
                 thiso.display();
             });
         }
-		if (cnf.simple) simple=true;
+        if (cnf.simple) simple=true;
     }
     
     // 切换页面
@@ -214,25 +214,27 @@ MWT.Pagebar=function(cnf)
             var selid=this.render+"-sel";
             var pname=this.render+"-page";
 
-			// simple
-			if (simple) {
-				var cbtn=this.render+'-cbtn';
-				var cls = 'class="mwt-btn mwt-btn-default mwt-btn-xs radius" style="color:#444;margin-left:5px;width:26px;padding:0;font-size:16px;"';
-				var code = '<table class="tablay" style="margin-top:3px;"><tr><td align="center">';
-				code += '<button name="'+cbtn+'" data-v="'+1+'" '+cls+'><i class="fa fa-angle-double-left"></i></button>';
-				code += '<button name="'+cbtn+'" data-v="'+(this.pageNum-1)+'" '+cls+'><i class="fa fa-angle-left"></i></button>';
-				code += '<span style="font-size:13px;margin:0 7px;color:#444;">'+this.pageNum+' / '+this.pageCount+'</span>';
-				code += '<button name="'+cbtn+'" data-v="'+(this.pageNum+1)+'" '+cls+'><i class="fa fa-angle-right"></i></button>';
-				code += '<button name="'+cbtn+'" data-v="'+(this.pageCount)+'" '+cls+'><i class="fa fa-angle-double-right"></i></button>';
-				document.getElementById(this.render).innerHTML=code;
-				jQuery('[name='+cbtn+']').click(function(){
-						var p = jQuery(this).data('v');
-						if (p!=thiso.pageNum && p>0 && p<=thiso.pageCount) {
-						thiso.changePage(p);
-						}
-						});
-				return;
-			}
+            // simple
+            if (simple) {
+                var cbtn=this.render+'-cbtn';
+                var cls = 'class="mwt-btn mwt-btn-default"';
+                var btns=[
+                    '<button name="'+cbtn+'" data-v="'+1+'" '+cls+'><i class="fa fa-angle-double-left"></i></button>',
+                    '<button name="'+cbtn+'" data-v="'+(this.pageNum-1)+'" '+cls+'><i class="fa fa-angle-left"></i></button>',
+                    '<span style="font-size:13px;margin:0 4px;color:#444;">'+this.pageNum+' / '+this.pageCount+'</span>',
+                    '<button name="'+cbtn+'" data-v="'+(this.pageNum+1)+'" '+cls+'><i class="fa fa-angle-right"></i></button>',
+                    '<button name="'+cbtn+'" data-v="'+(this.pageCount)+'" '+cls+'><i class="fa fa-angle-double-right"></i></button>'
+                ];
+                var code = '<div class="mwt-simple-pagebar">'+btns.join('&nbsp;')+'</div>';
+                jQuery('#'+this.render).html(code);
+                jQuery('[name='+cbtn+']').click(function(){
+                    var p = jQuery(this).data('v');
+                    if (p!=thiso.pageNum && p>0 && p<=thiso.pageCount) {
+                        thiso.changePage(p);
+                    }
+                });
+                return;
+            }
 
             var code="<table class='tablay'><tr><td>";
 

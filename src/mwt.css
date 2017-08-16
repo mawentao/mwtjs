@@ -250,7 +250,7 @@ i.folder-open{background-image:url(imgs/tree/folder-open.gif);cursor:pointer;}
 i.leaf{background-image:url(imgs/tree/leaf.gif);background-position: 0;}
 
 /* ---------------- bar -------------------- */
-.mwt-bar {background:#f9f9f9;padding:2px 0;}
+.mwt-bar {background:#f9f9f9;}
 .mwt-bar table {width:100%;cellspacing:0px;cellpadding:0px;padding:0;margin:0;}
 .mwt-bar hr {margin:0;padding:0;border-bottom:solid 1px #fff;border-top:solid 1px #ccc;border-left-width:0;border-right-width:0;}
 .mwt-bar td {padding:6px 0 6px 8px;}
@@ -384,4 +384,13 @@ i.leaf{background-image:url(imgs/tree/leaf.gif);background-position: 0;}
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+}
+
+/* 简洁版分页栏 */
+.mwt-simple-pagebar {text-align:center;}
+.mwt-simple-pagebar .mwt-btn {padding:0;
+	width: 20px;
+    border-radius: 2px;
+    vertical-align: baseline;
+    line-height: 19px;
 }

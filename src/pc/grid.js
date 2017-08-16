@@ -26,9 +26,10 @@ MWT.Grid=function(opt)
 
     var filename="";    //!< 导出文件名
     var striped=false;  //!< 奇偶行变色
-    var tableid=''; 
-    var noheader=false;
-    var rowclick=null;     //!< 行点击事件处理函数
+    var noheader=false; //!< 不显示表头 
+    var notoolbox=false;//!< 不显示工具箱（导出,刷新,奇偶变色）
+    var tableid='';
+    var rowclick=null;  //!< 行点击事件处理函数
     var thiso=this;
 
     if(opt){
@@ -49,6 +50,7 @@ MWT.Grid=function(opt)
         if(opt.striped)striped=true;
         if(opt.bordered)this.bordered=true;
         if(opt.noheader)noheader=true;
+		if(opt.notoolbox)notoolbox=true;
         if(opt.rowclick)rowclick=opt.rowclick;
         if(opt.pagebarSimple)pagebarSimple=true;
         if(opt.filename)filename=opt.filename;
@@ -72,66 +74,72 @@ MWT.Grid=function(opt)
         var code='<div class="mwt-grid'+fiexd+'">';
 
         // tbar
+		var tbarid=render+'-tbar';
         if(this.tbar){
             var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='tbar_div_"+opt.render+"'"+style+"></div>";
+            code+="<div class='mwt-grid-tbar' id='"+tbarid+"'"+style+"></div>";
         }
 
-        // header
-        var columns=this.cm.getColumns();
-		var headid=render+'-head';
-        var headcode='';
-        if (!noheader) {
-            headcode+='<thead><tr>';
-            if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
-            var len=columns.length;
-            var thname = this.grid_div+"-th";
-            for(var i=0;i<len;++i){
-                if (columns[i].hide){continue;}
-                var width="";
-                if (columns[i].width){width="width='"+columns[i].width+"'";}
-                var tdid = this.grid_div+"-"+columns[i].dataIndex+"-"+i;
-                headcode+="<th "+width+" id='"+tdid+"' name='"+thname+"' ";
-                if (isset(columns[i].align)) headcode+="align='"+columns[i].align+"' ";
-                if (isset(columns[i].valign))headcode+="valign='"+columns[i].valign+"' ";
-                if (isset(columns[i].style)) headcode+="style='"+columns[i].style+"' ";
-                if (columns[i].sort) headcode+="class='grid-sort' ";
-                if (columns[i].poptitle) headcode+="pop-title='"+columns[i].poptitle+"' ";
-                headcode+="data-id='"+columns[i].dataIndex+"'>"+columns[i].head+"</th>";
-            }
-            headcode+="</tr></thead>";
-            if (position!='relative') {
-                // fixed布局让head和body在两个table里
-                code+='<div id="'+headid+'" class="mwt-grid-head"><table>'+headcode+'</table></div>';
-            }
-        }
-        // body
-        var bordered = this.bordered ? ' bordered' : '';
-        var strip = striped ? ' striped' : '';
-        var style = opt.bodyStyle ? ' style="'+opt.bodyStyle+'"' : '';
-        code += '<div id="'+tableid+'" class="mwt-grid-body'+bordered+strip+'"'+style+'><table>';
-        if (position=='relative') code+=headcode;
-        code += '<tbody id="'+this.grid_div+'"></tbody></table></div>';
-
+		// table
+		code += '<div id="'+tableid+'">';
+		{
+        	// head
+        	var columns=this.cm.getColumns();
+			var headid=render+'-head';
+        	var headcode='';
+        	if (!noheader) {
+            	headcode+='<thead><tr>';
+            	if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
+            	var len=columns.length;
+            	var thname = this.grid_div+"-th";
+            	for(var i=0;i<len;++i){
+                	if (columns[i].hide){continue;}
+                	var width="";
+                	if (columns[i].width){width="width='"+columns[i].width+"'";}
+                	var tdid = this.grid_div+"-"+columns[i].dataIndex+"-"+i;
+                	headcode+="<th "+width+" id='"+tdid+"' name='"+thname+"' ";
+					var style = '';
+					if (isset(columns[i].align)) style+='text-align:'+columns[i].align+';';
+					if (isset(columns[i].valign)) style+='vertical-align:'+columns[i].valign+';';
+                	if (isset(columns[i].style)) style+=columns[i].style;
+					headcode+='style="'+style+'"';
+               		if (columns[i].sort) headcode+="class='grid-sort' ";
+                	if (columns[i].poptitle) headcode+="pop-title='"+columns[i].poptitle+"' ";
+                	headcode+="data-id='"+columns[i].dataIndex+"'>"+columns[i].head+"</th>";
+            	}
+            	headcode+="</tr></thead>";
+            	if (position!='relative') {
+                	// fixed布局让head和body在两个table里
+                	code+='<div id="'+headid+'" class="mwt-grid-head"><table>'+headcode+'</table></div>';
+            	}
+        	}
+        	// body
+        	var bordered = this.bordered ? ' bordered' : '';
+			var strip = striped ? ' striped' : '';
+			var style = opt.bodyStyle ? ' style="'+opt.bodyStyle+'"' : '';
+			var bodyid=render+'-body';
+			code += '<div id="'+bodyid+'" class="mwt-grid-body'+bordered+strip+'"'+style+'><table>';
+			if (position=='relative') code+=headcode;
+			code += '<tbody id="'+this.grid_div+'"></tbody></table></div>';
+		}
+		code += '</div>';
         // foot
 		var footid=render+'-foot';
-        var act = striped ? 'active' : '';
-        var stripedbtn = '<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
-        var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
-        var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
-        var btns=[stripedbtn,refershbtn,exportbtn];
+		var toolbox = '';
+		if (!notoolbox) {
+			var act = striped ? 'active' : '';
+			var stripedbtn = '<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
+			var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
+			var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
+			var btns=[stripedbtn,refershbtn,exportbtn];
+			toolbox = '<td align="right" width="94" style="padding:0;"><span class="seg"></span>'+btns.join('&nbsp;')+'</td>';
+		}
         code+='<div id="'+footid+'" class="mwt-grid-foot">'+
-            '<table width="100%"><tr><td id="'+this.page_div+'"></td><td align="right" width="94">'+
-                '<span class="seg"></span>'+btns.join('&nbsp;')+'</td></tr></table>'+
-          '</div>'+
-        "</div>";
+            '<table width="100%"><tr><td id="'+this.page_div+'"></td>'+toolbox+'</tr></table>'+
+          '</div>';
         code+='</div>';
         jQuery("#"+render).html(code);
-		if (position!='relative') {
-			var headh = jQuery('#'+headid).height();
-			var footh = jQuery('#'+footid).height();
-			jQuery('#'+tableid).css({'top':headh+1,'bottom':footh+17});
-		}
+		
 
         /////////////////////////////////////////////////
         // 导出按钮
@@ -175,7 +183,7 @@ MWT.Grid=function(opt)
 
         //create tbar
         if(this.tbar){
-            var tbar=new MWT.Bar({render:"tbar_div_"+opt.render,"items":this.tbar});
+            var tbar=new MWT.Bar({render:tbarid,"items":this.tbar});
             tbar.create();
         }
 
@@ -195,6 +203,16 @@ MWT.Grid=function(opt)
                 jQuery('#'+thiso.page_div).html(code);
             });
         }
+
+		////////////////////////////////////////////
+		// fixed布局自动计算top和bottom距离
+		if (position!='relative') {
+			var headh = jQuery('#'+headid).height();
+			if (mwt.$(tbarid)){headh+=jQuery('#'+tableid).position().top;}
+			var footh = jQuery('#'+footid).height();
+			jQuery('#'+bodyid).css({'top':headh+1,'bottom':footh+17});
+		}
+
     };
 
     // 获取记录
