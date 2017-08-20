@@ -305,7 +305,8 @@ MWT.BorderLayout=function(opt)
         var jcenter = jQuery('#'+targetc);
         var sideWidth = jside.width();
         var bl = sideWidth<=0 ? orginalWidth : 0;
-        if (jside.css('left')!='auto') {
+        var sidePosition = jside.hasClass('mwt-layout-border-east') ? 'right' : 'left';
+        if (sidePosition=='left') {
             if (bl==0) {
                 jQuery(this).removeClass('icon-left').addClass('icon-right');
             } else {
@@ -337,7 +338,8 @@ MWT.BorderLayout=function(opt)
         var jcenter = jQuery('#'+targetc);
         var sideHeight = jside.height();
         var bl = sideHeight<=0 ? orginalHeight : 0;
-        if (jside.css('top')!='auto') {
+        var sidePosition = jside.hasClass('mwt-layout-border-south') ? 'bottom' : 'top';
+        if (sidePosition=='top') {
             if (bl==0) {
                 jQuery(this).removeClass('icon-up').addClass('icon-down');
             } else {
