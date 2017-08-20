@@ -1,0 +1,39 @@
+/* 创建SQL */
+#dbview-div {position:absolute;top:10px;left:10px;bottom:10px;width:200px;border:solid 1px #ddd;}
+#sqlview-div {position:absolute;top:10px;left:220px;right:10px;height:210px;border:solid 1px #ddd;}
+#tablestr-div {position:absolute;top:230px;left:220px;right:10px;bottom:10px;border:solid 1px #ddd;}
+#dbbody-div,#tablebody-div {position:absolute;top:69px;left:0;right:0;bottom:0;overflow:auto;background:#fff;
+	padding:7px;
+	font-size:13px;
+	font-family: 'Courier New';
+}
+#dbbody-div {background:#fff;font-size:12px;box-sizing:border-box;}
+.headdiv {}
+.headdiv td,.headdiv td:last-child {padding:3px 5px;}
+.headdiv .title {font-size:12px;white-space:nowrap;}
+
+#dbbody-div ul {padding:0;margin:0;}
+#dbbody-div ul li {list-style: none;line-height:17px;}
+#dbbody-div ul li a {text-decoration:none;color:#333;font-size:13px;white-space: nowrap;font-family:'sans-serif','微软雅黑';}
+#dbbody-div ul li a:hover {color:#f90;}
+#dbbody-div ul li a i {font-size:14px;vertical-align:middle;color:#4C99D0;}
+
+/* SQL执行 */
+.sqlrestab {border-collapse:collapse;}
+.sqlrestab th,.sqlrestab td {border:solid 1px #ccc;padding:2px 4px;font-size:13px;}
+.sqlrestab th {background:#aaa;color:#fff;font-size:14px;font-weight:normal;padding:3px 5px;}
+.sqlrestab td {background:#fff;color:#333;}
+.sqlrestab td:first-child {color:#fff;background:#aaa;}
+
+.grida {color:#357ebd;text-decoration:none;font-size:12px;}
+.grida:hover {text-decoration:underline;}
+
+
+/* highlight样式 */
+pre {margin:0;}
+pre.autobr {white-space: normal;}
+pre span {font-family:monospace;}
+
+code { font-family: monospace; }
+
+

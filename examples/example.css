@@ -1,0 +1,24 @@
+/* example.css, (c) 2017 mawentao */
+body {margin:20px;}
+h1 {font-size:18px;color:darkred;margin:25px 0 10px;font-weight:normal;}
+h2 {font-size:16px;font-weight:normal;color:#FF5722;margin:35px 0 15px;padding-bottom:10px;border-bottom:dashed 1px #ccc;}
+h3 {font-size:14px;font-weight:normal;margin:20px 0 10px;}
+p {font-size:13px;margin:3px 0;}
+a {color:#03A9F4;}
+
+pre {margin:10px 0;white-space:normal;}
+code {display:none;font-size:13px;}
+code,code span,code b {
+    font-family:"Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace;
+}
+.hljs {
+    background: url(static/codebg.png) #F6F6F6 !important;
+    -moz-background-size: 30px,30px !important;
+    -o-background-size: 30px,30px !important;
+    -webkit-background-size: 30px,30px !important;
+    background-size: 30px,30px !important;
+    padding:10px !important;
+}
+
+#backtop-div {padding:0;text-align:center;line-height:40px;font-size:18px;color:#888;background:#eee;}
+#backtop-div:hover {background:#fff;}

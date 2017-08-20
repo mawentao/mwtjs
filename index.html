@@ -2,38 +2,43 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-  <title>MwtJs在线学习平台</title>
-  <link rel="stylesheet" href="static/dep/extjs/3.0/resources/css/ext-all.css">
-  <style>
-    body,p,b,span,div {font-family:"微软雅黑";}
-  </style>
-  <script src="static/dep/extjs/3.0/ext-base.js"></script>
-  <script src="static/dep/extjs/3.0/ext-all.js"></script>
-  <script src="static/dep/extjs/3.0/ext-lang-zh_CN.js"></script>
-  <script src="static/dep/requirejs/2.1.9/require.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="examples/static/mwtjs.png" type="image/png">
+  <title>mwtjs-涓撲负MIS绫粀eb绯荤粺璁捐</title>
+  <link rel="stylesheet" type="text/css" href="dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="static/app/base.css"/>
+  <script type="text/javascript" src="dist/jquery.min.js"></script>
+  <script type="text/javascript" src="dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="static/libs/requirejs/2.1.9/require.js"></script>
 </head>
 <body>
-    <!-- Demo对话框 -->
-    <div id="demowin_div"></div>
-    <!-- 源代码输入框 -->
-    <textarea id="source" style="width:100%;height:100%;"></textarea>
-    <!-- 显示页面 -->
-	<iframe id="main_area" name="ifm" src="demos/tmp/hello.html" width="100%" height="100%"></iframe>
-
+<div id="main-div" class="mwt-layout-fill"></div>
 <script>
+jQuery(document).ready(function(){
     require.config({
-		baseUrl: 'assets/',
-		paths: {},
-		packages: [
-			{name:'jquery', location:'../static/dep/jquery/1.11.2', main:'jquery.min'},
-			{name:'er',     location:'../static/dep/er/3.0.3', main:'main'}
-		]
-	});
-	
-	require(['main'], function (main) {
-        main.init();
+        baseUrl: 'static/app',
+        packages: [
+            {name:'frame', location:'frame', main:'main'},
+            {name:'highlight', location:'../libs/highlight', main:'highlight.min'}
+        ]   
+    }); 
+    require(['jappengine'], function(jappengine){
+        jappengine.start();
     });
+/*
+    new mwt.BorderLayout({
+        render : 'main-div',
+        items : [
+                {region:'north',height:100,collapsible:true,style:'background:#DEF',html:'<p>鍙姌鍙犵殑Border甯冨眬</p>'},
+                {region:'south',height:100,collapsible:true,style:'background:#DEF',html:'south'},
+                {region:'west',width:200,collapsible:true,style:'background:#FEE',html:'west'},
+                {region:'east',width:200,collapsible:true,split:true,style:'background:#FEE',html:'east'},
+                {region:'center',style:'background:#FDF5DD;',html:'center'}
+            ]
+    }).init();
+*/
+});
 </script>
 </body>
 </html>

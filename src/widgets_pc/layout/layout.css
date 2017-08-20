@@ -1,0 +1,32 @@
+/* layout.css, (c) 2017 mawentao */
+
+.mwt-layout-fill,.mwt-layout-border,.mwt-layout-border-center {
+    position:absolute;top:0;right:0;bottom:0;left:0;overflow:auto;
+}
+.mwt-layout-border-north {position:absolute;top:0;right:0;left:0;overflow:auto;}
+.mwt-layout-border-west {position:absolute;top:0;bottom:0;left:0;overflow:auto;}
+.mwt-layout-border-east {position:absolute;top:0;bottom:0;right:0;overflow:auto;}
+.mwt-layout-border-south {position:absolute;bottom:0;right:0;left:0;overflow:auto;}
+
+
+.mwt-layout-border-split-vertical, .mwt-layout-border-split-horizontal {
+    position:absolute;cursor:pointer;background:#ddd;
+}
+.mwt-layout-border-split-vertical {top:0;bottom:0;}
+.mwt-layout-border-split-horizontal {right:0;left:0;}
+
+
+.mwt-layout-border-collapse-vertical, .mwt-layout-border-collapse-horizontal{
+    position: absolute;padding: 0;display: block;
+    border:none;outline:none;
+    background: #d0d0d0;
+    border-radius: 30px;
+    color: #666;
+}
+.mwt-layout-border-collapse-vertical:hover, .mwt-layout-border-collapse-horizontal:hover {
+    background:#fff;
+}
+.mwt-layout-border-collapse-horizontal {left:50%;height:7px;line-height:8px;width:50px;margin-left:-25px;}
+.mwt-layout-border-collapse-vertical {top:50%;height:50px;margin-top:-25px;width:7px;}
+.mwt-layout-border-collapse-vertical:before {margin-left:-3px;}
+

@@ -1,0 +1,13 @@
+.cubetab {border-collapse:collapse;margin:-1px;}
+
+.cubetab th,.cubetab td{border:solid 1px #71BEC7;font-weight:normal;font-size:12px;padding:4px 8px;}
+.cubetab th {background:#1D717B;color:#fff;}
+.cubetab th i {color:#fff !important;}
+.cubetab th.tip {color:#FFF7B2;}
+
+.cubetab tr:nth-child(2n+1) {background:#fff;}
+.cubetab tr:nth-child(2n+2) {background:#EFFDFF;}
+
+.cubetab tr:hover td {background:#ff0;cursor:pointer;}
+
+.cubetab label {white-space:nowrap;}

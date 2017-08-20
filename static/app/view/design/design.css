@@ -1,0 +1,67 @@
+/* 设计器相关样式 */
+
+/* 设计器模块样式 */
+#design_left {position:absolute;top:0;bottom:0;left:0;width:200px;border-right:solid 1px #ccc;background:#f3f4f5;}
+#design_center {position:absolute;top:0;bottom:0;left:200px;right:270px;}
+#design_right {position:absolute;top:0;bottom:0;right:0;width:270px;border-left:solid 1px #ccc;}
+
+/* 组件面板 */
+#design_left h3 {padding:0;margin:0;font-size:13px;font-weight:normal;padding:0 10px;line-height:40px;background:#e3e4e6;color:#333;}
+
+.design-cube {margin:8px;padding:0;}
+.design-cube li {list-style-type:none;margin:5px;padding:0;float:left;text-align:center;line-height:13px;}
+.design-cube li .icon {border:solid 1px #f3f4f5;border-radius:2px;padding:5px;}
+.design-cube li .icon:hover { border-color:#ccc;background:#fff;cursor:move; }
+.design-cube li i {display:inline-block;width:36px;height:36px;}
+.design-cube li span {font-size:12px;}
+
+.dicon {background: url(imgs/svg_sprite.svg) no-repeat;}
+.dicon-grid {background-position: 0 0;}
+.dicon-tab {background-position: -36px 0;}
+
+/* 主面板 */
+#design_center .head, #design_right .head{
+	position:absolute;top:0;left:0;right:0;height:40px;background:#F8F8F8;border-bottom:1px solid #C7C7C7;
+}
+#design_right .head {background:#d6d6d6;color:#777;text-align:center;line-height:40px;font-size:12px;}
+#design_center .body, #design_right .body {
+	position:absolute;top:40px;left:0;right:0;bottom:0;overflow:auto;background:#eee;
+}
+#design_right .body { background:#ededed; font-size:13px;padding:10px 0;}
+
+
+/* 属性设置面板样式 */
+.property-tab {width:100%;border-spacing:0;}
+.property-tab th,.property-tab td {font-weight:normal;font-size:12px;text-align:left;padding:5px 10px;}
+.property-tab th {color:#0096A9;}
+.property-tab .partition {padding:0}
+.property-tab .partition hr {border:none;border-top:solid 1px #ccc;}
+
+.property-tab .dataa {color: #F44336;text-decoration: none;}
+.property-tab .dataa:hover {text-decoration:underline;}
+
+.property-tab ul {margin:0;padding:0;display:grid;}
+.property-tab li {list-style:none;}
+.property-tab label {cursor:pointer;}
+
+.property-tab ul .right-content {float:right;}
+.property-tab ul .right-content .first-column {margin-right: 10px;}
+.property-tab ul .right-content .second-column {width: 70px;display: inline-block;text-align: right;}
+
+
+/* 折叠按钮 */
+.pfoldicon {float:right;font-size:14px;cursor:pointer;padding:2px 2px 0 100px;margin-top:-3px;}
+.pfoldicon:hover {color:#00BCD4;}
+/* 全选 */
+.selall {color:#9E9E9E;}
+
+
+/* 样式配置面板上的视图组件icon */
+.cvico, .cvico-disable {width:25px; height:25px; float:left;margin-right:5px; border:solid 1px #ccc;}
+.cvico-disable {opacity:0.2;}
+.cvico {cursor:pointer;}
+.cvico:hover,.cvico.active {border-color:#29A5B5;}
+.cvico.active {box-shadow:0 0 2px #00BCD4;}
+
+
+

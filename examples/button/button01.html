@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>Button按钮</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>Button 按钮</h1>
+  <p>按钮用于开始一个即时操作。</p>
+  
+  <h2>按钮颜色</h2>
+  <button class='mwt-btn mwt-btn-default'>default</button>
+  <button class='mwt-btn mwt-btn-inverse'>inverse</button>
+  <button class='mwt-btn mwt-btn-primary'>primary</button>
+  <button class='mwt-btn mwt-btn-secondary'>secondary</button>
+  <button class='mwt-btn mwt-btn-danger'>danger</button>
+  <button class='mwt-btn mwt-btn-warning'>warning</button>
+  <button class='mwt-btn mwt-btn-success'>success</button>
+  <button class='mwt-btn mwt-btn-info'>info</button>
+  <pre><code><!--mwt-btn mwt-btn-default-->
+<button class='mwt-btn mwt-btn-default'>default</button>
+<button class='mwt-btn mwt-btn-inverse'>inverse</button>
+<button class='mwt-btn mwt-btn-primary'>primary</button>
+<button class='mwt-btn mwt-btn-secondary'>secondary</button>
+<button class='mwt-btn mwt-btn-danger'>danger</button>
+<button class='mwt-btn mwt-btn-warning'>warning</button>
+<button class='mwt-btn mwt-btn-success'>success</button>
+<button class='mwt-btn mwt-btn-info'>info</button>
+  </code></pre>
+
+  <h2>按钮尺寸</h2>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-lg'>mwt-btn-lg</button>
+  <button class='mwt-btn mwt-btn-primary'>default</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm'>mwt-btn-sm</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-xs'>mwt-btn-xs</button>
+  <pre><code><!--mwt-btn-lg sm xs-->
+<button class='mwt-btn mwt-btn-primary mwt-btn-lg'>mwt-btn-lg</button>
+<button class='mwt-btn mwt-btn-primary'>default</button>
+<button class='mwt-btn mwt-btn-primary mwt-btn-sm'>mwt-btn-sm</button>
+<button class='mwt-btn mwt-btn-primary mwt-btn-xs'>mwt-btn-xs</button>
+  </code></pre>
+
+  <h2>按钮形状</h2>
+  <button class='mwt-btn mwt-btn-primary'>default</button>
+  <button class='mwt-btn mwt-btn-primary radius'>radius</button>
+  <button class='mwt-btn mwt-btn-primary round'>round</button>
+  <button class='mwt-btn mwt-btn-primary topround'>topround</button>
+  <button class='mwt-btn mwt-btn-primary leaf'>leaf</button>
+  <button class='mwt-btn mwt-btn-primary ellipse'>ellipse</button>
+  <pre><code><!--radius round topround leaf ellipse-->
+<button class='mwt-btn mwt-btn-primary radius'>radius</button>
+<button class='mwt-btn mwt-btn-primary round'>round</button>
+<button class='mwt-btn mwt-btn-primary topround'>topround</button>
+<button class='mwt-btn mwt-btn-primary leaf'>leaf</button>
+<button class='mwt-btn mwt-btn-primary ellipse'>ellipse</button>
+  </code></pre>
+  
+  <h2>按钮状态</h2>
+  <button class='mwt-btn mwt-btn-primary'>search</button>
+  <button class='mwt-btn mwt-btn-primary active'>search</button>
+  <button class='mwt-btn mwt-btn-primary disabled'>search</button>
+  <pre><code><!--active disabled-->
+<button class='mwt-btn mwt-btn-primary active'>search</button>
+<button class='mwt-btn mwt-btn-primary disabled'>search</button>
+  </code></pre>
+
+  <h2>按钮组</h2>
+  <div class='mwt-btn-group'>
+    <button class='mwt-btn mwt-btn-default'>1</button>
+    <button class='mwt-btn mwt-btn-default'>2</button>
+    <button class='mwt-btn mwt-btn-default'>3</button>
+  </div>
+
+  <div class='mwt-btn-group-radius'>
+    <button class='mwt-btn mwt-btn-primary'>1</button>
+    <button class='mwt-btn mwt-btn-primary'>2</button>
+    <button class='mwt-btn mwt-btn-primary'>3</button>
+  </div>  
+
+  <div class='mwt-btn-group'>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>1</button>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>2</button>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>3</button>
+  </div>
+  <pre><code>
+<!--默认按扭组-->
+<div class='mwt-btn-group'>
+    <button class='mwt-btn mwt-btn-default'>1</button>
+    <button class='mwt-btn mwt-btn-default'>2</button>
+    <button class='mwt-btn mwt-btn-default'>3</button>
+</div>
+<!--加样式-->
+<div class='mwt-btn-group-radius'>
+    <button class='mwt-btn mwt-btn-primary'>1</button>
+    <button class='mwt-btn mwt-btn-primary'>2</button>
+    <button class='mwt-btn mwt-btn-primary'>3</button>
+</div>
+<!--小尺寸-->
+<div class='mwt-btn-group'>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>1</button>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>2</button>
+    <button class='mwt-btn mwt-btn-default mwt-btn-xs'>3</button>
+</div>
+  </code></pre>
+
+  <h2>块级按钮</h2>
+  <p>块级按钮的宽度设为100%，适用于手机端。</p>
+  <div style="width:300px;">
+    <button class='mwt-btn-block mwt-btn mwt-btn-primary' style="margin-bottom:5px;">Login</button>
+    <button class='mwt-btn-block mwt-btn mwt-btn-danger'>Login</button>
+  </div>
+  <pre><code>
+<button class='mwt-btn-block mwt-btn mwt-btn-primary'>Login</button>
+<button class='mwt-btn-block mwt-btn mwt-btn-danger'>Login</button>
+  </code></pre>
+<script>
+jQuery(document).ready(function(){
+    initCode();
+});
+</script>
+</body>
+</html>

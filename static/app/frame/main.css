@@ -1,0 +1,69 @@
+/* 框架样式 */
+#frame-top {background-color:#ddd;}
+#frame-top .logoa {text-decoration:none;display:inline-block;height:50px;line-height:50px;margin-left:15px;}
+#frame-top .logo {height:30px;float:left;margin:10px 10px 0 0;}
+#frame-top .title {font-size:20px;font-weight:bold;color:#333;}
+#frame-top .title b {font-family:'宋体';}
+#frame-west {background-color:#f2f2f2;}
+
+/* 页头-导航菜单 */
+#frame-menu {position:absolute;top:0;bottom:0;right:0;width:500px;}
+.menuul {display:inline-block;margin:0;padding:0;position: absolute;right:10px;bottom: 0;} 
+.menuul li {list-style-type:none;margin:0;padding:0;float:left;line-height:50px;position:relative;}
+.menuul li a {text-decoration:none;color:#666;font-size:15px;padding:12px 20px;font-family:'microsoft yahei';cursor:pointer;}
+.menuul li a:hover,.menuul li a.active {text-decoration:none;color:#FF8907;}
+.menuul li a i {margin-right:3px;}
+/* 子菜单 */
+.menu-sub{}
+.menu-sub-ul {
+    display:none;
+    position: absolute;
+    top:40px;left:10px;
+    border:solid 1px #eee;
+    z-index:999;
+    background:#fff;
+    list-style: none;
+    padding: 5px 15px;
+    -webkit-box-shadow: 2px 2px #aaa;
+    -moz-box-shadow: 2px 2px #aaa;   
+    box-shadow: 2px 2px #aaa;
+}
+.menu-sub:hover+ul, .menu-sub-ul:hover { display:block; }
+.menu-sub-ul>li { display:block;position:relative;float:none;line-height:30px; }
+.menu-sub-ul>li>a { display:block;padding:0;font-size:13px;color:#333;white-space:nowrap;}
+.menu-sub-ul>li>a.active,.menu-sub-ul>li>a:hover {color: #FC8B1C;}
+
+/* 左部导航区 */
+.leftmenu {width:100%;}
+.leftmenu,.leftmenu ul,.leftmenu li{list-style-type:none;margin:0;padding:0}
+.leftmenu>li {border-top:solid 1px #fff; border-bottom:solid 1px #c8c8c8;}
+.leftmenu>li>a {display:block; padding:10px 30px 10px 15px;font-size:13px;font-family:"microsoft yahei";color:#666;position:relative;}
+.menu-close>ul {display:none;}
+.menu-open>a:after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased;
+    content: "\f106";
+    position:absolute;
+    top:12px;
+    right:5px;
+    font-size:16px;
+}
+.menu-close>a:after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    -webkit-font-smoothing: antialiased;
+    content: "\f107";
+    position:absolute;
+    top:12px;
+    right:5px;
+    font-size:16px;
+}
+.menu-open>ul {display:block;}
+.submenu>li>a {display:block; padding:3px 30px 8px;font-size:12px;font-family:"microsoft yahei";}
+.leftmenu a{color:#666; text-decoration:none;}
+.leftmenu a:hover,.leftmenu a.active{text-decoration:none;color:#FF8907;}
+.leftmenu i {width:13px;text-align:center;}
+

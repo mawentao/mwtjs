@@ -1,0 +1,31 @@
+/* cube集市页面样式 */
+
+.cubemarttb {width:100%;border-collapse:collapse;}
+.cubemarttb tbody tr {border-left:solid 1px #fff;border-right:solid 1px #fff;border-bottom:dotted 1px #ccc;}
+.cubemarttb tbody tr:hover {border:solid 1px #FF9800;cursor:pointer;}
+.cubemarttb tbody tr:first-child {border-top:solid 1px #ccc;}
+.cubemarttb tbody tr:first-child:hover {border-top-color:#FF9800;}
+.cubemarttb th {background:#eee;border-top:solid 1px #ccc;border-bottom:none;font-size:12px;font-weight:normal;padding:4px 8px;color:#444;}
+
+.cubemarttb td {padding:10px 8px;vertical-align:top;line-height:14px;}
+.cubemarttb img {padding:8px;border:solid 1px #ccc;border-radius:50%;width:50px;height:50px;}
+.cubemarttb .title {font-size:13px;color:#FF5722;margin-bottom:5px;display:inline-block;}
+.cubemarttb .desc {font-size:12px;color:gray;
+	/*overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+	width:550px;*/
+}
+.cubemarttb .author {color:gray;font-size:12px;display:block;margin-bottom:5px;}
+.cubemarttb .time {color:gray;font-size:12px;display:block;}
+
+
+.seltab {width:100%;border-collapse:collapse;}
+.seltab th,.seltab td {font-size:13px;font-weight:normal;}
+.seltab th {width:50px;}
+.seltab ul {margin:0;padding:0}
+.seltab ul li {list-style:none;float:left;margin-right:4px;padding:4px 7px;border-radius:2px;}
+.seltab ul li.active,.seltab ul li:hover {cursor:pointer;background:#3BAFDA;color:#fff;}
+
+

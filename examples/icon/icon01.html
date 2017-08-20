@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../mwtjs.png" type="image/png">
+  <title>Icon图标</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>Icon 图标</h1>
+  <p>图标集成了三套图标库：<a href="#fontawesome">fontawesome-4.5.0</a>，<a href="#Simple-Line-Icons">Simple-Line-Icons</a>，<a href="#BBS-Icons">bbs-icon</a></p>
+  
+  <a name="fontawesome"></a><h2>FontAwesome图标</h2>
+  <p>FontAwesome图标库地址: <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></p>
+  <br>
+  <p>通过设置字体属性来调整图标大小颜色</p>
+  <br>
+  <p>
+    <i class="fa fa-question-circle" style="font-size:18px;color:#666;"></i>
+    <i class="fa fa-info-circle" style="font-size:18px;color:#3bb4f2;"></i>
+    <i class="fa fa-exclamation-circle" style="font-size:18px;color:#269abc;"></i>
+    <i class="fa fa-exclamation-triangle" style="font-size:18px;color:#f0ad4e;"></i>
+    <i class="fa fa-plus-circle" style="font-size:18px;color:#5eb95e;"></i>
+    <i class="fa fa-minus-circle" style="font-size:18px;color:#f95f5f;"></i>
+    <i class="fa fa-check-circle" style="font-size:18px;color:#5eb95e;"></i>
+    <i class="fa fa-times-circle" style="font-size:18px;color:#f95f5f;"></i>
+    <i class="fa fa-male" style="font-size:18px;color:#0076D4;"></i>
+    <i class="fa fa-female" style="font-size:18px;color:#F44336;"></i>
+    <i class="fa fa-street-view" style="font-size:18px;color:#039DB1;"></i>
+    <i class="fa fa-thumbs-o-up" style="font-size:18px;color:#F44336;"></i>
+    <i class="fa fa-thumbs-o-down" style="font-size:18px;color:#FF9800;"></i>
+  </p>
+  <pre class="autobr">
+    <code><!--设置字体属性来调整图标大小颜色-->
+<i class="fa fa-question-circle" style="font-size:18px;color:#666;"></i>
+<i class="fa fa-info-circle" style="font-size:18px;color:#3bb4f2;"></i>
+......
+    </code>
+  </pre>
+
+  <br>
+  <p>旋转的图标</p>
+  <br>
+  <p>
+    <i class="fa fa-spinner fa-spin fa-2x"></i>
+    <i class="fa fa-spinner fa-pulse fa-2x"></i>
+    <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+    <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+    <i class="fa fa-refresh fa-spin fa-2x"></i>
+    <i class="fa fa-cog fa-spin fa-2x"></i>
+  <br>
+  </p>
+  <pre class="autobr">
+    <code><!-- fa-spin 让图标旋转 -->
+<i class="fa fa-spinner fa-spin fa-2x"></i>
+<i class="fa fa-spinner fa-pulse fa-2x"></i>
+<i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+<i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+<i class="fa fa-refresh fa-spin fa-2x"></i>
+<i class="fa fa-cog fa-spin fa-2x"></i>
+    </code>
+  </pre>
+
+  <br>
+  <p>转动&翻转图标</p>
+  <br>
+  <p style="font-size:15px;">
+<i class="fa fa-shield"></i> normal<br>
+<i class="fa fa-shield fa-rotate-90"></i> fa-rotate-90<br>
+<i class="fa fa-shield fa-rotate-180"></i> fa-rotate-180<br>
+<i class="fa fa-shield fa-rotate-270"></i> fa-rotate-270<br>
+<i class="fa fa-shield fa-flip-horizontal"></i> fa-flip-horizontal<br>
+<i class="fa fa-shield fa-flip-vertical"></i> fa-flip-vertical
+  </p>
+  <pre class="autobr">
+    <code><!-- fa-rotate-90 转动图标 -->
+<i class="fa fa-shield fa-rotate-90"></i>
+<i class="fa fa-shield fa-rotate-180"></i>
+<i class="fa fa-shield fa-rotate-270"></i>
+<!-- fa-flip-horizontal fa-flip-vertical 翻转图标 -->
+<i class="fa fa-shield fa-flip-horizontal"></i>
+<i class="fa fa-shield fa-flip-vertical"></i>
+    </code>
+  </pre>
+
+  <br>
+  <p>组合图标</p>
+  <br>
+  <p>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-camera fa-stack-1x"></i>
+  <i class="fa fa-ban fa-stack-2x" style="color:#dd514c;"></i>
+</span>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-square fa-stack-2x"></i>
+  <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+</span>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+</span>
+
+  </p>
+  <pre class="autobr">
+    <code><!-- fa-stack 组合图标 -->
+<span class="fa-stack fa-lg">
+  <i class="fa fa-camera fa-stack-1x"></i>
+  <i class="fa fa-ban fa-stack-2x" style="color:#dd514c;"></i>
+</span>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-square fa-stack-2x"></i>
+  <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+</span>
+<span class="fa-stack fa-lg">
+  <i class="fa fa-circle fa-stack-2x"></i>
+  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+</span>
+    </code>
+  </pre>
+
+
+  <h3>按钮图标</h3>
+  <p><a class="mwt-icon-btn fa-github"></a>
+  <a class="mwt-icon-btn mwt-primary fa-qq"></a>
+  <a class="mwt-icon-btn mwt-secondary fa-drupal"></a>
+  <a class="mwt-icon-btn mwt-success fa-wechat"></a>
+  <a class="mwt-icon-btn mwt-warning fa-warning"></a>
+  <a class="mwt-icon-btn mwt-danger fa-youtube"></a></p>
+<pre><code><!-- mwt-icon-btn -->
+<a class="mwt-icon-btn fa-github"></a>
+<a class="mwt-icon-btn mwt-primary fa-qq"></a>
+<a class="mwt-icon-btn mwt-secondary fa-drupal"></a>
+<a class="mwt-icon-btn mwt-success fa-wechat"></a>
+<a class="mwt-icon-btn mwt-warning fa-warning"></a>
+<a class="mwt-icon-btn mwt-danger fa-youtube"></a>
+</code></pre>
+
+  <h3>按钮图标尺寸</h3>
+  <p><a class="mwt-icon-btn mwt-success fa-check lg"></a>
+  <a class="mwt-icon-btn mwt-success fa-check"></a>
+  <a class="mwt-icon-btn mwt-success fa-check sm"></a>
+  <a class="mwt-icon-btn mwt-success fa-check xs"></a></p>
+
+
+  <pre>
+    <code><!-- lg sm xs -->
+<a class="mwt-icon-btn mwt-success fa-check lg"></a>
+<a class="mwt-icon-btn mwt-success fa-check"></a>
+<a class="mwt-icon-btn mwt-success fa-check sm"></a>
+<a class="mwt-icon-btn mwt-success fa-check xs"></a>
+    </code>
+  </pre>
+
+
+  <a name="Simple-Line-Icons"></a><h2>Simple-Line-Icons</h2>
+  <p>此套图标线条比较精细，个人感觉比fontawesome图标库更精美，只是图标种类比较少。</p>
+  <pre>
+    <code>
+<!--sicon-user-->
+<i class="sicon-user"></i>
+<i class="sicon-users"></i>
+    </code>
+  </pre>
+  <div id="bbs-icon-div" style="background:#063D58;width:100%;padding:10px 10px 10px 20px;"></div>
+
+  <a name="BBS-Icons"></a><h2>BBS-Icons</h2>
+  <p>此套图标是从某论坛网站提取的，图标非常精美。</p>
+  <pre>
+    <code>
+<!--icon icon-user-->
+<i class="icon icon-user"></i>
+<i class="icon icon-ask"></i>
+    </code>
+  </pre>
+  <div id="sicon-div" style="background:#063D58;width:100%;padding:10px 10px 10px 20px;"></div>
+
+<script>
+  function showSimpleLineIcons() {
+      var icons = [
+        'activity','wegene','contact','about','protect','drug','hear','ear',
+        'beat','23','good','bad','format','strike','full','gene','count','order',
+        'google','facebook','twitter','cart','bulb','download','home','bar','right',
+        'left','unlock','verify','date','log','forbid','transfer','reader','phone',
+        'file', 'ol', 'undo', 'redo', 'bold', 'italic', 'underline', 'ul', 'image',
+        'video', 'quote', 'code', 'preview', 'help', 'h', 'prestige', 'v', 'score',
+        'plus', 'followed', 'mytopic', 'up', 'trash', 'fold', 'thank', 'report', 'qzone',
+        'at', 'attach', 'bell', 'triangle', 'wechat', 'lock', 'i', 'bubble', 'flag',
+        'txweibo', 'bestbg', 'best', 'job', 'favor', 'down', 'location', 'bind',
+        'weibo', 'qq', 'signup', 'users', 'topic', 'login', 'logout', 'insert', 
+        'setting', 'inbox', 'pic', 'user', 'delete', 'comment', 'share', 'loading', 
+        'inviteask', 'list', 'ask', 'search', 'more', 'agree', 'disagree', 'reply',
+        'draft', 'check', 'invite', 'edit'
+    ];
+    var ls = [];
+    for (var i=0; i<icons.length; ++i) {
+        var nm = icons[i];
+        var code = '<span style="display:inline-block;margin:2px;width:150px;padding:2px;color:#fff;font-size:14px;">'+
+                '<i class="icon icon-'+nm+'"></i> '+nm+'</span>';
+        ls.push(code);
+    }
+    document.getElementById('sicon-div').innerHTML = ls.join('');
+  }
+
+  function showBbsIcons() {
+      var icons = [
+		'action-redo','action-undo','anchor','arrow-down','arrow-left','arrow-right',
+		'arrow-up','badge','bag','ban','bar-chart','basket','basket-loaded','bell','book-open','briefcase','bubble','bubbles','bulb','calculator','calendar','call-end','call-in','call-out','camcorder','camera','check','chemistry','clock',
+		'close','cloud-download','cloud-upload','compass','control-end','control-forward','control-pause','control-play','control-rewind','control-start','credit-card','crop','cup','cursor','cursor-move','diamond','direction','directions','disc','dislike','doc','docs','drawer','drop','earphones','earphones-alt','emoticon-smile','energy','envelope','envelope-letter','envelope-open','equalizer','eye','eyeglasses','feed','film','fire','flag','folder','folder-alt','frame','game-controller','ghost','globe','globe-alt','graduation','graph','grid','handbag','heart','home','hourglass','info','key','layers','like','link','list','lock','lock-open','login','logout','loop','magic-wand','magnet','magnifier','magnifier-add','magnifier-remove','map','microphone','mouse','moustache','music-tone','music-tone-alt','note','notebook','paper-clip','paper-plane','pencil','picture','pie-chart','pin','plane','playlist','plus','pointer','power','present','printer','puzzle','question','refresh','reload','rocket','screen-desktop','screen-smartphone','screen-tablet','settings','share','share-alt','shield','shuffle',
+		'size-actual','size-fullscreen','social-dribbble','social-dropbox','social-facebook','social-tumblr','social-twitter','social-youtube','speech','speedometer','star','support','symbol-female','symbol-male','tag','target','trash','trophy','umbrella','user','user-female','user-follow','user-following','user-unfollow','users','vector','volume-1','volume-2','volume-off','wallet','wrench'
+
+    ];
+    var ls = [];
+    for (var i=0; i<icons.length; ++i) {
+        var nm = icons[i];
+        var code = '<span style="display:inline-block;margin:2px;width:150px;padding:2px;color:#fff;font-size:14px;">'+
+                '<i class="sicon-'+nm+'"></i> '+nm+'</span>';
+        ls.push(code);
+    }
+    document.getElementById('bbs-icon-div').innerHTML = ls.join('');
+  }
+
+jQuery(document).ready(function(){
+    initCode();
+    showSimpleLineIcons();
+    showBbsIcons();
+});
+</script>
+</body>
+</html>

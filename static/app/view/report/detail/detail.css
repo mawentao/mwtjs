@@ -1,0 +1,102 @@
+.slice {
+	position:absolute;
+	top:20px;
+	left:40px;
+	right:40px;
+	bottom:20px;
+	background:#fff;
+	box-shadow: 0 0 10px #ccc;
+}
+
+.slice-cover {
+	background: #114258;
+	background: linear-gradient(#172A3D, #164C65); 
+}
+.slice-cover h1 {
+	text-align:center;
+	margin-top:20%;
+	color:#fff;
+	font-weight: normal;
+}
+.slice-cover h2 {
+	font-weight: normal;
+	text-align:center;
+	color: #eee;
+	font-size:16px;
+}
+
+.slice-title {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	background:#114258;color:#fff;
+	line-height: 60px;
+	padding:0 20px;
+	font-size: 20px;
+	font-family: '黑体';
+}
+.slice-title img {
+	width:28px;
+	float:right;
+	margin-top:17px;
+}
+
+.slice-page {
+	position:absolute;
+	bottom:7px;
+	right:15px;
+	font-size:12px;
+	color:gray;
+}
+
+.slice-content {
+	position:absolute;left:0;right:0;bottom:0;top:60px;
+	overflow:auto;
+	padding:10px 20px;
+}
+
+.slice-content h1 {
+	font-size: 18px;
+	font-family:'黑体';
+    font-weight: normal;
+    color: #1895D2;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.slice-content ul {
+	margin:0;
+	padding:0 20px;
+	font-size: 13px;
+}
+.slice-content li {
+	color: #333;
+	padding:2px 0;
+}
+.slice-content li em {
+	color: #00B3CC;
+	font-style:normal;
+	margin:0 5px;
+	font-size:16px;
+}
+.slice-content sup,.slice-content sub {vertical-align: baseline; font-size:16px; margin:0 5px;}
+.slice-content sub {color: #4ABF4A;}
+.slice-content sub:after {
+	font: normal normal normal 14px/1 FontAwesome;
+    content: "\f175";
+    padding-left:5px;
+	font-size:16px;
+}
+.slice-content sup {color:#FD574B;}
+.slice-content sup:after {
+	font: normal normal normal 14px/1 FontAwesome;
+    content: "\f176";
+    padding-left:5px;
+	font-size:16px;
+}
+
+.slice-cube {
+	position:absolute;left:10px;right:10px;bottom:15px;
+}
