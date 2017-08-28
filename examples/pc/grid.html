@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>表格Grid</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>表格Grid</h1>
+  <p>表格用于显示列表数据。表格类mwt.Grid封装了列表数据模型的展现和基础操作，包括分页和排序。</p>
+  
+  <h2>类名：mwt.Grid</h2>
+  <h3>配置属性</h3>
+  <div id="property-grid"></div>
+
+  <a name="column_model"></a>
+  <h2>mwt.Grid.ColumnModel （Grid列模型类，定义Grid列）</h2>
+
+<script>
+
+function init_property_grid()
+{
+    var propertyList = [
+        ['render','已存在的div元素id','无','被渲染的dom元素'],
+        ['store','mwt.Store','无','数据'],
+        ['striped','true / false','false','奇偶行变色'],
+        ['bordered','true / false','false','是否显示单元格边框'],
+        ['cm', 'mwt.Grid.ColumnModel', '无', '<a href="#column_model">Grid列模型</a>']
+    ];
+    var store=new mwt.Store({
+        proxy: new mwt.MemoryProxy({
+            data: propertyList
+        })
+    });
+    var grid = new mwt.Grid({
+        render  : 'property-grid',
+        store   : store,
+        pagebar : false,
+        striped : true,
+        bordered: false,
+        cm: new MWT.Grid.ColumnModel([
+            {head:'属性',dataIndex:0,width:150},
+            {head:'取值范围',dataIndex:1,width:200},
+            {head:'默认值',dataIndex:2,width:150},
+            {head:'说明',dataIndex:3}
+        ])
+    });
+    grid.load();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init_property_grid();
+});
+</script>
+</body>
+</html>

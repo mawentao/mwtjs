@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>消息提示</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>消息提示</h1>
+  <p>消息提示向用户显示一些需要关注的信息，包括 <a href="#at_notice">通知提示</a>，<a href="#at_alert">警告提示</a>，<a href="#at_confirm">确认提示</a>，<a href="#at_progress">进度条提示</a>。</p>
+  
+  <!---------------------- 通知提示 ---------------------->
+  <a name="at_notice"></a>
+  <h2>通知提示</h2>
+  <p>通知提示是一种不打断用户当前操作的轻量级提示，通常展现成功、错误反馈等信息。</p><br>
+
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500);'>显示后自动销毁的通知消息</button>
+  <pre><code>
+mwt.notify("1.5秒自动销毁啦",1500);
+  </code></pre>
+
+  <h3>不同主题的通知</h3>
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"info");'>info</button>
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"warning");'>warning</button>
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"danger");'>danger</button>
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"success");'>success</button>
+  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("正在加载数据...",1500,"loading");'>loading</button>
+  <pre><code>
+mwt.notify("1.5秒自动销毁啦",1500,"info");
+mwt.notify("1.5秒自动销毁啦",1500,"warning");
+mwt.notify("1.5秒自动销毁啦",1500,"danger");
+mwt.notify("1.5秒自动销毁啦",1500,"success");
+mwt.notify("正在加载数据...",1500,"loading");
+  </code></pre>
+
+
+  <a name="at_alert"></a>
+  <h2>警告提示</h2>
+  <p>警告提示用于展现需要关注的信息。</p><br>
+  <button class='mwt-btn mwt-btn-default' onclick="mwt.alert('<i>警告提示</i>');">mwt.alert</button>
+  <pre><code>
+mwt.alert('<b>警告提示</b>');
+  </code></pre>
+  <p>弹框动画</p>
+  <button class='mwt-btn mwt-btn-default' onclick="mwt.alert({title: '消息标题（自定义）',msg: '消息内容',animate: 'rubberBand'});">弹框动画</button>
+  <pre><code>
+MWT.alert({
+    title: '消息标题（自定义）',
+    msg: '消息内容',
+    animate: 'rubberBand'
+});
+  </code></pre>
+  
+
+  <a name="at_confirm"></a>
+  <h2>确认提示</h2>
+  <p>确认提示用于当前操作需要用户进一步的确认时展现。</p><br>
+  <button class='mwt-btn mwt-btn-default' onclick='confirm_msg();'>mwt.confirm</button>
+  <pre><code>
+mwt.confirm("确认删除吗？",function(res){
+    if (res) {
+        alert("确认");
+    } else {
+        alert("取消");
+    }
+});
+  </code></pre>
+
+
+  <a name="at_progress"></a>
+  <h2>进度条提示</h2>
+  <p>进度条提示在页面顶部显示进度条来提示当前页面的执行进度。</p><br>
+  <button class='mwt-btn mwt-btn-default' onclick='mwt.showProgress();'>mwt.showProgress</button>
+  <button class='mwt-btn mwt-btn-default' onclick='mwt.hideProgress();'>mwt.hideProgress</button>
+  <button class='mwt-btn mwt-btn-default' onclick="mwt.progress_color='orange';mwt.showProgress();">设置进度条颜色</button>
+  <pre><code>
+mwt.showProgress();
+mwt.hideProgress();
+// 设置进度条颜色
+mwt.progress_color='orange';
+mwt.showProgress();
+  </code></pre>
+  
+
+<script>
+function confirm_msg()
+{
+    mwt.confirm("确认删除吗？",function(res){
+        if (res) {
+            alert("确认");
+        } else {
+            alert("取消");
+        }
+    });
+}
+
+jQuery(document).ready(function(){
+    initCode();
+});
+</script>
+</body>
+</html>

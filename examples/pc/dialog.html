@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>对话框</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>对话框</h1>
+  <p>模态对话框，当需要用户处理查看或处理新的事务，而又不希望跳转页面时，可以弹出一个对话框来承载新的页面。</p><br>
+  
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='dialog_demo("bounceInDown");'>open</button>
+  <pre><code>
+var myDialog = new MWT.Dialog({
+    title   : '我的对话框',
+    width   : 400,
+    top     : 50,
+    body    : '<div style="padding:20px;">这里是对话框内容</div>',
+    buttons : [
+        {label:"确定",handler:function(){alert("确认");myDialog.close();}},
+        {label:"关闭",type:'close',cls:'mwt-btn-danger'}
+    ]
+});
+myDialog.open();
+  </code></pre>
+
+  <p>弹出动画</p>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='dialog_demo("bounceInDown");'>bounceInDown</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='dialog_demo("zoomIn");'>zoomIn</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='dialog_demo("flipInX");'>flipInX</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='dialog_demo("rubberBand");'>rubberBand</button>
+  <pre><code>
+new MWT.Dialog({
+    title   : '我的对话框',
+    width   : 400,
+    top     : 50,
+    body    : '<div style="padding:20px;">这里是对话框内容</div>',
+    animate : 'zoomIn',  /* bounceInDown(默认), zoomIn, flipInX, rubberBand */
+    buttons : [
+        {label:"确定",handler:function(){alert("确认");myDialog.close();}},
+        {label:"关闭",type:'close',cls:'mwt-btn-danger'}
+    ]
+}).open();
+  </code></pre>
+
+  <p>全屏显示的对话框</p>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='full_dialog_demo();'>open</button>
+   <pre><code>
+new MWT.Dialog({
+    title      : '我的对话框',
+    fullscreen : true,
+    body       : '<div style="padding:20px;">这里是对话框内容</div>'
+}).open();
+  </code></pre> 
+  
+
+<script>
+function dialog_demo(animate)
+{
+    var myDialog = new MWT.Dialog({
+        title   : '我的对话框',
+        width   : 400,
+        top     : 50,
+        animate : animate,
+        body    : '<div style="padding:20px;">这里是对话框内容</div>',
+        buttons : [
+            {label:"确定",handler:function(){alert("确认");myDialog.close();}},
+            {label:"关闭",type:'close',cls:'mwt-btn-danger'}
+        ]
+    });
+    myDialog.open();
+}
+
+function full_dialog_demo()
+{
+    var myDialog = new MWT.Dialog({
+        title      : "全屏对话框",
+        fullscreen : true,
+        body       : '<div style="padding:20px;">这里是对话框内容</div>'
+    });
+    myDialog.open();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+});
+</script>
+</body>
+</html>

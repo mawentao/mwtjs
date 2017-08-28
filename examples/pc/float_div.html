@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>浮层</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>浮层</h1>
+  <p>浮层用于在页面指定位置显示一个悬浮框。</p>
+  
+  <h2>通用浮层</h2>
+  <h3>API</h3>
+  <pre><code>
+mwt.showFloatDiv(divid,x,y,w,h,fixed,cls,style);
+参数说明
+divid：浮层ID，文档不存在此元素时会自动创建；
+x：浮层的左上角x坐标，x>=0表示偏向左边，x<0表示偏向右边；
+y：浮层的左上角y坐标，y>=0表示偏向上方，y<0表示偏向下方；
+w：浮层宽度；
+h：浮层高度；
+fixed：true/false，默认为false；
+cls：浮层的class属性值，可以为空；
+style：浮层的style属性值，可以为空。
+  </code></pre>
+
+  <button id="float-btn-1" class="mwt-btn mwt-btn-primary">左上角显示浮层</button>
+  <pre><code>
+mwt.showFloatDiv("float-div-1",10,10,100,100,false,'',"background:#FDF5DD;");
+  </code></pre>
+
+  <button id="float-btn-2" class="mwt-btn mwt-btn-primary">右下角显示浮层</button>
+  <pre><code>
+mwt.showFloatDiv("float-div-2",-10,-10,100,100,false,'',"background:#FDF5DD;");
+  </code></pre>
+
+<script>
+jQuery(document).ready(function(){
+    initCode();
+    jQuery('#float-btn-1').click(function(){
+        mwt.showFloatDiv("float-div-1",10,10,100,100,false,'',"background:#FDF5DD;");
+    });
+    jQuery('#float-btn-2').click(function(){
+        mwt.showFloatDiv("float-div-2",-10,-10,100,100,false,'',"background:#FDF5DD;");
+    });
+});
+</script>
+</body>
+</html>

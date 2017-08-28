@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>表格Grid</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>表格Grid</h1>
+  <p>表格用于显示列表数据。表格类mwt.Grid封装了列表数据模型的展现和基础操作，包括分页和排序。</p><br>
+  
+  <div id='grid-div-1'></div>
+
+<script>
+var loadingdivid;
+var proxy = new mwt.HttpProxy({
+    url: "../ajax.php",
+    beforeLoad: function(){loadingdivid=mwt.notify("数据加载中...",0,'loading');},
+    afterLoad: function(){mwt.notify_destroy(loadingdivid);}
+});
+
+function init_grid_1()
+{
+    var store = new mwt.Store({
+        proxy: proxy
+    });
+    grid = new MWT.Grid({
+      render   : "grid-div-1",
+      store    : store,
+      pagebar  : true,   //!< false 表示不分页
+      bordered : true,  //!< false 不显示列边框
+      pageSize : 10,    //!< 默认每页大小
+      cm: new MWT.Grid.ColumnModel([
+          {head:"ID", dataIndex:"id", width:80, sort:true},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", render:function(v){
+              return v==1 ? "男" : "女";
+          }},
+          {head:"操作", dataIndex:"id",render:function(v,item){
+              return "<button class='mwt-btn mwt-btn-default mwt-btn-sm' "+
+                 "onclick=\"show_detail("+v+");\">查看详情</button>";
+          }}
+      ])
+    });
+    grid.create();
+    grid.load();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init_grid_1();
+});
+</script>
+</body>
+</html>

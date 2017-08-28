@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>数据存储与传输</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>数据存储</h1>
+  <p>数据存储负责数据的存储和传输。</p>
+
+  <div id="demo-div-1"></div>
+  
+  <h2>加载内存数据<h2>
+  <p></p>
+  <pre><code>
+var memoryProxy = new MWT.MemoryProxy({
+    data: [
+        {id:10001, name:'name_1', gender:'男'},
+        {id:10002, name:'name_2', gender:'女'},
+        {id:10003, name:'name_3', gender:'男'},
+        ......
+    ]
+});
+var store = new MWT.Store({
+    proxy: memoryProxy
+});
+store.on('load',function(){
+    console.log(store.root);
+});
+store.load();
+  </code></pre>
+
+
+<script>
+function showData(list)
+{
+    var trs = [];
+    for (var i=0;i<list.length;++i) {
+        var im=list[i];
+        var code = '<tr><td>'+im.id+'</td><td>'+im.name+'</td><td>'+im.gender+'</td></tr>';
+        trs.push(code);
+    }
+    var code = '<table class="mwt-table">'+
+        '<tr><th>id</th><th>name</th><th>gender</th>'+
+        trs.join('')+
+    '</table>';
+    jQuery('#demo-div-1').html(code);
+}
+
+function demo()
+{
+    var memoryProxy = new MWT.MemoryProxy({
+        data: [
+            {id:10001, name:'name_1', gender:'男'},
+            {id:10002, name:'name_2', gender:'女'},
+            {id:10003, name:'name_3', gender:'男'},
+            {id:10004, name:'name_4', gender:'女'},
+            {id:10005, name:'name_5', gender:'男'},
+        ]
+    });
+    var store = new MWT.Store({
+        proxy: memoryProxy
+    });
+    store.on('load',function(){
+        showData(store.root);
+    });
+    store.load();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    demo();
+});
+</script>
+</body>
+</html>

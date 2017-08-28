@@ -22,9 +22,9 @@ function initCode()
 function backTop()
 {
     var backid = "backtop-div";
-    mwt.showFloatDiv(backid,-10,-10,40,40,true);
+    mwt.showFloatDiv(backid,-10,-10,40,40,true,'mwt-btn mwt-btn-default radius');
     var code = '<i class="icon icon-insert"></i>';
-    jQuery('#'+backid).addClass('mwt-btn mwt-btn-default radius').html(code).unbind('click').click(function(){
+    jQuery('#'+backid).html(code).unbind('click').click(function(){
         scroll(0,0);
     });
 }

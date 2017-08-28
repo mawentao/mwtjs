@@ -12,7 +12,7 @@ mwt.destroy=function(id){
 };
 
 // ID生成器(随机生成一个6位长度的id，且document中没有此id的dom元素)
-mwt.genid=function(prefix) 
+mwt.genId=function(prefix) 
 {/*{{{*/
 	function randstr(n) {
         var x="0123456789qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,23 +38,34 @@ mwt.createDiv=function(divid)
         var onediv = document.createElement('div');
         onediv.id=divid;
         document.body.appendChild(onediv);
-    }   
+    }
+    return divid;  
 }/*}}}*/
 
 // 显示浮层
-mwt.showFloatDiv=function(divid,x,y,w,h,fixed)
-{
+mwt.showFloatDiv=function(divid,x,y,w,h,fixed,cls,style)
+{/*{{{*/
     if (!mwt.$(divid)) {
         mwt.createDiv(divid);
     }
+    // cls
+    var dom = mwt.$(divid);
+    if (cls) dom.className=cls;
+
+    // style
     var pos = fixed ? 'fixed' : 'absolute';
     var xn = x<0 ? 'right' : 'left';
     var yn = y<0 ? 'bottom' : 'top';
     x = Math.abs(x);
     y = Math.abs(y);
-    jQuery('#'+divid).css({position:pos,'z-index':9527,width:w+'px',height:h+'px'})
-                     .css(xn,x+'px').css(yn,y+'px');
-};
+
+    var cssStyle = 'position:'+pos+';z-index:9527;width:'+w+'px;height:'+h+'px;'+xn+':'+x+'px;'+yn+':'+y+'px;';
+    if (style) cssStyle+=style;
+    dom.style = cssStyle;
+
+    //jQuery('#'+divid).css({position:pos,'z-index':9527,width:w+'px',height:h+'px'})
+    //                 .css(xn,x+'px').css(yn,y+'px');
+};/*}}}*/
 
 
 
