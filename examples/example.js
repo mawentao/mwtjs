@@ -28,3 +28,21 @@ function backTop()
         scroll(0,0);
     });
 }
+
+// 获取供demo演示的内存数据代理
+function getDemoMemoryProxy()
+{
+    var list = [];
+    var proxy = new mwt.HttpProxy({
+        url    : "../data/list.txt",
+        method : 'GET',
+        async  : false,  //!< 同步请求
+    });
+    proxy.load({},function(data){
+        list = data;
+    });
+    var memoryProxy = new mwt.MemoryProxy({
+        data: list
+    });
+    return memoryProxy;
+}

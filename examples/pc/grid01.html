@@ -19,17 +19,21 @@
   <div id='grid-div-1'></div>
 
 <script>
+/*
 var loadingdivid;
 var proxy = new mwt.HttpProxy({
-    url: "../ajax.php",
+    //url: "../ajax.php",
+    url: "../data/json.txt",
+    method: 'GET',
     beforeLoad: function(){loadingdivid=mwt.notify("数据加载中...",0,'loading');},
     afterLoad: function(){mwt.notify_destroy(loadingdivid);}
 });
+*/
 
 function init_grid_1()
 {
     var store = new mwt.Store({
-        proxy: proxy
+        proxy: getDemoMemoryProxy()
     });
     grid = new MWT.Grid({
       render   : "grid-div-1",
@@ -38,14 +42,10 @@ function init_grid_1()
       bordered : true,  //!< false 不显示列边框
       pageSize : 10,    //!< 默认每页大小
       cm: new MWT.Grid.ColumnModel([
-          {head:"ID", dataIndex:"id", width:80, sort:true},
+          {head:"ID",   dataIndex:"id", width:80, sort:true},
           {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
-          {head:"性别", dataIndex:"sex", render:function(v){
+          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
               return v==1 ? "男" : "女";
-          }},
-          {head:"操作", dataIndex:"id",render:function(v,item){
-              return "<button class='mwt-btn mwt-btn-default mwt-btn-sm' "+
-                 "onclick=\"show_detail("+v+");\">查看详情</button>";
           }}
       ])
     });
