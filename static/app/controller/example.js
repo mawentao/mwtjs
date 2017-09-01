@@ -22,6 +22,7 @@ define(function(require){
                 {name:'对话框',action:'dialog'},
                 {name:'消息提示',action:'msg'}
             ]},
+            {name:'工具栏',action:'toolbar'},
             {name:'表格', submenu:[
                 {name:'表格简介&API',action:'grid'},
                 {name:'简单表格',action:'grid01'},
@@ -38,6 +39,8 @@ define(function(require){
             '/'+control+'/FloatDiv',
             '/'+control+'/dialog',
             '/'+control+'/msg',
+
+            '/'+control+'/toolbar',
 
             '/'+control+'/grid',
             '/'+control+'/grid01',
@@ -61,6 +64,8 @@ define(function(require){
     o.FloatDivAction=function() {example.show('pc/float_div.html');}
     o.dialogAction=function() {example.show('pc/dialog.html');}
     o.msgAction=function() {example.show('pc/msg.html');}
+
+    o.toolbarAction=function() {example.show('pc/toolbar.html');}
 
     o.gridAction=function() {example.show('pc/grid.html');}
     o.grid01Action=function() {example.show('pc/grid01.html');}

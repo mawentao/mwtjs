@@ -1,0 +1,15 @@
+/**
+ * 弹出层样式
+ **/
+.mwt-pop {
+    display:none;z-index:999;position:absolute;
+    background-color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    padding:9px;
+    /*box-shadow: 0 1px 6px rgba(0,0,0,.2);*/
+}
+
+.mwt-pop .btn-bar {height:38px}
+.mwt-pop .btn-bar button {padding:4px 10px}

@@ -17,3 +17,4 @@ mwt.Bar=function(opt)
 MWT.extends(MWT.Bar, MWT.Event);
 
 require('./PageBar');
+require('./ToolBar');

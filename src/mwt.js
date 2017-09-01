@@ -16,17 +16,18 @@ window.mwt = window.MWT;
 
 require('./core/log.js');
 require('./core/php.js');
+require('./core/excel.js');
+require('./core/util.js');
+
 require('./core/core.js');
 require('./core/event.js');
 
 require('./data/index.js');
 
-require('./widgets_common/button.js');
-require('./widgets_common/icon.js');
+require('./widgets_common/index.js');
 
 require('./field/Field.js');
 
 require('./widgets_pc/index.js');
 
-console.log(mwt.config);
 console.log('mwt.js(v'+mwt.version+') loaded success!');

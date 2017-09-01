@@ -67,5 +67,3 @@ mwt.showFloatDiv=function(divid,x,y,w,h,fixed,cls,style)
     //                 .css(xn,x+'px').css(yn,y+'px');
 };/*}}}*/
 
-
-

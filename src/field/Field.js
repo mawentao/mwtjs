@@ -1,7 +1,7 @@
 /**
  * Field
  **/
-
+require('./Field.css');
 MWT.Field=function(opt)
 {
     this.listeners={};
@@ -9,7 +9,7 @@ MWT.Field=function(opt)
     this.id="";
     this.value="";
     this.defaultValue="";
-    this.cls="";
+    this.cls="mwt-field";
     this.style="";
 
     this.construct=function(opt){
@@ -42,3 +42,11 @@ MWT.Field=function(opt)
 MWT.extends(MWT.Field, MWT.Event);
 
 require('./TextField.js');
+require('./SelectField.js');
+require('./RadiobtnField.js');
+
+require('./DatepickerField.js');
+require('./DaterangepickerField.js');
+
+
+

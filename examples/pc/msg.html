@@ -21,17 +21,17 @@
   <h2>通知提示</h2>
   <p>通知提示是一种不打断用户当前操作的轻量级提示，通常展现成功、错误反馈等信息。</p><br>
 
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500);'>显示后自动销毁的通知消息</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("1.5秒自动销毁啦",1500);'>显示后自动销毁的通知消息</button>
   <pre><code>
 mwt.notify("1.5秒自动销毁啦",1500);
   </code></pre>
 
   <h3>不同主题的通知</h3>
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"info");'>info</button>
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"warning");'>warning</button>
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"danger");'>danger</button>
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("1.5秒自动销毁啦",1500,"success");'>success</button>
-  <button class='mwt-btn mwt-btn-primary' onclick='mwt.notify("正在加载数据...",1500,"loading");'>loading</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("1.5秒自动销毁啦",1500,"info");'>info</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("1.5秒自动销毁啦",1500,"warning");'>warning</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("1.5秒自动销毁啦",1500,"danger");'>danger</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("1.5秒自动销毁啦",1500,"success");'>success</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.notify("正在加载数据...",1500,"loading");'>loading</button>
   <pre><code>
 mwt.notify("1.5秒自动销毁啦",1500,"info");
 mwt.notify("1.5秒自动销毁啦",1500,"warning");
@@ -44,12 +44,12 @@ mwt.notify("正在加载数据...",1500,"loading");
   <a name="at_alert"></a>
   <h2>警告提示</h2>
   <p>警告提示用于展现需要关注的信息。</p><br>
-  <button class='mwt-btn mwt-btn-default' onclick="mwt.alert('<i>警告提示</i>');">mwt.alert</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick="mwt.alert('<i>警告提示</i>');">mwt.alert</button>
   <pre><code>
 mwt.alert('<b>警告提示</b>');
   </code></pre>
   <p>弹框动画</p>
-  <button class='mwt-btn mwt-btn-default' onclick="mwt.alert({title: '消息标题（自定义）',msg: '消息内容',animate: 'rubberBand'});">弹框动画</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick="mwt.alert({title: '消息标题（自定义）',msg: '消息内容',animate: 'rubberBand'});">弹框动画</button>
   <pre><code>
 MWT.alert({
     title: '消息标题（自定义）',
@@ -62,7 +62,7 @@ MWT.alert({
   <a name="at_confirm"></a>
   <h2>确认提示</h2>
   <p>确认提示用于当前操作需要用户进一步的确认时展现。</p><br>
-  <button class='mwt-btn mwt-btn-default' onclick='confirm_msg();'>mwt.confirm</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='confirm_msg();'>mwt.confirm</button>
   <pre><code>
 mwt.confirm("确认删除吗？",function(res){
     if (res) {
@@ -77,9 +77,9 @@ mwt.confirm("确认删除吗？",function(res){
   <a name="at_progress"></a>
   <h2>进度条提示</h2>
   <p>进度条提示在页面顶部显示进度条来提示当前页面的执行进度。</p><br>
-  <button class='mwt-btn mwt-btn-default' onclick='mwt.showProgress();'>mwt.showProgress</button>
-  <button class='mwt-btn mwt-btn-default' onclick='mwt.hideProgress();'>mwt.hideProgress</button>
-  <button class='mwt-btn mwt-btn-default' onclick="mwt.progress_color='orange';mwt.showProgress();">设置进度条颜色</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.showProgress();'>mwt.showProgress</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='mwt.hideProgress();'>mwt.hideProgress</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick="mwt.progress_color='orange';mwt.showProgress();">设置进度条颜色</button>
   <pre><code>
 mwt.showProgress();
 mwt.hideProgress();

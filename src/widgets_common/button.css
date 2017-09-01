@@ -97,6 +97,7 @@
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    white-space: nowrap;
 }
 .mwt-btn-group>.mwt-btn, .mwt-btn-group-radius>.mwt-btn {
     position: relative;

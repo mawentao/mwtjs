@@ -46,3 +46,30 @@ function getDemoMemoryProxy()
     });
     return memoryProxy;
 }
+
+// 渲染配置属性
+function renderPropertyGrid(domid,propertyList)
+{
+    var store=new mwt.Store({
+        proxy: new mwt.MemoryProxy({
+            data: propertyList
+        })
+    });
+    var grid = new mwt.Grid({
+        render  : domid,
+        store   : store,
+        pagebar : false,
+        striped : true,
+        bordered: false,
+        cm: new MWT.Grid.ColumnModel([
+            {head:'属性',dataIndex:0,width:150},
+            {head:'取值范围',dataIndex:1,width:200},
+            {head:'默认值',dataIndex:2,width:150},
+            {head:'说明',dataIndex:3}
+        ])
+    });
+    grid.load();
+    jQuery('#'+domid+'-foot').hide();
+}
+
+

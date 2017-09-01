@@ -1,0 +1,34 @@
+/**
+ * Field全局样式
+ **/
+.mwt-field {
+    display: inline-block;
+    width: 100%;
+    height: 26px;
+    padding:0;
+    font-size: 13px;
+    line-height: 26px;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;
+}
+.mwt-field:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+}
+select.mwt-field {padding:2px 5px;}
+input[type=text].mwt-field,input[type=password].mwt-field {padding-left:5px;}
+
+
+.mwt-datepicker {width:100px;cursor:pointer;}
+.mwt-datepicker+i {margin-left:-20px;font-size:12px;color:#666;}
+

@@ -23,6 +23,8 @@ window.is_numeric=function(v)
 // 判断变量是否数组
 window.is_array=function(v) {return toString.apply(v) === '[object Array]';}
 
+// 判断变量是否字符串
+window.is_string=function(v) {return typeof v === 'string';}
 
 //////////////////////////////////////////////////////
 // 数字相关的函数

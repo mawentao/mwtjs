@@ -1,0 +1,13 @@
+/**
+ * 搜索框
+ **/
+.mwt-search {display:inline-block;}
+.mwt-search>input {line-height:20px;padding-right:25px;font-size:12px;}
+.mwt-search>i {color:#999;font-size:14px;cursor:pointer;margin-left:-20px;}
+.mwt-search>input:focus+i, .mwt-text-search>i:hover {color:#666;}
+
+.mwt-search.primary {border-color:#357ebd;}
+.mwt-search.secondary {border-color:#3bb4f2;}
+.mwt-search.danger {border-color:#d43f3a;}
+.mwt-search.warning {border-color:#eea236;}
+.mwt-search.success {border-color:#4cae4c;}

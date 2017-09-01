@@ -1,0 +1,9 @@
+/* 工具栏样式 */
+
+.mwt-toolbar {background:#f2f2f2;border:solid 1px #ddd;}
+.mwt-toolbar table {width:100%;cellspacing:0px;cellpadding:0px;padding:0;margin:0;}
+.mwt-toolbar hr {margin:0 5px;padding:0;border-bottom:solid 1px #fff;border-top:solid 1px #ccc;border-left-width:0;border-right-width:0;border:none;}
+.mwt-toolbar td {padding:6px 0 6px 8px;}
+.mwt-toolbar td:last-child{padding:6px 8px;}
+.mwt-toolbar label {display:block;white-space:nowrap;color:#333;font-size:12px;}
+.mwt-toolbar button {display:inline-block;padding:3px 10px;border-radius:2px;font-size:13px;}
