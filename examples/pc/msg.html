@@ -14,7 +14,7 @@
 </head>
 <body>
   <h1>消息提示</h1>
-  <p>消息提示向用户显示一些需要关注的信息，包括 <a href="#at_notice">通知提示</a>，<a href="#at_alert">警告提示</a>，<a href="#at_confirm">确认提示</a>，<a href="#at_progress">进度条提示</a>。</p>
+  <p>消息提示向用户显示一些需要关注的信息，包括 <a href="#at_notice">通知提示</a>，<a href="#at_alert">警告提示</a>，<a href="#at_confirm">确认提示</a>，<a href="#at_prompt">输入提示</a>，<a href="#at_progress">进度条提示</a>。</p>
   
   <!---------------------- 通知提示 ---------------------->
   <a name="at_notice"></a>
@@ -70,6 +70,36 @@ mwt.confirm("确认删除吗？",function(res){
     } else {
         alert("取消");
     }
+});
+  </code></pre>
+
+  <a name="at_prompt"></a>
+  <h2>输入提示</h2>
+  <p>输入提示用于当前操作需要用户输入一段文本时展现。</p><br>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='prompt_msg("text");'>输入单行文本</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='prompt_msg("textarea");'>输入多行文本</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='prompt_msg("number");'>输入数字</button>
+  <button class='mwt-btn mwt-btn-primary mwt-btn-sm radius' onclick='prompt_msg("color");'>输入颜色</button>
+  <script>
+    function prompt_msg(type) {
+        mwt.prompt({
+            title: '请输入内容',
+            type : type,
+            width: 400,
+            top  : 50
+        },function(txt){
+            alert('您刚刚输入的文本是: '+txt);
+        });
+    }
+  </script>
+  <pre><code>
+mwt.prompt({
+    title: '请输入内容',
+    type : 'textarea',   /* text,textarea,number,color */
+    width: 400,
+    top  : 50
+},function(txt){
+    alert('您刚刚输入的文本是: '+txt);
 });
   </code></pre>
 

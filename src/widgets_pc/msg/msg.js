@@ -134,3 +134,4 @@ mwt.hideProgress = function()
     });
 };/*}}}*/
 
+require('./prompt.js');

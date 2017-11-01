@@ -20,12 +20,20 @@ define(function(require){
             {name:'浮层', submenu:[
                 {name:'通用浮层',action:'FloatDiv'},
                 {name:'对话框',action:'dialog'},
-                {name:'消息提示',action:'msg'}
+                {name:'消息提示',action:'msg'},
+                {name:'冒泡提示',action:'pop'}
             ]},
             {name:'工具栏',action:'toolbar'},
             {name:'表格', submenu:[
                 {name:'表格简介&API',action:'grid'},
                 {name:'简单表格',action:'grid01'},
+                {name:'带工具栏表格',action:'grid02'}
+            ]},
+            {name:'表单', submenu:[
+                {name:'表单简介&API',action:'form'}
+            ]},
+            {name:'面板', submenu:[
+                {name:'wall',action:'wall'}
             ]},
         ],
 		// url路由
@@ -39,12 +47,16 @@ define(function(require){
             '/'+control+'/FloatDiv',
             '/'+control+'/dialog',
             '/'+control+'/msg',
+            '/'+control+'/pop',
 
             '/'+control+'/toolbar',
 
             '/'+control+'/grid',
             '/'+control+'/grid01',
+            '/'+control+'/grid02',
 
+            '/'+control+'/form',
+            '/'+control+'/wall',
 			'/'+control+'/index'
 		]
 	};
@@ -64,11 +76,16 @@ define(function(require){
     o.FloatDivAction=function() {example.show('pc/float_div.html');}
     o.dialogAction=function() {example.show('pc/dialog.html');}
     o.msgAction=function() {example.show('pc/msg.html');}
+    o.popAction=function() {example.show('pc/pop.html');}
 
     o.toolbarAction=function() {example.show('pc/toolbar.html');}
 
     o.gridAction=function() {example.show('pc/grid.html');}
     o.grid01Action=function() {example.show('pc/grid01.html');}
+    o.grid02Action=function() {example.show('pc/grid02.html');}
+
+    o.formAction=function() {example.show('pc/form.html');}
+    o.wallAction=function() {example.show('pc/wall.html');}
 
 	return o;
 });

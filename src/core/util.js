@@ -2,10 +2,11 @@
  * 操作html元素的工具函数
  */
 
-mwt.set_value=function(eleid, value)
+mwt.set_html=function(eleid, value)
 {/*{{{*/
-	document.getElementById(eleid).value = value;
+	document.getElementById(eleid).innerHTML = value;
 }/*}}}*/
+
 
 mwt.get_value=function(eleid)
 {/*{{{*/
@@ -13,11 +14,112 @@ mwt.get_value=function(eleid)
 	return dom.value.trim();
 }/*}}}*/
 
+mwt.get_text_value=function(eleid)
+{/*{{{*/
+	var dom = document.getElementById(eleid);
+	var val = dom.value.trim();
+	if (val == "") {
+		dom.value = "";
+		dom.focus();
+		throw new Error(eleid+" is empty");
+	}
+	return val;
+}/*}}}*/
+
+
+mwt.set_value=function(eleid, value)
+{/*{{{*/
+	document.getElementById(eleid).value = value;
+}/*}}}*/
+
+
+/* 数据格式判断 */
+mwt.isNumber=function(num){
+	var reg=/^[0-9]+$/;
+	return reg.test(num);
+};
+mwt.isDecimal=function(num){
+	var reg=/^[0-9]+[\.]{0,1}[0-9]*$/;
+	return reg.test(num);
+};
+mwt.isPhone=function(str){
+    var reg=/^1[0-9]{10}$/;
+    return reg.test(str);
+};
+mwt.isEmail=function(str){
+    var reg=/^[\w\-_\.]+@[\w\-_\.]+\.\w+$/;
+    return reg.test(str);
+}
+mwt.isUrl=function(str){
+    var reg='^((https|http|ftp|rtsp|mms)?://)' 
+          + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
+		  + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
+		  + '|' // 允许IP和DOMAIN（域名） 
+		  + '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
+		  + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
+		  + '[a-z]{2,6})' // first level domain- .com or .museum 
+		  + '(:[0-9]{1,4})?' // 端口- :80 
+		  + '((/?)|' // a slash isn't required if there is no file name 
+		  + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$'; 
+	var re=new RegExp(reg, 'i'); 
+    return re.test(str);
+}
+
+
+function set_radio_value(elename, value)
+{
+	var doms = document.getElementsByName(elename);
+	for (var i=0; i<doms.length; ++i) {
+		if (doms[i].value == value) {
+			doms[i].checked = true;
+			return;
+		}
+	}
+}
+
+function set_checkbox_checked(elename, checked)
+{
+	var doms = document.getElementsByName(elename);
+	for (var i=0; i<doms.length; ++i) {
+		doms[i].checked = checked;
+	}
+}
+
+function set_checkbox_values(elename, varr)
+{
+	var doms = document.getElementsByName(elename);
+	for (var i=0; i<doms.length; ++i) {
+		var checked = false;
+		for (var k=0; k<varr.length; ++k) {
+			if (varr[k] == doms[i].value) {
+				checked = true;
+				break;
+			}
+		}
+		doms[i].checked = checked;
+	}
+}
+
+
+
+
 mwt.get_select_value=function(eleid)
 {/*{{{*/
 	var sel = document.getElementById(eleid);
 	return sel.options[sel.selectedIndex].value;
 }/*}}}*/
+
+mwt.set_select_value=function(eleid, value)
+{/*{{{*/
+	var sel = document.getElementById(eleid);
+	for(var i=0; i<sel.options.length; i=i+1){
+		if(sel.options[i].value == value){
+			sel.options[i].selected = true;
+			break;
+		}
+	}
+}/*}}}*/
+
 
 mwt.get_radio_value=function(elename)
 {/*{{{*/
@@ -84,17 +186,6 @@ function get_int_value(eleid, dafult_value)
 	return val;
 }
 
-function get_text_value(eleid)
-{
-	var dom = document.getElementById(eleid);
-	var val = dom.value.trim();
-	if (val == "") {
-		dom.value = "";
-		dom.focus();
-		throw new Error(eleid+" is empty");
-	}
-	return val;
-}
 
 function get_textarea_values(eleid)
 {
@@ -112,56 +203,7 @@ function get_textarea_values(eleid)
 
 
 /* ------------ set dom value ------------ */
-function set_html(eleid, value)
-{
-	document.getElementById(eleid).innerHTML = value;
-}
 
-
-function set_select_value(eleid, value)
-{
-	var sel = document.getElementById(eleid);
-	for(var i=0; i<sel.options.length; i=i+1){
-		if(sel.options[i].value == value){
-			sel.options[i].selected = true;
-			break;
-		}
-	}
-}
-
-function set_radio_value(elename, value)
-{
-	var doms = document.getElementsByName(elename);
-	for (var i=0; i<doms.length; ++i) {
-		if (doms[i].value == value) {
-			doms[i].checked = true;
-			return;
-		}
-	}
-}
-
-function set_checkbox_checked(elename, checked)
-{
-	var doms = document.getElementsByName(elename);
-	for (var i=0; i<doms.length; ++i) {
-		doms[i].checked = checked;
-	}
-}
-
-function set_checkbox_values(elename, varr)
-{
-	var doms = document.getElementsByName(elename);
-	for (var i=0; i<doms.length; ++i) {
-		var checked = false;
-		for (var k=0; k<varr.length; ++k) {
-			if (varr[k] == doms[i].value) {
-				checked = true;
-				break;
-			}
-		}
-		doms[i].checked = checked;
-	}
-}
 
 
 /* ------------- 数组扩展函数 ---------------- */
@@ -240,37 +282,7 @@ Date.prototype.format=function(fmt)
 };
 
 
-/* 数据格式判断 */
-function is_number(num){
-	var reg=/^[0-9]+$/;
-	return reg.test(num);
-};
-function is_decimal(num){
-	var reg=/^[0-9]+[\.]{0,1}[0-9]*$/;
-	return reg.test(num);
-};
-function is_phone(str){
-    var reg=/^1[0-9]{10}$/;
-    return reg.test(str);
-};
-function is_email(str){
-    var reg=/^[\w\-_\.]+@[\w\-_\.]+\.\w+$/;
-    return reg.test(str);
-}
-function is_url(str){
-    var reg='^((https|http|ftp|rtsp|mms)?://)' 
-          + '(([0-9a-z_!~*\'().&=+$%-]+: )?[0-9a-z_!~*\'().&=+$%-]+@)?' //ftp的user@ 
-		  + '(([0-9]{1,3}.){3}[0-9]{1,3}' // IP形式的URL- 199.194.52.184 
-		  + '|' // 允许IP和DOMAIN（域名） 
-		  + '([0-9a-z_!~*\'()-]+.)*' // 域名- www. 
-		  + '([0-9a-z][0-9a-z-]{0,61})?[0-9a-z].' // 二级域名 
-		  + '[a-z]{2,6})' // first level domain- .com or .museum 
-		  + '(:[0-9]{1,4})?' // 端口- :80 
-		  + '((/?)|' // a slash isn't required if there is no file name 
-		  + '(/[0-9a-z_!~*\'().;?:@&=+$,%#-]+)+/?)$'; 
-	var re=new RegExp(reg, 'i'); 
-    return re.test(str);
-}
+
 
 function hasClass(ele,cls) {
     return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));

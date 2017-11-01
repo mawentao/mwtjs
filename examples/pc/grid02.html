@@ -13,7 +13,7 @@
   <script type="text/javascript" src="../example.js"></script>
 </head>
 <body>
-  <p>带工具栏的Grid。</p><br>
+  <h3>带工具栏的Grid</h3>
 
   <pre><code>
 var store = new mwt.Store({
@@ -38,14 +38,10 @@ grid = new MWT.Grid({
     ]),
     tbarStyle: 'margin-bottom:10px;',
     tbar: [
-        {type:"select",label:"性别",id:"sex-sel",options:sexOptions,handler:thiso.query},
-        {type:"search",label:"GO",id:"so-key",width:300,handler:thiso.query,placeholder:'ss'},
-        {type:"text",label:"GO",id:"xx",width:200,handler:thiso.query,placeholder:'name'},
+        {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+        {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
         '->',
-        {"label":"add",class:'mwt-btn mwt-btn-primary',handler:function(){alert("ss");}},
-        {"label":"查看选中的记录",handler:thiso.show_select},
-        {"html":"<div id='ss'>sss</div>"},
-        {"label":"edit",handler:function(){alert("edit");}}
+        {label:"Add",handler:function(){alert("Add");}}
     ]
 });
 grid.create();
@@ -77,8 +73,9 @@ function init_grid_1()
       tbarStyle: 'margin-bottom:10px;',
       tbar: [
           {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+          {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
           '->',
-          {"label":"edit",handler:function(){alert("edit");}}
+          {label:"Add",handler:function(){alert("Add");}}
       ]
     });
     grid.create();
@@ -87,10 +84,12 @@ function init_grid_1()
 
 function query()
 {
-    var params = {
-        sex: get_select_value('sex-sel')
+    store.baseParams = {
+        sex: mwt.get_select_value('sex-sel'),
+        key: mwt.get_value('so-key')
     };
-    print_r(params);
+    //grid.load();
+    print_r(store.baseParams);
 }
 
 jQuery(document).ready(function(){

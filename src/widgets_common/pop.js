@@ -49,7 +49,7 @@ mwt.showPop=function(anchor,targetid,width,height,popBackFun)
         delete(style.left);
         style['right']=2;
     }
-    if (y+height>bodyHeight) {
+    if (y>height && y+height>bodyHeight) {
 //console.log('y+height='+(y+height)+'; bodyHeight='+bodyHeight);
         style.top = (a.y-height-2);
     }

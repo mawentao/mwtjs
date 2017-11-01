@@ -177,6 +177,7 @@ define(function(require){
 			}
 			code += "</li>";
 		}
+        code += '<li style="border-bottom:none;"></li>';
 		code += '</ul>';
         jQuery("#frame-west").html(code);
 		//2. bunddle event

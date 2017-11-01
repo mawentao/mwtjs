@@ -16,3 +16,8 @@ require('./bar/Bar.js');
 require('./pop.js');
 
 require('./grid/Grid.js');
+
+require('./form.js');
+
+require('./panel/panel.js');
+

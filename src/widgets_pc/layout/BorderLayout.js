@@ -14,6 +14,7 @@ MWT.BorderLayout=function(opt)
         this.construct(opt);
         if(opt.items)items=opt.items;
         if(opt.splitStyle)splitStyle=opt.splitStyle;
+        if(opt.splitWidth)splitWidth=opt.splitWidth;
     }
 
     this.init=function()

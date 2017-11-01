@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>冒泡提示</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>冒泡提示</h1>
+  <p>冒泡提示当鼠标移上去弹出冒泡提示信息。</p>
+  
+  <br>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Default">Pop Default</button>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Primary" pop-cls="mwt-popover-primary">Pop Primary</button>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Secondary" pop-cls="mwt-popover-secondary">Pop Secondary</button>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Danger" pop-cls="mwt-popover-danger">Pop Danger</button>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Warning" pop-cls="mwt-popover-warning">Pop Warning</button>
+  <button class="mwt-btn mwt-btn-default mwt-btn-xs radius" pop-title="Pop Success" pop-cls="mwt-popover-success">Pop Success</button>
+
+  <pre><code>
+<button pop-title="Pop Default">Pop Default</button>
+<button pop-title="Pop Primary" pop-cls="mwt-popover-primary">Pop Primary</button>
+<button pop-title="Pop Secondary" pop-cls="mwt-popover-secondary">Pop Secondary</button>
+<button pop-title="Pop Danger" pop-cls="mwt-popover-danger">Pop Danger</button>
+<button pop-title="Pop Warning" pop-cls="mwt-popover-warning">Pop Warning</button>
+<button pop-title="Pop Success" pop-cls="mwt-popover-success">Pop Success</button>
+
+<script>
+    mwt.popinit();  //!< 初始化pop, 重复调用没有关系
+</script>
+  </code></pre>
+
+  
+<script>
+jQuery(document).ready(function(){
+    initCode();
+    mwt.popinit();
+});
+</script>
+</body>
+</html>

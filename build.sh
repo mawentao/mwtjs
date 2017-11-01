@@ -37,8 +37,8 @@ fi
 npm run build
 # 打包文件
 tarfiles $PRODUCT.min.js $PRODUCT.min.css
-
-
+cp -r dist/fonts $targetdir
+cd $OUTDIR; zip -r $PRODUCT-$VERSION.zip $PRODUCT/*; cd ..
 
 echo '!!!BUILD SUCCESS!!!'
 exit 0

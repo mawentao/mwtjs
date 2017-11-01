@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>表单Form</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>表单Form</h1>
+  <p>表单用于收集用户填写的数据。表单类mwt.Form封装了表单数据模型的展现和基础操作。</p>
+  
+  <h2>类名：mwt.Form</h2>
+  <h3>配置属性</h3>
+  <div id="property-grid"></div>
+
+  <a name="column_model"></a>
+  <h2>表单示例</h2>
+  <table class="mwt-formtab">
+    <tr><td colspan="3" class="partition">表单示例</td></tr>
+    <tr><td width="100">hidden</td><td width="300"><div id="hidden-div"></div></td><td class="tips">隐藏字段</td></tr>
+    <tr><td>text</td><td><div id="text-div"></div></td><td class="tips">文本框</td></tr>
+    <tr><td>password</td><td><div id="password-div"></div></td><td class="tips">密码框</td></tr>
+    <tr><td>image</td><td><div id="image-div"></div></td><td class="tips">图片</td></tr>
+    <tr><td>textarea</td><td><div id="textarea-div"></div></td><td class="tips">多行文本框</td></tr>
+    <tr><td>datetime</td><td><div id="datetimepic"></div></td><td class="tips">日期</td></tr>
+    <tr><td></td><td colspan="2">
+        <button id="subbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">提交</button>
+        <button id="rstbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">重置</button>
+        <button id="loadbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">加载</button>
+        <button id="getbtn" class="mwt-btn mwt-btn-primary mwt-btn-sm radius">获取Field的值</button>
+    </td></tr>
+  </table>
+
+<script>
+
+function init_property_grid()
+{
+    var propertyList = [
+        ['render','已存在的div元素id','无','被渲染的dom元素'],
+        ['store','mwt.Store','无','数据'],
+        ['striped','true / false','false','奇偶行变色'],
+        ['bordered','true / false','false','是否显示单元格边框'],
+        ['cm', 'mwt.Grid.ColumnModel', '无', '<a href="#column_model">Grid列模型</a>']
+    ];
+    var store=new mwt.Store({
+        proxy: new mwt.MemoryProxy({
+            data: propertyList
+        })
+    });
+    var grid = new mwt.Grid({
+        render  : 'property-grid',
+        store   : store,
+        pagebar : false,
+        striped : true,
+        bordered: false,
+        cm: new MWT.Grid.ColumnModel([
+            {head:'属性',dataIndex:0,width:150},
+            {head:'取值范围',dataIndex:1,width:200},
+            {head:'默认值',dataIndex:2,width:150},
+            {head:'说明',dataIndex:3}
+        ])
+    });
+    grid.load();
+}
+
+function init_form() 
+{
+    var form = new MWT.Form({
+            fields: [
+                {render:'hidden-div',type:'hidden',name:'id',value:'0'},
+                {render:'text-div',type:'text',name:'name',value:'',
+                 empty  :false,
+                 errmsg : "请输入用户名,不超过10个字符",
+                 checkfun: function(v){return v.length<=10;}
+                },
+                {render:'password-div',type:'password',name:'passwd',value:'',
+                 empty  :false,
+                 errmsg : "请输入密码,6-15个字符",
+                 checkfun: function(v){return v.length>=6 & v.length<=15;}
+                }/*,
+                {render:'image-div',type:'image',name:'photo',value:'',
+                 imgupapi : 'http://139.196.29.35:8008/mawt/index.php/toolkit/ajax/upimg',
+                 errmsg : "请上传图片",
+                 style: 'border:solid 1px #ccc;'
+                }*/
+            ]
+        });
+        var txtfd = new MWT.TextField({
+            render   : 'textarea-div',
+            type     : 'textarea',
+            style    : 'width:300px;height:200px;',
+            value    : '',
+            empty    : false,
+            errmsg   : "请输入介绍，不超过50个字符",
+            checkfun : function(v) { return v.length<=50; }
+        });
+        form.addField('desc',txtfd);
+/*        var dtimefd = new MWT.DateTimePicker({
+            render:"datetimepic",
+            format: "yy-mm-dd",
+            style:'width:200px;float:left'
+        });
+        form.addField('dtm',dtimefd);*/
+
+        form.create();
+}
+
+
+jQuery(document).ready(function(){
+    initCode();
+    init_property_grid();
+    init_form();
+});
+</script>
+</body>
+</html>

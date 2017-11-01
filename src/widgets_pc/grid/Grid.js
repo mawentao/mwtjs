@@ -185,7 +185,7 @@ MWT.Grid=function(opt)
 
         //create tbar
         if(this.tbar){
-            var tbar=new MWT.Bar({render:tbarid,"items":this.tbar});
+            var tbar=new MWT.ToolBar({render:tbarid,"items":this.tbar});
             tbar.create();
         }
 

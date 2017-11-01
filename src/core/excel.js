@@ -29,7 +29,7 @@ function base64(s)
 /**
  * 导出table到excel
  **/
-function export_excel(domid,filename)
+window.export_excel = function(domid,filename)
 {
 	if(getbrowser()=='ie') {
 		window.alert('不支持IE内核浏览器，请使用Chrome或FireFox浏览器！');

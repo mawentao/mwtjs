@@ -2,6 +2,9 @@
  * 对含pop-title属性的元素做pop初始化
  * id: 元素的domid,若为null,则初始化所有含pop-title属性的元素
  **/
+
+require('./pop.css');
+
 mwt.popinit=function(domid) {
 	// 显示弹框(每次弹框都会重新定位)
 	function popshow(anchor,popid) {
