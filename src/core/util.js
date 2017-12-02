@@ -33,6 +33,8 @@ mwt.set_value=function(eleid, value)
 }/*}}}*/
 
 
+
+
 /* 数据格式判断 */
 mwt.isNumber=function(num){
 	var reg=/^[0-9]+$/;
@@ -66,16 +68,6 @@ mwt.isUrl=function(str){
 }
 
 
-function set_radio_value(elename, value)
-{
-	var doms = document.getElementsByName(elename);
-	for (var i=0; i<doms.length; ++i) {
-		if (doms[i].value == value) {
-			doms[i].checked = true;
-			return;
-		}
-	}
-}
 
 function set_checkbox_checked(elename, checked)
 {
@@ -147,6 +139,16 @@ mwt.get_checkbox_values=function(elename)
 }/*}}}*/
 
 
+mwt.set_radio_value=function(elename, value)
+{/*{{{*/
+	var doms = document.getElementsByName(elename);
+	for (var i=0; i<doms.length; ++i) {
+		if (doms[i].value == value) {
+			doms[i].checked = true;
+			return;
+		}
+	}
+}/*}}}*/
 
 
 

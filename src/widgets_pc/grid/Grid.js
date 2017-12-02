@@ -17,6 +17,7 @@ MWT.Grid=function(opt)
     this._pagebar = {};
     this.pagebar=true;
     this.pageSize=10;
+    this.pageStyle=1;          //!< 分页样式(详见PageBar的配置)
     var pagebarSimple=false;   //!< 简单分页条
     var position='relative';   //!< 位置(relative:相对位置,其他:固定头部和尾部)
 
@@ -47,6 +48,7 @@ MWT.Grid=function(opt)
         }
         if(isset(opt.pagebar)) this.pagebar=opt.pagebar;
         if(isset(opt.pageSize)) this.pageSize=opt.pageSize;
+        if(isset(opt.pageStyle)) this.pageStyle=opt.pageStyle;
         if(isset(opt.multiSelect))this.multiSelect=opt.multiSelect;
         if(isset(opt.tbar))this.tbar=opt.tbar;
         if(opt.striped)striped=true;
@@ -126,22 +128,23 @@ MWT.Grid=function(opt)
 		}
 		code += '</div>';
         // foot
-		var footid=render+'-foot';
-		var toolbox = '';
-		if (!notoolbox) {
-			var act = striped ? 'active' : '';
-			var stripedbtn = '<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
-			var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
-			var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
-			var btns=[stripedbtn,refershbtn,exportbtn];
-			toolbox = '<td align="right" width="94" style="padding:0;"><span class="seg"></span>'+btns.join('&nbsp;')+'</td>';
-		}
-        code+='<div id="'+footid+'" class="mwt-grid-foot">'+
-            '<table width="100%"><tr><td id="'+this.page_div+'"></td>'+toolbox+'</tr></table>'+
-          '</div>';
-        code+='</div>';
+        if (this.pagebar) {
+		    var footid=render+'-foot';
+		    var toolbox = '';
+		    if (!notoolbox) {
+			    var act = striped ? 'active' : '';
+			    var stripedbtn = '<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
+			    var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
+			    var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
+			    var btns=[stripedbtn,refershbtn,exportbtn];
+			    toolbox = '<td align="right" width="94" style="padding:0;"><span class="seg"></span>'+btns.join('&nbsp;')+'</td>';
+		    }
+            code+='<div id="'+footid+'" class="mwt-grid-foot">'+
+              '<table width="100%"><tr><td id="'+this.page_div+'"></td>'+toolbox+'</tr></table>'+
+            '</div>';
+            code+='</div>';
+        }
         jQuery("#"+render).html(code);
-		
 
         /////////////////////////////////////////////////
         // 导出按钮
@@ -192,10 +195,11 @@ MWT.Grid=function(opt)
         //create pagebar
         if(this.pagebar){
             this._pagebar = new MWT.PageBar({
-                "store"   : this.store,
-                "render"  : this.page_div,
-                "pageSize": this.pageSize,
-                "simple"  : pagebarSimple
+                "store"    : this.store,
+                "render"   : this.page_div,
+                "pageSize" : this.pageSize,
+                "simple"   : pagebarSimple,
+                "pageStyle": this.pageStyle
             });
         }
         //
@@ -268,7 +272,7 @@ MWT.Grid=function(opt)
                     var v = item[dataidx];
                     if (columns[c].render){
                         var func=columns[c].render;
-                        v = func(v,item);
+                        v = func(v,item,i,this._pagebar);
                     }
                     html+="<td ";
                     //var width="";
@@ -340,3 +344,23 @@ MWT.Grid.ColumnModel=function(opt)
 
     this.getColumns=function(){return this.columns;};
 };
+
+MWT.Grid.RowNumberer=function(opt)
+{
+    this.head = '';
+    this.dataIndex = '';
+    this.width = 50;
+    this.align = 'left';
+    this.style = "color:#999;font-family:Helvetica;";
+    if (opt) {
+        if(opt.style) this.style=opt.style;
+        if(opt.width) this.width=opt.width;
+        if(opt.align) this.align=opt.align;
+    }
+    this.render=function(v,item,storeIdx,pagebar) {
+        var linen = storeIdx+1;
+        if (pagebar) linen += pagebar.start;
+        return linen+'.';
+    };
+};
+

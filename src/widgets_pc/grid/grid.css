@@ -1,5 +1,4 @@
 /* grid样式 */
-
 .mwt-table{width:100%;border-spacing:0;}
 
 
@@ -14,7 +13,6 @@
 
 .mwt-table-bordered {}
 .mwt-table-bordered th,.mwt-table-bordered td{border:solid 1px #ddd;}
-
 
 .mwt-grid {border:none;}
 .mwt-grid table {width:100%;border-spacing:0;}
@@ -70,3 +68,12 @@
 .grid-sort-asc:after{font:normal normal normal 14px/1 FontAwesome;color:#999;margin-left:4px;content:'\f0de'}
 .grid-sort-desc:after{font:normal normal normal 14px/1 FontAwesome;color:#999;margin-left:4px;content:'\f0dd'}
 
+
+.mwt-simple-pagebar {text-align: center;}
+.mwt-simple-pagebar .mwt-btn {
+    padding: 0;
+    width: 20px;
+    border-radius: 2px;
+    vertical-align: baseline;
+    line-height: 19px;
+}

@@ -7,3 +7,9 @@
 .mwt-toolbar td:last-child {padding:6px 8px !important;}
 .mwt-toolbar label {display:block;white-space:nowrap;color:#333;font-size:12px;}
 .mwt-toolbar button {display:inline-block;padding:3px 10px;border-radius:2px;font-size:13px;}
+
+
+.mwt-tablay {width:100%;}
+.mwt-tablay td.lt {text-align:left;}
+.mwt-tablay td.ct {text-align:center;}
+.mwt-tablay td.rt {text-align:right;}

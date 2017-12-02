@@ -11,3 +11,77 @@
 .mwt-search.danger {border-color:#d43f3a;}
 .mwt-search.warning {border-color:#eea236;}
 .mwt-search.success {border-color:#4cae4c;}
+
+
+.mwt-search-bar { width:600px; border:solid 2px #d22636; }
+.mwt-search-bar.round {border-radius:4px;}
+.mwt-search-bar .text {
+    display:inline-block;
+    padding:0; margin:0;
+    background-color:#fff;
+}
+.mwt-search-bar .text input {
+    display:inline-block;
+    margin:0;
+    padding:0 10px;
+    outline: 0;
+    border:0;
+    width:500px;
+    height:30px; line-height:30px;
+    font-size:14px;
+}
+.mwt-search-bar .submit {
+    display:inline-block;
+    padding:0; margin:0;
+    float:right;
+    width:50px;
+    background-color:#d22636;
+    height:30px; line-height:30px;
+    text-align:center;
+    cursor:pointer;
+    border:0;
+    border-left:solid 2px #d22636;
+    color:#fff;
+    font-size: 14px;
+    outline: none;
+}
+.mwt-search-bar .submit:hover { background-image: none; background-color: #d22600; }
+.mwt-search-bar .submit:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+}
+
+.mwt-search-bar-primary {border:solid 2px #428bca;}
+.mwt-search-bar-primary .submit { background-color:#428bca; border-left:solid 2px #428bca;}
+.mwt-search-bar-primary .submit:hover {background-color: #357ebd;}
+
+.mwt-search-bar-success {border:solid 2px #47a447;}
+.mwt-search-bar-success .submit { background-color:#47a447; border-left:solid 2px #47a447;}
+.mwt-search-bar-success .submit:hover {background-color: #398439;}
+
+.mwt-search-bar-warning {border:solid 2px #d58512;}
+.mwt-search-bar-warning .submit { background-color:#d58512; border-left:solid 2px #d58512;}
+.mwt-search-bar-warning .submit:hover {background-color: #ed9c28;}
+
+.mwt-search-bar-black {border:solid 2px #333;}
+.mwt-search-bar-black .submit { background-color:#333; border-left:solid 2px #333;}
+.mwt-search-bar-black .submit:hover {background-color: #4f4f4f;}
+
+.mwt-text-search {
+    border:solid 1px #ccc;display:inline-block;padding:3px 8px;border-radius:2px;background:#fff;
+    white-space: nowrap;
+}
+.mwt-text-search>input {border:none;outline:none;line-height:19px;}
+.mwt-text-search>i {color:#999;font-size:14px;cursor:pointer;}
+.mwt-text-search>input:focus+i, .mwt-text-search>i:hover {color:#666;}
+.mwt-text-search.round {border-radius:36px;}
+
+.mwt-text-search.primary {border-color:#357ebd;}
+.mwt-text-search.secondary {border-color:#3bb4f2;}
+.mwt-text-search.danger {border-color:#d43f3a;}
+.mwt-text-search.warning {border-color:#eea236;}
+.mwt-text-search.success {border-color:#4cae4c;}
+
+

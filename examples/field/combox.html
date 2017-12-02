@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>ComboxField</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>ComboxField</h1>
+  <p>自定义选择控件。</p>
+  
+  <div id='dom-div'></div>
+  <br>
+  <button id='set-btn' class='mwt-btn mwt-btn-default'>设值</button>
+  <button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
+  <button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
+
+<script>
+var store,grid,fd;
+
+function query() {
+    store.baseParams = {
+        key: mwt.get_value("so-key")
+    };
+    grid.load();
+}
+
+function create_grid(divid) {
+    store = new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+        render  : divid,
+        store   : store,
+        noheader: true,
+        pagebar : true, //!< false 表示不分页
+        pageSize: 10,
+        pagebarSimple: true,      //!< 简化版分页栏
+        notoolbox: true,        //!< 不显示右下角工具箱
+        multiSelect:false, 
+        bordered : false,
+        position : 'fixed',  //!< 固定位置显示
+        striped  : true,
+        tbarStyle: 'margin-bottom:-1px;',
+        tbar: [
+            {type:"search",label:"GO",id:"so-key",width:300,placeholder:'ss',handler:query}
+        ],
+        cm: new MWT.Grid.ColumnModel([
+            {head:"ID", dataIndex:"id", width:80, hide:false, sort:true},
+            {head:"姓名", dataIndex:"name", width:300},
+            {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+                return v==1 ? "男" : "女";
+            }}
+        ]),
+        rowclick: function(im) {
+            //print_r(im);
+            fd.setText(im.name);
+            fd.setValue(im.id);
+        }
+    });
+    grid.create();
+}
+
+function init_combox_field()
+{
+    fd = new MWT.ComboxField({
+        render   : 'dom-div',
+        cls      : 'radius',
+        style    : 'width:100px;', 
+        popWidth : 500,
+        popHeight: 300,
+        value    : '',
+        empty    : false,
+        errmsg   : '请选择用户'
+    });
+/*    fd.on('create',function(){
+        create_grid(fd.getPopDivId());
+    });*/
+    fd.on('pop',function(){
+        if (!grid) create_grid(fd.getPopDivId());
+        if (store.size()==0) {
+            grid.load();
+        }
+    });
+    fd.create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init_combox_field();
+    jQuery("#set-btn").click(function(){fd.setValue(0);});
+    jQuery("#get-btn").click(function(){alert(fd.getValue());});
+    jQuery("#reset-btn").click(function(){fd.reset();});
+});
+</script>
+</body>
+</html>

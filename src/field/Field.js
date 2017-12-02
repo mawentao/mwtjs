@@ -43,10 +43,12 @@ MWT.extends(MWT.Field, MWT.Event);
 
 require('./TextField.js');
 require('./SelectField.js');
+require('./RadioField.js');
 require('./RadiobtnField.js');
 
 require('./DatepickerField.js');
 require('./DaterangepickerField.js');
 
 
+require('./ComboxField.js');
 

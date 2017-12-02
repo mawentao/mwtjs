@@ -73,7 +73,7 @@ MWT.DatepickerField=function(opt)
 
     this.setValue=function(v){
         this.value=v;
-        set_value(this.id,v);
+        mwt.set_value(this.id,v);
     };
 };
 MWT.extends(MWT.DatepickerField, MWT.Field);

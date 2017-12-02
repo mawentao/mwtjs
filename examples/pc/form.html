@@ -25,6 +25,7 @@
   <table class="mwt-formtab">
     <tr><td colspan="3" class="partition">表单示例</td></tr>
     <tr><td width="100">hidden</td><td width="300"><div id="hidden-div"></div></td><td class="tips">隐藏字段</td></tr>
+    <tr><td>radio</td><td><div id="fm-radio"></div></td><td class="tips">单选</td></tr>
     <tr><td>text</td><td><div id="text-div"></div></td><td class="tips">文本框</td></tr>
     <tr><td>password</td><td><div id="password-div"></div></td><td class="tips">密码框</td></tr>
     <tr><td>image</td><td><div id="image-div"></div></td><td class="tips">图片</td></tr>
@@ -92,6 +93,13 @@ function init_form()
                 }*/
             ]
         });
+        form.addField('radio',new MWT.RadioField({
+            render   : 'fm-radio',
+            options  : [{text:'保密',value:0},{text:"男",value:1},{text:"女",value:2}],
+            value    : '',
+            errmsg   : '请选择性别',
+            empty    : false
+        }));
         var txtfd = new MWT.TextField({
             render   : 'textarea-div',
             type     : 'textarea',

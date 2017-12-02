@@ -11,7 +11,8 @@ define(function(require){
         menu: [
             {name:'通用', submenu:[
                 {name:'图标',action:'Icon'},
-                {name:'按钮',action:'Button'}
+                {name:'按钮',action:'Button'},
+                {name:'导航',action:'Nav'}
             ]},
             {name:'布局', submenu:[
                 {name:'Fill布局',action:'FillLayout'},
@@ -30,7 +31,8 @@ define(function(require){
                 {name:'带工具栏表格',action:'grid02'}
             ]},
             {name:'表单', submenu:[
-                {name:'表单简介&API',action:'form'}
+                {name:'表单简介&API',action:'form'},
+                {name:'自定义选择控件',action:'fieldCombox'}
             ]},
             {name:'面板', submenu:[
                 {name:'wall',action:'wall'}
@@ -40,6 +42,7 @@ define(function(require){
 		path: [
 			'/'+control+'/Icon',
 			'/'+control+'/Button',
+			'/'+control+'/Nav',
 
 			'/'+control+'/FillLayout',
 			'/'+control+'/BorderLayout',
@@ -56,6 +59,8 @@ define(function(require){
             '/'+control+'/grid02',
 
             '/'+control+'/form',
+            '/'+control+'/fieldCombox',
+
             '/'+control+'/wall',
 			'/'+control+'/index'
 		]
@@ -69,6 +74,7 @@ define(function(require){
 
     o.IconAction=function() {example.show('icon/icon01.html');}
     o.ButtonAction=function() {example.show('button/button01.html');}
+    o.NavAction=function() {example.show('nav/nav01.html');}
 
     o.FillLayoutAction=function() {example.show('pc/layout_fill.html');}
     o.BorderLayoutAction=function() {example.show('pc/layout_border.html');}
@@ -85,6 +91,8 @@ define(function(require){
     o.grid02Action=function() {example.show('pc/grid02.html');}
 
     o.formAction=function() {example.show('pc/form.html');}
+    o.fieldComboxAction=function() {example.show('field/combox.html');}
+
     o.wallAction=function() {example.show('pc/wall.html');}
 
 	return o;

@@ -13,15 +13,17 @@ MWT.PageBar=function(cnf)
     this.start=0;          //!< 起始行
     this.pageSize=10;      //!< 页面大小
     this.pageNum=0;        //!< 当前页号
-    this.pageCount=0;     //!< 总页数
+    this.pageCount=0;      //!< 总页数
     this.totalProperty=0;  //!< 总记录数
     var simple=false;
-
+    var pageStyle = 1;     //!< 分页样式(1,2)
+    
     if (cnf) {
         this.construct(cnf);
 
         if (cnf.pageSize) this.pageSize=cnf.pageSize;
         if (cnf.pageSizeList) this.pageSizeList=cnf.pageSizeList;
+        if (cnf.pageStyle) pageStyle = cnf.pageStyle;
         if (cnf.store) {
             this.store=cnf.store;
             var thiso=this;
@@ -105,15 +107,12 @@ MWT.PageBar=function(cnf)
                 return;
             }
 
-            var code="<table class='tablay'><tr><td>";
-
             // 页号列表
             var list_heaad=[
                 {"text":"首页", "value":1, "active":this.pageNum!=1},
                 {"text":"上一页", "value":this.pageNum-1, "active":this.pageNum!=1}
             ];
             var list_body=[];
-
             var step=Math.ceil(this.pageNumCount / 2);
             var begin=this.pageNum - step;
             if (begin<1) begin=1;
@@ -127,41 +126,53 @@ MWT.PageBar=function(cnf)
                     break;
                 ++count;
             }
-
             var list_tail=[
                 {"text":"下一页", "value":this.pageNum+1, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)},
                 {"text":"尾页", "value":this.pageCount, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)}
             ];
             var list=list_heaad.concat(list_body, list_tail);
+            var pagebtns = [];
             for (var i=0; i<list.length; ++i) {
                 var t=list[i].text;
                 var v=list[i].value;
                 var c=list[i].active ? "" : "disabled";
                 var margin_left = (i==0) ? 0 : 1;
-                code += "<button name='"+pname+"' "+c+" value='"+v+"' "+
+                var btncode = "<button name='"+pname+"' "+c+" value='"+v+"' "+
                     "class='mwt-btn mwt-btn-default mwt-btn-xs' style='border-radius:0;margin-left:"+margin_left+"px;'>"+t+
                   "</button>";
+                pagebtns.push(btncode);
             }
 
-            
-
-            code += "</td><td style='text-align:right;font-size:12px;color:#777;'>"+
-                    "共 <b>"+this.totalProperty+"</b> 条记录，每页显示个数：<select id='"+selid+"'>";
+            // 页面大小选择
+            var pagesel = '<select id="'+selid+'">';
             for (var i=0; i<this.pageSizeList.length; ++i) {
                 var v=this.pageSizeList[i];
                 var c=v==this.pageSize ? "selected" : "";
-                code+="<option value='"+v+"' "+c+">"+v+"</option>";
+                pagesel += "<option value='"+v+"' "+c+">"+v+"</option>";
             }
-            code += "</select>";
-            
-            code += "</td></tr></table>";
+            pagesel += "</select>";
+
+            // 根据样式设置显示
+            var code='<table class="mwt-tablay"><tr>';
+            switch (parseInt(pageStyle)) {
+                case 2:
+                    code += '<td class="ct">'+pagebtns.join('')+'</td>';
+                    break;
+                default: 
+                    code += '<td class="lt">'+pagebtns.join('')+'</td>'+
+                            '<td class="rt">共 <b>'+this.totalProperty+'</b> 条记录，每页显示个数：'+pagesel+'</td>';
+                    break;
+            }
+            code += "</tr></table>";
             //alert(this.totalProperty+"条记录");
-            //
             document.getElementById(this.render).innerHTML=code;
 
-            document.getElementById(selid).onchange=function(e){
-                thiso.changePagesize(this.value);
-            };
+            // bunddle event
+            if (document.getElementById(selid)) {
+                document.getElementById(selid).onchange=function(e){
+                    thiso.changePagesize(this.value);
+                };
+            }
 
             var btns=document.getElementsByName(pname);
             for (var i=0; i<btns.length; ++i) {
@@ -169,7 +180,6 @@ MWT.PageBar=function(cnf)
                     thiso.changePage(this.value);
                 };
             }
-
         }
     };
 };
