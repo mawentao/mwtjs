@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>Excel导入控件</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>Excel导入控件</h1>
+  <p>Excel导入流程：先上传Excel文件，需要后端提供一个Excel文件上传并解析的接口，该接口返回数据格式如下所示；控件收到返回的解析结果，逐行调用回调函数，在回调函数可以完成一行数据的导入。</p>
+
+  <h2>Excel文件上传并解析接口</h2>
+  <pre><code>
+// 请求接口:
+GET: {
+    fileElementId: 'excelfile'
+}
+FILE: {
+    excelfile: 上传的Excel文件
+}
+
+// 返回接口:
+{
+    retcode :  返回码   (0:正常,其他:异常)
+    retmsg  :   错误信息
+    data : {
+        rows_count : 行数
+        cols_count : 列数
+        root : [
+            [第一列, 第二列, ...],
+            ...
+        ]
+    }
+}
+  </code></pre>
+
+  <h2>示例</h2>
+  <div id="excel-import-div"></div>
+  <pre><code>
+var excelImport = new mwt.ExcelImport({
+    render  : 'excel-import-div',
+    ajaxapi : 'http://localhost:8888/discuz/source/plugin/demoapp/index.php?version=4&module=excel&action=upload',
+    tiphtml : '数据格式: 姓名 性别 手机号',
+    checkFun : function(data) {
+        if (data.cols_count!=3) throw "数据格式不正确：必须是3列";
+    },
+    lineProcFun: function(data) {
+        if (data[0]=='姓名') return "表头略过";
+        console.log(data);
+        return 0;
+    }
+});
+excelImport.create();
+  </code></pre>
+<script>
+
+function init() {
+    var excelImport = new mwt.ExcelImport({
+        render      : 'excel-import-div',
+        ajaxapi     : 'http://localhost:8888/discuz/source/plugin/demoapp/index.php?version=4&module=excel&action=upload',
+        tiphtml     : '数据格式: 姓名 性别 手机号',
+        checkFun    : function(data) {
+            if (data.cols_count!=3) throw "数据格式不正确：必须是3列";
+        },
+        lineProcFun : function(data) {
+            if (data[0]=='姓名') return "表头略过";
+            console.log(data);
+            return 0;
+        }
+    });
+    excelImport.create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init();
+});
+</script>
+</body>
+</html>

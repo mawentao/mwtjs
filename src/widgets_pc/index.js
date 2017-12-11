@@ -21,3 +21,6 @@ require('./form.js');
 
 require('./panel/panel.js');
 
+require('./excel/excel_import.js');
+
+

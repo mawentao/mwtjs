@@ -34,8 +34,9 @@ define(function(require){
                 {name:'表单简介&API',action:'form'},
                 {name:'自定义选择控件',action:'fieldCombox'}
             ]},
-            {name:'面板', submenu:[
-                {name:'wall',action:'wall'}
+            {name:'其他', submenu:[
+                {name:'wall',action:'wall'},
+                {name:'ExcelImport',action:'excel'}
             ]},
         ],
 		// url路由
@@ -62,6 +63,7 @@ define(function(require){
             '/'+control+'/fieldCombox',
 
             '/'+control+'/wall',
+            '/'+control+'/excel',
 			'/'+control+'/index'
 		]
 	};
@@ -94,6 +96,7 @@ define(function(require){
     o.fieldComboxAction=function() {example.show('field/combox.html');}
 
     o.wallAction=function() {example.show('pc/wall.html');}
+    o.excelAction=function() {example.show('pc/excel.html');}
 
 	return o;
 });
