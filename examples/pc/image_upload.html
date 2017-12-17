@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>图片上传控件</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>图片上传控件</h1>
+  <p>上传图片文件，返回图片URL。</p>
+
+  <h2>示例</h2>
+  <a id="imgup" href="javascript:uploadimg();">点击上传图片</a>
+
+  <div id="excel-import-div"></div>
+  <pre><code>
+var imguploader = new mwt.ImageUpload({
+    ajaxapi: 'http://localhost:8888/discuz/source/plugin/gift/index.php?version=4&module=upload&action=imgfile'
+});
+imguploader.upload(function(data){
+    print_r(data);
+});
+  </code></pre>
+<script>
+
+function uploadimg()
+{
+    var imguploader = new mwt.ImageUpload({
+        ajaxapi: 'http://localhost:8888/discuz/source/plugin/gift/index.php?version=4&module=upload&action=imgfile'
+    });
+    imguploader.upload(function(data){
+        print_r(data);
+    });
+}
+
+jQuery(document).ready(function(){
+    initCode();
+});
+</script>
+</body>
+</html>

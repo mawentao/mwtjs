@@ -42,7 +42,7 @@ MWT.TextField=function(opt)
 			'</div>';
         }
         jQuery("#"+this.render).html(code);
-//        errpop = new MWT.Popover({anchor:tid,html:errmsg,cls:"mwt-popover-danger"});
+        errpop = new MWT.Popover({anchor:tid,html:errmsg,cls:"mwt-popover-danger"});
 
         this.setValue(this.value);
         // bundle event
@@ -72,7 +72,7 @@ MWT.TextField=function(opt)
     };
 
     function change() {
-//        errpop.hide();
+        errpop.hide();
         thiso.value = mwt.get_value(tid);
         thiso.fire("change");
 		if (thiso.value!='') jQuery("#"+tid+'-clear').show();
@@ -84,12 +84,12 @@ MWT.TextField=function(opt)
     };
 
     this.validate=function() {
-//        errpop.hide();
+        errpop.hide();
         var t = empty ? mwt.get_value(tid) : mwt.get_text_value(tid);
         if (checkfun && !checkfun(t)) {
-            //errpop.pop();
+            errpop.pop();
             jQuery("#"+tid).focus();
-//            setTimeout(errpop.hide,2000);
+            setTimeout(errpop.hide,2000);
             return false;
         }
         return true;

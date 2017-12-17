@@ -69,16 +69,16 @@ mwt.isUrl=function(str){
 
 
 
-function set_checkbox_checked(elename, checked)
-{
+mwt.set_checkbox_checked = function(elename, checked)
+{/*{{{*/
 	var doms = document.getElementsByName(elename);
 	for (var i=0; i<doms.length; ++i) {
 		doms[i].checked = checked;
 	}
-}
+}/*}}}*/
 
-function set_checkbox_values(elename, varr)
-{
+mwt.set_checkbox_values=function(elename, varr)
+{/*{{{*/
 	var doms = document.getElementsByName(elename);
 	for (var i=0; i<doms.length; ++i) {
 		var checked = false;
@@ -90,10 +90,7 @@ function set_checkbox_values(elename, varr)
 		}
 		doms[i].checked = checked;
 	}
-}
-
-
-
+}/*}}}*/
 
 mwt.get_select_value=function(eleid)
 {/*{{{*/
@@ -111,7 +108,6 @@ mwt.set_select_value=function(eleid, value)
 		}
 	}
 }/*}}}*/
-
 
 mwt.get_radio_value=function(elename)
 {/*{{{*/
@@ -138,7 +134,6 @@ mwt.get_checkbox_values=function(elename)
 	return values;
 }/*}}}*/
 
-
 mwt.set_radio_value=function(elename, value)
 {/*{{{*/
 	var doms = document.getElementsByName(elename);
@@ -149,7 +144,6 @@ mwt.set_radio_value=function(elename, value)
 		}
 	}
 }/*}}}*/
-
 
 
 // вўВи

@@ -146,11 +146,11 @@ MWT.ExcelImport = function(opt)
 
     function beforeUpload() {
         jQuery('#txt-'+render).attr('disabled','disabled').css({"background":"#eee"});
-        var code = '<i class="fa fa-spinner fa-spin fa-1x"></i>正在导入...';
+        var code = '<i class="icon icon-loading fa fa-spin"></i>正在导入...';
         jQuery('#upbtn-'+render).attr('disabled','disabled').html(code);
         code = '<ul id="ul-'+render+'"></ul>'+
             '<ul id="loading-'+render+'" style="margin-top:-8px;">'+
-                '<li><i class="fa fa-cog fa-spin fa-1x" style="color:gray;"></i></li>'+
+                '<li><i class="icon icon-loading fa fa-spin" style="color:gray;"></i></li>'+
             '</ul>';
         jQuery('#feedback-'+render).html(code).fadeIn();
     }

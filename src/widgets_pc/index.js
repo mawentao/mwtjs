@@ -23,4 +23,6 @@ require('./panel/panel.js');
 
 require('./excel/excel_import.js');
 
+require('./excel/image_upload.js');
+
 

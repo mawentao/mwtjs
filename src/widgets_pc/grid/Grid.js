@@ -93,7 +93,7 @@ MWT.Grid=function(opt)
         	var headcode='';
         	if (!noheader) {
             	headcode+='<thead><tr>';
-            	if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
+            	if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='mwt.set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
             	var len=columns.length;
             	var thname = this.grid_div+"-th";
             	for(var i=0;i<len;++i){
@@ -297,7 +297,7 @@ MWT.Grid=function(opt)
 
     // 获取选中项
     this.getSelectedRecords=function(){
-        var values=get_checkbox_values(this.grid_chkbox_name);
+        var values=mwt.get_checkbox_values(this.grid_chkbox_name);
         var records=[];
         for(var i=0;i<values.length;++i){
             var item=this.store.get(values[i]);

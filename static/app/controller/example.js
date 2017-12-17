@@ -36,7 +36,8 @@ define(function(require){
             ]},
             {name:'其他', submenu:[
                 {name:'wall',action:'wall'},
-                {name:'ExcelImport',action:'excel'}
+                {name:'ExcelImport',action:'excel'},
+                {name:'ImageUpload',action:'imgup'}
             ]},
         ],
 		// url路由
@@ -64,6 +65,7 @@ define(function(require){
 
             '/'+control+'/wall',
             '/'+control+'/excel',
+            '/'+control+'/imgup',
 			'/'+control+'/index'
 		]
 	};
@@ -97,6 +99,7 @@ define(function(require){
 
     o.wallAction=function() {example.show('pc/wall.html');}
     o.excelAction=function() {example.show('pc/excel.html');}
+    o.imgupAction=function() {example.show('pc/image_upload.html');}
 
 	return o;
 });
