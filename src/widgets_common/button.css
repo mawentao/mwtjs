@@ -27,6 +27,7 @@
 }
 .mwt-btn:hover {text-decoration:none;}
 
+
 /* 按钮尺寸 */
 .mwt-btn-lg { padding: 10px 25px; font-size: 18px; line-height: 1.33;}
 .mwt-btn-sm { padding: 3px 10px; font-size: 12px; line-height: 1.5;}
@@ -63,33 +64,75 @@
 .mwt-btn-default:hover, .mwt-btn-default:focus, .mwt-btn-default:active, .mwt-btn-default.active {
     color: #333; background-color: #efefef; border-color: #ccc;
 }
+
+/* 反色黑 */
 .mwt-btn-inverse {color: #fff; background-color: #454545; border-color: #666; }
 .mwt-btn-inverse:hover, .mwt-btn-inverse:focus, .mwt-btn-inverse:active, .mwt-btn-inverse.active {
     color: #fff; background-color: #666; border-color: #666;
 }
+.mwt-btn-inverse-o {color:#666;border-color:#666;background-color:#fff;}
+.mwt-btn-inverse-o:hover, .mwt-btn-inverse-o:focus, .mwt-btn-inverse-o:active, .mwt-btn-inverse-o.active {
+    color: #fff; background-color: #666;
+}
+
+/* 主色调 */
 .mwt-btn-primary { color: #fff; background-color: #428bca; border-color: #357ebd; }
 .mwt-btn-primary:hover, .mwt-btn-primary:focus, .mwt-btn-primary:active, .mwt-btn-primary.active {
     color: #fff; background-color: #3276b1; border-color: #285e8e;
 }
+.mwt-btn-primary-o {color:#357ebd;background-color: #fff;border-color:#357ebd;}
+.mwt-btn-primary-o:hover, .mwt-btn-primary-o:focus, .mwt-btn-primary-o:active, .mwt-btn-primary-o.active {
+    background-color: #3276b1; color: #fff;
+}
+
+/* 副色调 */
 .mwt-btn-secondary { color: #fff; background-color: #3bb4f2; border-color: #3bb4f2; }
 .mwt-btn-secondary:hover, .mwt-btn-secondary:focus, .mwt-btn-secondary:active, .mwt-btn-secondary.active {
     color: #fff; background-color: #0f9ae0; border-color: #0f9ae0;
 }
+.mwt-btn-secondary-o {color:#3bb4f2;border-color:#3bb4f2;background-color:#fff;}
+.mwt-btn-secondary-o:hover, .mwt-btn-secondary-o:focus, .mwt-btn-secondary-o:active, .mwt-btn-secondary-o.active {
+    color: #fff; background-color: #0f9ae0;
+}
+
+/* 成功绿 */
 .mwt-btn-success { color: #fff; background-color: #5cb85c; border-color: #4cae4c; }
 .mwt-btn-success:hover, .mwt-btn-success:focus, .mwt-btn-success:active, .mwt-btn-success.active {
     color: #fff; background-color: #47a447; border-color: #398439;
 }
+.mwt-btn-success-o {color:#4cae4c;border-color:#4cae4c;background-color:#fff;}
+.mwt-btn-success-o:hover, .mwt-btn-success-o:focus, .mwt-btn-success-o:active, .mwt-btn-success-o.active {
+    color: #fff; background-color: #47a447;
+}
+
+/* 信息蓝 */
 .mwt-btn-info { color: #fff; background-color: #5bc0de; border-color: #46b8da; }
 .mwt-btn-info:hover, .mwt-btn-info:focus, .mwt-btn-info:active, .mwt-btn-info.active {
     color: #fff; background-color: #39b3d7; border-color: #269abc;
 }
+.mwt-btn-info-o {color:#46b8da;border-color:#46b8da;background-color:#fff;}
+.mwt-btn-info-o:hover, .mwt-btn-info-o:focus, .mwt-btn-info-o:active, .mwt-btn-info-o.active {
+    color: #fff; background-color: #39b3d7;
+}
+
+/* 警告橙 */
 .mwt-btn-warning { color: #fff; background-color: #f0ad4e; border-color: #eea236; }
 .mwt-btn-warning:hover, .mwt-btn-warning:focus, .mwt-btn-warning:active, .mwt-btn-warning.active {
     color: #fff; background-color: #ed9c28; border-color: #d58512;
 }
+.mwt-btn-warning-o {color:#eea236;border-color:#eea236;background-color:#fff;}
+.mwt-btn-warning-o:hover, .mwt-btn-warning-o:focus, .mwt-btn-warning-o:active, .mwt-btn-warning-o.active {
+    color: #fff; background-color: #ed9c28;
+}
+
+/* 危险红 */
 .mwt-btn-danger { color: #fff; background-color: #d9534f; border-color: #d43f3a; }
 .mwt-btn-danger:hover, .mwt-btn-danger:focus, .mwt-btn-danger:active, .mwt-btn-danger.active {
     color: #fff; background-color: #d2322d; border-color: #ac2925;
+}
+.mwt-btn-danger-o {color:#d43f3a;border-color:#d43f3a;background-color:#fff;}
+.mwt-btn-danger-o:hover, .mwt-btn-danger-o:focus, .mwt-btn-danger-o:active, .mwt-btn-danger-o.active {
+    color: #fff; background-color: #d2322d;
 }
 
 /* 按钮组 */

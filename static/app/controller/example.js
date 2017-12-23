@@ -15,6 +15,7 @@ define(function(require){
                 {name:'导航',action:'Nav'}
             ]},
             {name:'布局', submenu:[
+                {name:'栅格布局',action:'GridLayout'},
                 {name:'Fill布局',action:'FillLayout'},
                 {name:'Border布局',action:'BorderLayout'}
             ]},
@@ -46,6 +47,7 @@ define(function(require){
 			'/'+control+'/Button',
 			'/'+control+'/Nav',
 
+			'/'+control+'/GridLayout',
 			'/'+control+'/FillLayout',
 			'/'+control+'/BorderLayout',
 
@@ -80,6 +82,7 @@ define(function(require){
     o.ButtonAction=function() {example.show('button/button01.html');}
     o.NavAction=function() {example.show('nav/nav01.html');}
 
+    o.GridLayoutAction=function() {example.show('common/flex.html');}
     o.FillLayoutAction=function() {example.show('pc/layout_fill.html');}
     o.BorderLayoutAction=function() {example.show('pc/layout_border.html');}
 

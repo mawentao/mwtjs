@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>栅格布局</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+<style>
+[class^=mwt-col-] {height:50px;background:rgba(33,150,243,.15);;border:solid 1px rgba(33,150,243,.3);font-size:12px;}
+</style>
+</head>
+<body>
+  <h1>栅格布局</h1>
+  <p>栅格布局采用12等分方式布局。</p>
+  
+  <h2>等分布局</h2>
+  <div class="mwt-row">
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+
+    <div class="mwt-col-4">.col-4</div>
+    <div class="mwt-col-4">.col-4</div>
+    <div class="mwt-col-4">.col-4</div>
+
+    <div class="mwt-col-6">.col-6</div>
+    <div class="mwt-col-6">.col-6</div>
+  </div>
+  <pre><code><!-- mwt-row mwt-col -->
+<div class="mwt-row">
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+    <div class="mwt-col-1">.col-1</div>
+
+    <div class="mwt-col-4">.col-4</div>
+    <div class="mwt-col-4">.col-4</div>
+    <div class="mwt-col-4">.col-4</div>
+
+    <div class="mwt-col-6">.col-6</div>
+    <div class="mwt-col-6">.col-6</div>
+</div>
+  </code></pre>
+
+  <h2>弹性布局</h2>
+  <div class="mwt-row mwt-row-flex">
+    <div class="mwt-col-wd" style="width:300px;">side</div>
+    <div class="mwt-col-fill">fill</div>
+  </div>
+  <div class="mwt-row mwt-row-flex">
+    <div class="mwt-col-wd" style="width:300px;">left</div>
+    <div class="mwt-col-fill">fill</div>
+    <div class="mwt-col-wd" style="width:300px;">right</div>
+  </div>
+<pre><code><!-- mwt-row mwt-row-fex mwt-col -->
+<div class="mwt-row mwt-row-flex">
+    <div class="mwt-col-wd" style="width:300px;">side</div>
+    <div class="mwt-col-fill">fill</div>
+</div>
+<div class="mwt-row mwt-row-flex">
+    <div class="mwt-col-wd" style="width:300px;">left</div>
+    <div class="mwt-col-fill">fill</div>
+    <div class="mwt-col-wd" style="width:300px;">right</div>
+</div>
+</code></pre>
+
+
+<script>
+jQuery(document).ready(function(){
+    initCode();
+});
+</script>
+</body>
+</html>

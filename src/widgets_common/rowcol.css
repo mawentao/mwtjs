@@ -1,0 +1,31 @@
+/**
+ *     12等分栅格布局样式 
+ *     author: mawentao
+ *     date: 2017-12-23 10:00:23
+ **/
+
+/* 行 */
+.mwt-row {width:100%;}
+.mwt-row-flex {display:--webkit-flex;display:flex;flex-flow:row;}
+.mwt-row:before, .mwt-row:after {
+    display:table;content:" ";-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+}
+.mwt-row:after {clear:both;}
+
+/* 列 */
+[class^=mwt-col-] {float:left;position:relative;}
+.mwt-col-1 {width:8.33333333%;}
+.mwt-col-2 {width:16.6666667%;}
+.mwt-col-3 {width:25%;}
+.mwt-col-4 {width:33.3333333%;}
+.mwt-col-5 {width:41.6666667%;}
+.mwt-col-6 {width:50%;}
+.mwt-col-7 {width:58.3333333%;}
+.mwt-col-8 {width:66.6666667%;}
+.mwt-col-9 {width:75%;}
+.mwt-col-10 {width:83.3333333%;}
+.mwt-col-11 {width:91.6666667%;}
+.mwt-col-12 {width:100%;}
+
+.mwt-col-fill {flex:1}
+
