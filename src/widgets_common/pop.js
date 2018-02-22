@@ -17,7 +17,7 @@ mwt.showPop=function(anchor,targetid,width,height,popBackFun)
     if (!mwt.$(targetid)) {
         mwt.createDiv(targetid);
         var dom = mwt.$(targetid);
-        dom.className = 'mwt-pop';
+        dom.className = 'mwt-pop mwt-motion-popdown';
         dom.style.width = width+'px';
         dom.style.height = height+'px';
         // 弹出层截获点击事件

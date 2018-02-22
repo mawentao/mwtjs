@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>Button按钮</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+  <style>
+ul {margin:100px;width:400px;}
+li {list-style:none;float:left;display:inline-block;text-align:center;width:70px;height:70px;border-radius:100%;border:solid 2px #ccc;
+    margin:7px 15px;padding-top:15px;
+}
+li span {display:block;text-align:center;font-size:13px;}
+  </style>
+</head>
+<body>
+    <div id="aa">a</div>
+<script>
+jQuery(document).ready(function(){
+    var colors = [
+        '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
+        '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
+        '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
+        '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+    ];
+
+    var ls = [
+        ['用户','sicon-user'],
+        ['车辆','fa fa-car'],
+        ['订单','icon icon-signup'],
+        ['收入','fa fa-cny'],
+        ['风控','icon icon-report'],
+        ['工单','fa fa-line-chart'],
+    ];
+    var code = '<ul>';
+    for (var i=0;i<ls.length;++i) {
+        var im = ls[i];
+        var color = colors[i%colors.length];
+        var li = '<li style="border-color:'+color+';color:'+color+'">'+
+            '<i class="'+im[1]+'" style="font-size:22px;"></i><span>'+im[0]+'</span>'+
+        '</li>';
+        code += li;
+    }
+    code += '</ul>';
+    jQuery('#aa').html(code);
+
+});
+</script>
+</body>
+</html>

@@ -41,7 +41,7 @@ MWT.SelectField=function(opt)
     };
     this.setValue=function(v){
         this.value=v;
-        set_select_value(this.id,v);
+        mwt.set_select_value(this.id,v);
     };
 };
 MWT.extends(MWT.SelectField, MWT.Field);

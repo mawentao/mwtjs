@@ -213,18 +213,17 @@ MWT.Grid=function(opt)
 		////////////////////////////////////////////
 		// fixed布局自动计算top和bottom距离
 		this.autolayout();
-		/*if (position!='relative') {
-			var headh = jQuery('#'+tableid).position().top;
-			if(!noheader){headh+=jQuery('#'+headid).height();}
-			var footh = jQuery('#'+footid).height();
-			jQuery('#'+bodyid).css({'top':headh+1,'bottom':footh+17});
-		}*/
+        this.store.on('load',thiso.autolayout);
     };
 
 	// fixed布局自动计算top和bottom距离
 	this.autolayout=function() {
 		if (position!='relative') {
+            var tbarid=render+'-tbar';
+            var tbarh = jQuery('#'+tbarid).height();
 			var headh = jQuery('#'+tableid).position().top;
+            if (tbarh && headh<tbarh) headh=tbarh-2;
+
 			if(!noheader){headh+=jQuery('#'+render+'-head').height();}
 			var footh = jQuery('#'+render+'-foot').height();
 			jQuery('#'+render+'-body').css({'top':headh+1,'bottom':footh+17});

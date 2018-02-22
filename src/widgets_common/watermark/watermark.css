@@ -1,0 +1,22 @@
+/* 水印样式 */
+#watermark {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 2000;
+}
+
+#watermark span {
+    display:block;text-align:center;overflow:hidden;position:absolute;
+    transform: rotate(-25deg);
+    opacity: 0.06;
+    font-size: 13px;
+    color: #000;
+    width: 200px;
+    min-height: 30px;
+    left: 20px; top:20px;
+}

@@ -38,8 +38,12 @@ window.export_excel = function(domid,filename,style)
     if (!style) style='';
 	var uri = 'data:application/vnd.ms-excel;base64,';
 	var template = '<html><head><title>'+filename+'</title><meta charset="UTF-8">'+
-			'<style>table{font-size:13px;font-family:"微软雅黑";border-color:#666;} tr {height:25px;}'+
-            'th, thead td {background:#eee;color:#000} th,td{border-color:#666;vertical-align:middle;}'+style+'</style>'+
+			'<style>'+
+                'table {font-family:"microsoft yahei";font-size:13px;border:solid 8px #ddd;}'+
+                'th,thead td {background:#1D717B;color:#fff;height:25px;}'+
+                'th,td,thead td,tbody td,thead th,tbody th {border:solid 1px #ddd;vertical-align:middle;}'+
+                style+
+            '</style>'+
 		'</head><body><table border="1">{table}</table></body></html>';
     var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m,p) {return c[p];}) };
 	var table = document.getElementById(domid);

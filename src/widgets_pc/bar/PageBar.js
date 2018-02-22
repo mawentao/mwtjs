@@ -109,8 +109,8 @@ MWT.PageBar=function(cnf)
 
             // 页号列表
             var list_heaad=[
-                {"text":"首页", "value":1, "active":this.pageNum!=1},
-                {"text":"上一页", "value":this.pageNum-1, "active":this.pageNum!=1}
+                {"text":"<i class='fa fa-angle-double-left'></i>", "value":1, "active":this.pageNum!=1},
+                {"text":"<i class='fa fa-angle-left'></i>", "value":this.pageNum-1, "active":this.pageNum!=1}
             ];
             var list_body=[];
             var step=Math.ceil(this.pageNumCount / 2);
@@ -127,8 +127,8 @@ MWT.PageBar=function(cnf)
                 ++count;
             }
             var list_tail=[
-                {"text":"下一页", "value":this.pageNum+1, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)},
-                {"text":"尾页", "value":this.pageCount, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)}
+                {"text":"<i class='fa fa-angle-right'></i>", "value":this.pageNum+1, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)},
+                {"text":"<i class='fa fa-angle-double-right'></i>", "value":this.pageCount, "active":(this.pageCount>0)&(this.pageNum!=this.pageCount)}
             ];
             var list=list_heaad.concat(list_body, list_tail);
             var pagebtns = [];
