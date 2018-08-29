@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>时间选择控件</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>时间选择控件</h1>
+  <p>TimepickerField: 时间选择控件。</p>
+  
+  <div id="dom-div" style="margin:20px 0;"></div>
+
+  <div id="bar-div"></div>
+
+<script>
+var fd;
+function init()
+{
+    fd = new MWT.TimepickerField({
+        render  : 'dom-div'
+    });
+    fd.on('change',function(){
+        mwt.notify(fd.getValue(),1000);
+    });
+    fd.create();
+
+    new mwt.ToolBar({
+        render : 'bar-div',
+//        style  : 'padding:10px;border-radius:4px;background:#FDFAF0;border:solid 1px #FFECB3;',
+        items  : [
+            {type:"timepicker",label:"时间",value:'08:00'}
+        ]
+    }).create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init();
+});
+</script>
+</body>
+</html>

@@ -29,6 +29,7 @@ grid = new MWT.Grid({
     pagebar  : true,  // false 表示不分页
     bordered : true,  // false 不显示列边框
     pageSize : 10,    // 默认每页大小
+    pageStyle: 1,
     cm: new MWT.Grid.ColumnModel([
         {head:"ID",   dataIndex:"id", width:80, sort:true},
         {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
@@ -62,6 +63,7 @@ function init_grid_1()
       pagebar     : true,  // false 表示不分页
       bordered    : true,  // false 不显示列边框
       pageSize    : 10,    // 默认每页大小
+      pageStyle   : 1,
       multiSelect : true,  // 多选
       cm: new MWT.Grid.ColumnModel([
           {head:"ID",   dataIndex:"id", width:80, sort:true},

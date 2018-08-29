@@ -19,7 +19,7 @@ mwt.notify=function(msg,timeout,cls)
             case 'warning': icon='fa fa-warning';break;
             case 'danger': icon='fa fa-times-circle';break;
             case 'success': icon='fa fa-check-circle';break;
-            case 'loading': icon='fa fa-circle-o-notch fa-spin fa-3x fa-fw';break;
+            case 'loading': icon='icon icon-loading fa fa-spin fa-3x';break;
         }
         if(cls!='') icon = '<i class="'+icon+'"></i>';
         var code = '<div id="'+divid+'"><div class="mwt-notify '+cls+' zoomIn">'+icon+msg+'</div></div>';

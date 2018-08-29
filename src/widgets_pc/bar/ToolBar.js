@@ -19,6 +19,51 @@ MWT.ToolBar=function(cnf)
         if(cnf.style)this.style=cnf.style;
     }
 
+    // 根据总宽度自动计算每个cell的宽度(栅格布局宽度)
+    function getCellWidth(totalWidth)
+    {/*{{{*/
+        var minWidth = 150;
+        var n = Math.ceil(minWidth/(totalWidth/12));
+        // 栅格布局等分只能是1,2,3,4,6,12
+        if (n>6) n=12;
+        else if (n>=5) n=6;
+        return n;
+    }/*}}}*/
+
+
+    // 控件布局2
+    function layout2() 
+    {/*{{{*/
+        var jDom = jQuery('#'+thiso.render);
+        var cn = getCellWidth(jDom.width());
+        var style = thiso.style ? " style='"+thiso.style+"'" : "";
+        var cells = [];
+        for (var i=0;i<thiso.items.length;++i) {
+            var item=thiso.items[i];
+            if (item=='->' || item=='-') {
+                continue;
+            }
+            var code = '<div class="mwt-col-'+cn+'">';
+            if (isset(item.html)) {
+                code += item.html;
+            }
+            else if (is_string(item)) {
+                code += item;
+            }
+            else {
+                if (item.label && item.type && item.type!='button') {
+                    code += '<label>'+item.label+'</label>';
+                }
+                code += '<div id="'+genid(item,i)+'-cell"></div>';
+            }
+            code += '</div>';
+            cells.push(code);
+        }
+        var code = '<div class="mwt-row">'+cells.join('')+'</div>';
+        jDom.html(code);
+    }/*}}}*/
+    
+
     // 创建工具条
     this.create=function()
     {/*{{{*/
@@ -69,6 +114,7 @@ MWT.ToolBar=function(cnf)
                 case "search"          : renderSearch(item,id,cellid); break;
                 case "datepicker"      : renderDatepicker(item,id,cellid); break;
                 case "daterangepicker" : renderDaterangepicker(item,id,cellid); break;
+                case "timepicker"      : renderTimepicker(item,id,cellid); break;
                 case "button":
                 default: renderButton(item,id,cellid); break;
             }
@@ -166,6 +212,22 @@ MWT.ToolBar=function(cnf)
     function renderDaterangepicker(item,id,cellid)
     {/*{{{*/
          var field=new MWT.DaterangepickerField({
+            render  : cellid,
+            id      : id,
+            options : item.options ? item.options : [],
+            value   : item.value,
+            cls     : item.cls,
+            style   : item.style
+        }); 
+        field.create();
+        if(item.handler){
+            field.on("change",item.handler);
+        };
+    }/*}}}*/
+    // Timepicker
+    function renderTimepicker(item,id,cellid)
+    {/*{{{*/
+         var field=new MWT.TimepickerField({
             render  : cellid,
             id      : id,
             options : item.options ? item.options : [],

@@ -11,6 +11,7 @@
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
     font-size: 13px;
+    font-family: 'microsoft yahei';
     background:rgba(0,0,0,0.6);
     color:#fff;
 }

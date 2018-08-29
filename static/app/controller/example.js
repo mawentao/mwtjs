@@ -25,7 +25,10 @@ define(function(require){
                 {name:'消息提示',action:'msg'},
                 {name:'冒泡提示',action:'pop'}
             ]},
-            {name:'工具栏',action:'toolbar'},
+            {name:'工具栏', submenu:[
+                {name:'工具栏', action:'toolbar'},
+                {name:'时间选择', action:'timepicker'}
+            ]},
             {name:'表格', submenu:[
                 {name:'表格简介&API',action:'grid'},
                 {name:'简单表格',action:'grid01'},
@@ -33,13 +36,21 @@ define(function(require){
             ]},
             {name:'表单', submenu:[
                 {name:'表单简介&API',action:'form'},
-                {name:'自定义选择控件',action:'fieldCombox'}
+                {name:'自定义选择控件',action:'fieldCombox'},
+                {name:'checkbox',action:'fieldCheckbox'}
             ]},
             {name:'其他', submenu:[
                 {name:'wall',action:'wall'},
                 {name:'ExcelImport',action:'excel'},
                 {name:'ImageUpload',action:'imgup'}
             ]},
+            {name:'Mobile', submenu:[
+                {name:'图标&按钮',action:'wxicon'},
+                {name:'消息',action:'wxmsg'},
+                {name:'列表',action:'wxflow'},
+                {name:'侧边栏',action:'sidebar'},
+                {name:'滑动菜单',action:'scrollbar'}
+            ]}
         ],
 		// url路由
 		path: [
@@ -57,6 +68,7 @@ define(function(require){
             '/'+control+'/pop',
 
             '/'+control+'/toolbar',
+            '/'+control+'/timepicker',
 
             '/'+control+'/grid',
             '/'+control+'/grid01',
@@ -64,10 +76,18 @@ define(function(require){
 
             '/'+control+'/form',
             '/'+control+'/fieldCombox',
+            '/'+control+'/fieldCheckbox',
+
+            '/'+control+'/wxicon',
+            '/'+control+'/wxmsg',
+            '/'+control+'/wxflow',
+
 
             '/'+control+'/wall',
             '/'+control+'/excel',
             '/'+control+'/imgup',
+            '/'+control+'/scrollbar',
+            '/'+control+'/sidebar',
 			'/'+control+'/index'
 		]
 	};
@@ -92,6 +112,7 @@ define(function(require){
     o.popAction=function() {example.show('pc/pop.html');}
 
     o.toolbarAction=function() {example.show('pc/toolbar.html');}
+    o.timepickerAction=function() {example.show('field/TimepickerField.html');}
 
     o.gridAction=function() {example.show('pc/grid.html');}
     o.grid01Action=function() {example.show('pc/grid01.html');}
@@ -99,10 +120,18 @@ define(function(require){
 
     o.formAction=function() {example.show('pc/form.html');}
     o.fieldComboxAction=function() {example.show('field/combox.html');}
+    o.fieldCheckboxAction=function() {example.show('field/checkbox.html');}
 
     o.wallAction=function() {example.show('pc/wall.html');}
     o.excelAction=function() {example.show('pc/excel.html');}
     o.imgupAction=function() {example.show('pc/image_upload.html');}
+
+    o.wxiconAction=function() {example.show('mobile/wxicon.html');}
+    o.wxmsgAction=function() {example.show('mobile/msg.html');}
+    o.wxflowAction=function() {example.show('mobile/flow.html');}
+    o.sidebarAction=function() {example.show('mobile/sidebar.html');}
+    o.scrollbarAction=function() {example.show('mobile/scrollbar.html');}
+    
 
 	return o;
 });

@@ -7,7 +7,6 @@ mwt.set_html=function(eleid, value)
 	document.getElementById(eleid).innerHTML = value;
 }/*}}}*/
 
-
 mwt.get_value=function(eleid)
 {/*{{{*/
 	var dom = document.getElementById(eleid);
@@ -33,11 +32,9 @@ mwt.set_value=function(eleid, value)
 }/*}}}*/
 
 
-
-
 /* 数据格式判断 */
 mwt.isNumber=function(num){
-	var reg=/^[0-9]+$/;
+	var reg=/^[-]?[0-9]+$/;
 	return reg.test(num);
 };
 mwt.isDecimal=function(num){
@@ -66,8 +63,6 @@ mwt.isUrl=function(str){
 	var re=new RegExp(reg, 'i'); 
     return re.test(str);
 }
-
-
 
 mwt.set_checkbox_checked = function(elename, checked)
 {/*{{{*/

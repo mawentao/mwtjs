@@ -3,6 +3,10 @@
     display: inline-block;
     padding: 6px 15px;
 
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
     outline: 0;
     border: 1px solid transparent;
     background-image: none;
@@ -26,6 +30,8 @@
     user-select: none;
 }
 .mwt-btn:hover {text-decoration:none;}
+
+.mwt-btn i {vertical-align: text-bottom;}
 
 
 /* 按钮尺寸 */
@@ -144,7 +150,7 @@
 }
 .mwt-btn-group>.mwt-btn, .mwt-btn-group-radius>.mwt-btn {
     position: relative;
-    float: left;
+    /*float: left;*/
     margin-left: -1px;
 }
 .mwt-btn-group>.mwt-btn:first-child, .mwt-btn-group-radius>.mwt-btn:first-child {
@@ -175,6 +181,8 @@
     border-bottom-right-radius: 4px;
     border-top-right-radius: 4px;
 }
+
+
 
 /* 块级button */
 .mwt-btn-block {

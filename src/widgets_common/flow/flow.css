@@ -1,0 +1,28 @@
+
+.mwt-flow-tab {width:100%;border-collapse:collapse;}
+
+.mwt-loadmorebtn {
+    display:none;
+    background:#eee;
+    border-color:#eee;
+    padding:4px 0;
+    color: #666;
+    margin:10px 0;
+}
+
+.mwt-loadmorebtn:hover {
+    background:#ddd;
+    color: #666;
+}
+
+.mwt-loadmorebtn i {
+    font-size:12px;
+    margin-right:5px;
+}
+
+.mwt-empty {
+    text-align:center;
+    padding:40px 0;
+    font-size: 13px;
+    color:#999;
+}

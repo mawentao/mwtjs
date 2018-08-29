@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>ComboxField</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>ComboxField</h1>
+  <p>文件上传控件。</p>
+  
+  <div id='dom-div'></div>
+  <br>
+
+<script>
+var fd;
+function init_combox_field()
+{
+    fd = new MWT.FileField({
+        render   : 'dom-div',
+        id       : 'upfile'
+    });
+    fd.create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init_combox_field();
+});
+</script>
+</body>
+</html>

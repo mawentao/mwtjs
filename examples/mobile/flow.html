@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>列表流</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt_mobile.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt_mobile.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+
+<div id="flow-div"></div>
+
+<script>
+
+
+function init()
+{
+    var store=new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    var flow = new mwt.Flow({
+        render  : 'flow-div',
+        store   : store,
+        pageSize: 20,
+        itemRenderFun: function(item) {
+            return json2str(item);
+        }
+    });
+    flow.create();
+    flow.load();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init();
+});
+</script>
+</body>
+</html>

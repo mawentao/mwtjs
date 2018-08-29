@@ -28,7 +28,7 @@ MWT.Grid=function(opt)
     this.multiSelect=false;//!<多选按钮
 
     var filename="";    //!< 导出文件名
-    var striped=false;  //!< 奇偶行变色
+    var striped=true;  //!< 奇偶行变色
     var noheader=false; //!< 不显示表头 
     var notoolbox=false;//!< 不显示工具箱（导出,刷新,奇偶变色）
     var tableid='';
@@ -60,14 +60,12 @@ MWT.Grid=function(opt)
         if(opt.filename)filename=opt.filename;
         if(opt.position)position=opt.position;
         tableid=render+"-tab";
-        if(filename=='')filename=tableid+'.xls';
+        if(filename=='')filename=tableid;
     }
 
-
-
-
     // 创建
-    this.create=function(){
+    this.create=function()
+    {/*{{{*/
         this.grid_div="grid_div_"+opt.render;
         this.page_div="page_div_"+opt.render;
         this.grid_chkbox_id=this.grid_div+"-chkbox-id";
@@ -79,7 +77,7 @@ MWT.Grid=function(opt)
 
         // tbar
 		var tbarid=render+'-tbar';
-        if(this.tbar){
+        if(this.tbar && this.tbar.length){
             var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
             code+="<div class='mwt-grid-tbar' id='"+tbarid+"'"+style+"></div>";
         }
@@ -137,7 +135,7 @@ MWT.Grid=function(opt)
 			    var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
 			    var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
 			    var btns=[stripedbtn,refershbtn,exportbtn];
-			    toolbox = '<td align="right" width="94" style="padding:0;"><span class="seg"></span>'+btns.join('&nbsp;')+'</td>';
+			    toolbox = '<td align="right" width="10" style="padding:0;"><div class="mwt-block"><span class="seg"></span>'+btns.join('&nbsp;')+'</div></td>';
 		    }
             code+='<div id="'+footid+'" class="mwt-grid-foot">'+
               '<table width="100%"><tr><td id="'+this.page_div+'"></td>'+toolbox+'</tr></table>'+
@@ -214,10 +212,11 @@ MWT.Grid=function(opt)
 		// fixed布局自动计算top和bottom距离
 		this.autolayout();
         this.store.on('load',thiso.autolayout);
-    };
+    };/*}}}*/
 
 	// fixed布局自动计算top和bottom距离
-	this.autolayout=function() {
+	this.autolayout=function() 
+    {/*{{{*/
 		if (position!='relative') {
             var tbarid=render+'-tbar';
             var tbarh = jQuery('#'+tbarid).height();
@@ -226,26 +225,29 @@ MWT.Grid=function(opt)
 
 			if(!noheader){headh+=jQuery('#'+render+'-head').height();}
 			var footh = jQuery('#'+render+'-foot').height();
-			jQuery('#'+render+'-body').css({'top':headh+1,'bottom':footh+17});
+			jQuery('#'+render+'-body').css({'top':headh+1,'bottom':footh+16});
 		}
-	};
+	};/*}}}*/
 
     // 获取记录
-    this.getRecord=function(key,value){
+    this.getRecord=function(key,value)
+    {/*{{{*/
         var idx=this.store.indexOf(key,value);
         if(idx<0||idx>=this.store.size()){return null;}
         return this.store.get(idx);
-    };
+    };/*}}}*/
 
     // 加载数据
-    this.load=function(params){
+    this.load=function(params)
+    {/*{{{*/
         if (isset(params))this.store.baseParams = params;
         if (this.pagebar) this._pagebar.changePage(1);
         else this.store.load();
-    };
+    };/*}}}*/
 
     // 显示Grid（如果设置了render）
-    this.display=function(){
+    this.display=function()
+    {/*{{{*/
         if(!render){return;}
         if(!this.grid_div){
             this.create();
@@ -292,10 +294,11 @@ MWT.Grid=function(opt)
                 rowclick(im);
             });
         }
-    };
+    };/*}}}*/
 
     // 获取选中项
-    this.getSelectedRecords=function(){
+    this.getSelectedRecords=function()
+    {/*{{{*/
         var values=mwt.get_checkbox_values(this.grid_chkbox_name);
         var records=[];
         for(var i=0;i<values.length;++i){
@@ -304,10 +307,11 @@ MWT.Grid=function(opt)
             records.push(item);
         }
         return records;
-    };
+    };/*}}}*/
 
     // 初始化事件
-    this.initevent=function(){
+    this.initevent=function()
+    {/*{{{*/
         //1. 列标题排序点击事件
         var jthAll = jQuery('[name='+thiso.grid_div+'-th]');
         jthAll.unbind('click').click(function(){
@@ -323,12 +327,19 @@ MWT.Grid=function(opt)
             thiso.store.baseParams["dir"]=dir;
             thiso.load();
         });
-    };
+    };/*}}}*/
 
     // 导出到excel
-    this.export_excel=function() {
+    this.export_excel=function()
+    {/*{{{*/
+        if (this._pagebar && this._pagebar.pageNum) {
+            filename += "_第"+this._pagebar.pageNum+"页_共"+
+                    this._pagebar.pageCount+"页";
+        }
+        var rg = new RegExp("\\.xls$",'i');
+        if (!rg.test(filename)) filename += ".xls";
         export_excel(tableid,filename);
-    };
+    };/*}}}*/
 };
 MWT.extends(MWT.Grid, MWT.Event);
 

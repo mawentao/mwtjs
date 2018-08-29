@@ -2,12 +2,7 @@
  * PC端Lib
  **/
 
-require('./animate.css');
-
 require('./layout/Layout.js');
-
-
-require('./dialog/dialog.js');
 
 require('./msg/msg.js');
 

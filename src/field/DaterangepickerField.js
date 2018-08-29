@@ -5,6 +5,7 @@ MWT.DaterangepickerField=function(opt)
 {
 	var thiso=this;
     this.listeners={};
+    this.value=-1;
     var format="yy/mm/dd";
 	var txtid='';
 	var fromdate,todate,fromid,toid;
@@ -27,12 +28,13 @@ MWT.DaterangepickerField=function(opt)
 		//1. 创建dom
 		var code = "<div class='btn-bar'>"+
 		  '<div class="mwt-btn-group" style="float:left;">'+
-            '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-90">最近90天</button>'+
-			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-60">最近60天</button>'+
-			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-30">最近30天</button>'+
-			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-7">最近7天</button>'+
+            '<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-90">近90天</button>'+
+			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-60">近60天</button>'+
+			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-30">近30天</button>'+
+			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-7">近7天</button>'+
 			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="-1">昨天</button>'+
 			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="0">今天</button>'+
+			'<button class="date-submit mwt-btn mwt-btn-default mwt-btn-xs" data-value="na">置空</button>'+
           '</div>'+
 		  '<div style="float:right">'+
 			'<button class="date-submit mwt-btn mwt-btn-primary mwt-btn-xs" data-value="yes">确定</button>'+
@@ -69,8 +71,19 @@ MWT.DaterangepickerField=function(opt)
 				return;
 			}
 			// 快选按钮
-            if(v!='yes'){
-				v = parseInt(v);
+            if (v=='yes') {
+				var f = fromdom.datepicker('getDate').format(format);
+				var t = todom.datepicker('getDate').format(format);
+				fromdate=new Date(f);
+				todate=new Date(t);
+            }
+            else if(v=='na') {
+                v = '';
+                thiso.setValue(v);
+				jpop.hide();
+                return;
+            }else {
+                v = parseInt(v);
                 fromdate=new Date();
                 todate=new Date();
 				if (v<0) {
@@ -78,13 +91,7 @@ MWT.DaterangepickerField=function(opt)
 					todate.setTime(todate.getTime()-86400000);
 				}
 				syncDatePicker();
-            } else {
-				var f = fromdom.datepicker('getDate').format(format);
-				var t = todom.datepicker('getDate').format(format);
-				fromdate=new Date(f);
-				todate=new Date(t);
 			}
-
             var fv=fromdom.datepicker('getDate').format(format);
             var tv=todom.datepicker('getDate').format(format);
             thiso.value=fv+" ~ "+tv;
@@ -104,10 +111,11 @@ MWT.DaterangepickerField=function(opt)
     // create
     this.create=function()
 	{/*{{{*/
-        var style=" style=\"width:180px\" ";
+        var style=" style=\"width:165px;font:normal 12px Arial;\" ";
         if(this.style!="")style=" style=\""+this.style+"\" ";
-        var code= "<input type='text' class='mwt-field mwt-datepicker'"+style+"id='"+txtid+"' value='"+this.value+"' readonly/>"+
-            '<i class="fa fa-calendar"></i>';
+        var code= "<input type='text' class='mwt-field mwt-datepicker'"+style+"id='"+txtid+"' "+
+                    "value='"+this.value+"' placeholder='请选择时间区间' readonly/>"+
+                    '<i class="fa fa-calendar"></i>';
         jQuery("#"+this.render).html(code);
         var txtdom=jQuery("#"+txtid);
         txtdom.click(function(){
@@ -118,32 +126,35 @@ MWT.DaterangepickerField=function(opt)
 				syncDatePicker();
 			});
         });
-        this.setDefault(this.value);
-    };/*}}}*/
-
-	// 设置默认值
-    this.setDefault=function(v)
-	{/*{{{*/
-		fromdate=new Date();
-		todate=new Date();
-		if (v<0) {
-			fromdate.setTime(fromdate.getTime()+86400000*v);
-			todate.setTime(todate.getTime()-86400000);
-		}
-		var fv = fromdate.format(format);
-		var tv = todate.format(format);
-		thiso.value = fv+" ~ "+tv;
-		jQuery('#'+txtid).val(thiso.value);
+        this.setValue(this.value);
     };/*}}}*/
 
 	// 设置值
-	this.setValue=function(v) {
+	this.setValue=function(v) 
+    {/*{{{*/
+        // 数字值处理
+        if (mwt.isNumber(v)) {
+            v = parseInt(v);
+            fromdate=new Date();
+            todate=new Date();
+            if (v<0) {
+			    fromdate.setTime(fromdate.getTime()+86400000*v);
+                todate.setTime(todate.getTime()-86400000);
+            } else {
+			    fromdate.setTime(fromdate.getTime()+86400000*0);
+                todate.setTime(todate.getTime()+86400000*v);
+            }
+            var fv = fromdate.format(format);
+            var tv = todate.format(format);
+            v = fv+" ~ "+tv;
+        }
 		this.value = v;
-		jQuery('#'+txtid).val(thiso.value);
+		jQuery('#'+txtid).val(this.value);
 		var arr = v.split(' ~ ');
 		fromdate=new Date(arr[0]);
 		todate=new Date(arr[1]);
 		this.fire("change");
-	};
+	};/*}}}*/
+
 };
 MWT.extends(MWT.DaterangepickerField, MWT.Field);

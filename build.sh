@@ -36,7 +36,7 @@ fi
 # 编译
 npm run build
 # 打包文件
-tarfiles $PRODUCT.min.js $PRODUCT.min.css
+tarfiles $PRODUCT.min.js $PRODUCT.min.css $PRODUCT"_mobile.min.js" $PRODUCT"_mobile.min.css"
 cp -r dist/fonts $targetdir
 cd $OUTDIR; zip -r $PRODUCT-$VERSION.zip $PRODUCT/*; cd ..
 

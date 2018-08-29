@@ -55,6 +55,7 @@ define(function(require){
 			jQuery('#navitem-'+controller+'-'+action).addClass('active');
 			return;
 		}
+        controller_active=controller;
 
 		//2. 清理布局
         jQuery(".menu-item").removeClass('active');
@@ -81,6 +82,8 @@ define(function(require){
 			//4-3. 选中action
 			jQuery('[name="navitem"]').removeClass('active');
 			jQuery('#navitem-'+controller+'-'+action).addClass('active');
+            var jlm = jQuery('#navitem-'+controller+'-'+action).parent().parent().parent();
+            jlm.removeClass('menu-close').addClass('menu-open');
 		} 
         // fill布局
         else {
@@ -154,7 +157,8 @@ define(function(require){
 			var item = navitems[j];
 			var href = item.action ? '#/'+controller+'/'+item.action : "javascript:;";
 			var hassubmenu = (item.submenu && item.submenu.length>0);
-			var cls = hassubmenu ? 'class="menu-open"' : '';
+			//var cls = hassubmenu ? 'class="menu-open"' : '';
+			var cls = hassubmenu ? 'class="menu-close"' : '';
 			var icon = item.icon ? item.icon : 'fa fa-hand-o-right';
 			var style = item.style ? item.style : '';
 			var liid = item.action ? 'id="navitem-'+controller+'-'+item.action+'"' : '';

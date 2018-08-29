@@ -14,7 +14,6 @@
 .mwt-dialog .dialog-head {
     height: 40px;
     line-height: 40px;
-    border-bottom: solid 1px #eee;
     text-align: left;
     padding-left: 10px;
     font-size: 13px;
@@ -46,12 +45,14 @@
     animation-fill-mode: both;
 }
 .mwt-dialog .dialog-body .btnclose {
-    position:absolute;right:10px; top:10px;
+    position:absolute;right:10px; top:8px;
     color: #999;
     text-decoration:none;
-    font-size:16px;
-    padding: 0 7px;
+    border: none;
+    font-size: 16px;
+    padding: 3px 4px 0;
 }
 .mwt-dialog .dialog-body .content {background-color:#fff;text-align:left;color: #333;overflow:auto;font-size:13px;}
 
+.btnclose i {vertical-align:top;font-size:16px;}
 

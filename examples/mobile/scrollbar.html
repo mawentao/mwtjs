@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>可滑动的导航菜单</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt_mobile.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt_mobile.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+
+<div id="navdiv" style="width:200px;background:#eee;"></div>
+
+<script>
+function init()
+{
+    var bar = new MWT.ScrollBar({
+        render: 'navdiv',
+        items: [
+            {label:'头条',handler:function(idx){alert(idx+'. 头条');}},
+            {label:'体育',handler:function(idx){alert(idx+'. 体育');}},
+            {label:'娱乐',handler:function(idx){alert(idx+'. 娱乐');}},
+            {label:'财经',handler:function(idx){alert(idx+'. 财经');}},
+            {label:'电影',handler:function(idx){alert(idx+'. 电影');}},
+            {label:'音乐',handler:function(idx){alert(idx+'. 音乐');}},
+            {label:'游戏',handler:function(idx){alert(idx+'. 游戏');}},
+            {label:'NBA',handler:function(idx){alert(idx+'. NBA');}},
+            {label:'读书',handler:function(idx){alert(idx+'. 读书');}},
+            {label:'教育',handler:function(idx){alert(idx+'. 教育');}},
+            {label:'医疗',handler:function(idx){alert(idx+'. 医疗');}},
+            {label:'户外运动', width:60, handler:function(idx){alert(idx+'. 户外运动');}},
+        ]
+    });
+    bar.create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init();
+});
+</script>
+</body>
+</html>

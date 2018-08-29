@@ -40,8 +40,9 @@ MWT.SelectField=function(opt)
         });
     };
     this.setValue=function(v){
-        this.value=v;
-        mwt.set_select_value(this.id,v);
+        var selid = this.id;
+        mwt.set_select_value(selid,v);
+        this.value=jQuery('#'+selid).children('option:selected').val();
     };
 };
 MWT.extends(MWT.SelectField, MWT.Field);

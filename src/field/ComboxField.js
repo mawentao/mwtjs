@@ -9,6 +9,7 @@ MWT.ComboxField=function(opt)
     var empty=false;      //!< 是否允许为空   
     var checkfun;         //!< 自定义校验函数
     var btnid,txtid,optdivid;
+    var width = 'auto';   //!< 控件宽度
     var popWidth = 400;   //!< 弹出层宽度
     var popHeight = 300;  //!< 弹出层高度
 	var text="请选择...";
@@ -17,6 +18,7 @@ MWT.ComboxField=function(opt)
         if(opt.errmsg) errmsg=opt.errmsg;
         if(opt.checkfun) checkfun=opt.checkfun;
         if(opt.empty) empty=opt.empty;
+        if(opt.width) width=opt.width;
         if(opt.popWidth) popWidth=opt.popWidth;
         if(opt.popHeight) popHeight=opt.popHeight;
         if(opt.text) text=opt.text;
@@ -28,9 +30,11 @@ MWT.ComboxField=function(opt)
 	// create 
 	this.create = function() {
         var thiso=this;
+        var spanstyle = 'text-align:left;overflow:hidden;';
+        if (width!='auto') spanstyle += 'width:'+width+'px';
 		var code = '<div>'+
 				'<a id="'+btnid+'" class="mwt-field mwt-btn mwt-btn-default '+this.cls+'" href="javascript:;" style="'+this.style+'">'+
-                  '<span id="'+txtid+'">'+text+'</span><i class="fa fa-caret-down"></i></a>'+
+                  '<span id="'+txtid+'" style="'+spanstyle+'">'+text+'</span><i class="fa fa-caret-down"></i></a>'+
                 '</div>'+
 			'</div>';
         jQuery("#"+this.render).html(code);
@@ -62,6 +66,7 @@ MWT.ComboxField=function(opt)
 		jQuery('#'+txtid).html(v);
 		jQuery("#"+optdivid).hide();
 	};
+    
 
 	this.validate=function() {
         errpop.hide();

@@ -1,0 +1,48 @@
+/* checkbox控件美化样式 */
+
+/* 开关-plain */
+.mwt-cbx-switch-plain {cursor:pointer;width:60px;height:20px;position:relative;display:inline-block;}
+.mwt-cbx-switch-plain span {display:block;width:100%;height:100%;background:#a5a39d;border-radius:40px;}
+.mwt-cbx-switch-plain span i {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: inherit;
+  position: absolute;
+  z-index: 2;
+  right: 50%;
+  top: 0;
+  background: #ddd;
+  box-shadow:
+      inset 0 1px 0 white,
+      0 0 2px rgba(0,0,0,0.3),
+      0 1px 1px rgba(0,0,0,0.2);
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.mwt-cbx-switch-plain span i:before {
+  content: " ";
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  color: rgba(0,0,0,0.4);
+  text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  margin-top: -7px;
+  right: -80%;
+}
+
+.mwt-cbx-switch-plain input:checked + span { background:#5cb85c; }
+.mwt-cbx-switch-plain input:checked + span i { right:-1%; }
+.mwt-cbx-switch-plain input:checked + span i:before { content:" "; right:120%; color:green; text-shadow:0 1px 0 #65E256;}
+.mwt-cbx-switch-plain input[type=checkbox] {display:none;}
+
+
+
+

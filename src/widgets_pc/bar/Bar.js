@@ -18,3 +18,4 @@ MWT.extends(MWT.Bar, MWT.Event);
 
 require('./PageBar');
 require('./ToolBar');
+require('./FlexBar');

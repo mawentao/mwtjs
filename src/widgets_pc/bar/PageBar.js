@@ -16,7 +16,8 @@ MWT.PageBar=function(cnf)
     this.pageCount=0;      //!< 总页数
     this.totalProperty=0;  //!< 总记录数
     var simple=false;
-    var pageStyle = 1;     //!< 分页样式(1,2)
+    var pageStyle = 1;     //!< 分页样式(1,2,3-瀑布式加载更多)
+    var thiso=this;
     
     if (cnf) {
         this.construct(cnf);
@@ -77,9 +78,43 @@ MWT.PageBar=function(cnf)
         this.changePage(this.pageCount);
     };
 
+    // 瀑布式加载更多
+    function displayStyle3()
+    {/*{{{*/
+        if (!thiso.render) return;
+        var jarea = jQuery('#'+thiso.render);
+        var pageNum = thiso.pageNum;
+        var pageCount = thiso.pageCount;
+        // 没有下一页了
+        if (pageNum>=pageCount) {
+            jarea.html('');
+            return;
+        } 
+        // 还有下一页
+        var morebtnid = 'morebtn-'+thiso.render;
+        var code = '<div id="'+morebtnid+'" class="mwt-btn-block mwt-btn mwt-btn-default mwt-btn-xs mwt-loadmorebtn">'+
+            '点击查看更多</div>';
+        jarea.html(code);
+        // 点击下一页事件
+        var jmorebtn = jQuery('#'+morebtnid);
+        jmorebtn.show().unbind('click').click(function(){
+            code = '<i class="icon icon-loading fa fa-spin fa-2x"></i>'+jmorebtn.html();
+            jmorebtn.html(code).unbind('click');
+            thiso.nextPage();
+        });
+    }/*}}}*/
+
+
     // 显示Pagebar（如果设置了render）
     this.display=function()
     {
+        /////////////////////////////////////
+        //20180802新增样式
+        if (pageStyle==3) {
+            displayStyle3();
+            return;
+        }
+        /////////////////////////////////////
         if (this.render) {
             var thiso=this;
             var selid=this.render+"-sel";

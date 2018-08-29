@@ -23,12 +23,13 @@ mwt.Dialog = function(opt)
     var form;                      //!< MWT.Form
     var body=null;
     var bodyStyle;
+    var style;
 	
 	if (opt)
 	{
 		if (opt.render) render = opt.render;
 		if (opt.title) title = opt.title;
-		if (opt.width) width = opt.width+"px";
+		if (opt.width) width = /%$/.test(opt.width) ? opt.width : opt.width+"px";
 		if (opt.height) height = opt.height+"px";
 		if (opt.top) top = opt.top;
         if (opt.form) form=opt.form;
@@ -37,6 +38,7 @@ mwt.Dialog = function(opt)
         if (opt.body) body = opt.body;
         if (opt.bodyStyle) bodyStyle=opt.bodyStyle;
 		if (opt.fullscreen) fullscreen=true;
+        if (opt.style) style=opt.style;
 	}
 
     function dig_mdown(e){
@@ -91,18 +93,22 @@ mwt.Dialog = function(opt)
 		if (fullscreen) {
 			var htmlcode = "<div id='"+render+"-modal' class='modaldiv'></div>"+
 			  "<div id='"+dialog_body_id+"' class='dialog-body "+animate+"' "+
-                "style='position:fixed;top:0;bottom:0;left:0;right:0;display:block;border-radius:0;'>"+
-                "<div class='dialog-head' id='d-head-"+eleid+"'>"+
+                "style='position:fixed;top:0;bottom:0;left:0;right:0;display:block;border-radius:0;"+style+"'>"+
+                "<div class='dialog-head mwt-border-bottom' id='d-head-"+eleid+"'>"+
 			      "<span id='"+dialog_title_id+"'>"+title+"</span>"+
-			      "<a id='"+a_close_id+"' class='mwt-btn mwt-btn-default mwt-btn-xs radius btnclose' href='javascript:;'> × </a>"+
+			      "<a id='"+a_close_id+"' class='mwt-btn mwt-btn-default btnclose' href='javascript:;'>"+
+                    '<i class="sicon-close"></i>'+
+                  "</a>"+
                 "</div>"+
 		        "<div class='content' onmousedown='' style='height:"+height+";"+bodyStyle+"' id='"+dialog_content_id+"'>"+content_html+"</div>";
 		} else {
 			var htmlcode = "<div id='"+render+"-modal' class='modaldiv'></div>"+
-		      "<div id='"+dialog_body_id+"' class='dialog-body "+animate+"' style='top:"+top+"px;width:"+width+"'>"+
-                "<div class='dialog-head' id='d-head-"+eleid+"'>"+
+		      "<div id='"+dialog_body_id+"' class='dialog-body "+animate+"' style='top:"+top+"px;width:"+width+";"+style+"'>"+
+                "<div class='dialog-head mwt-border-bottom' id='d-head-"+eleid+"'>"+
 			      "<span id='"+dialog_title_id+"'>"+title+"</span>"+
-			      "<a id='"+a_close_id+"' class='mwt-btn mwt-btn-default mwt-btn-xs radius btnclose' href='javascript:;'> × </a>"+
+			      "<a id='"+a_close_id+"' class='mwt-btn mwt-btn-default btnclose' href='javascript:;'>"+
+                    '<i class="sicon-close"></i>'+
+                  "</a>"+
                 "</div>"+
 		        "<div class='content' onmousedown='' style='height:"+height+";"+bodyStyle+"' id='"+dialog_content_id+"'>"+content_html+"</div>";
 		}

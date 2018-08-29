@@ -15,7 +15,8 @@ const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 
 module.exports = {
     entry: {
-		mwt: path.resolve(SRC_PATH, 'mwt.js')
+		mwt: path.resolve(SRC_PATH, 'mwt.js'),
+        mwt_mobile: path.resolve(SRC_PATH, 'mwt_mobile.js'),
     },
     output: {
         path: DIST_PATH,

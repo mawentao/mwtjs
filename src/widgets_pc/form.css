@@ -5,3 +5,5 @@
 .mwt-formtab td,.mwt-formtab th {font-size:13px;border-top:1px dotted #eee;text-align:left;padding:0 10px;}
 .mwt-formtab tr:first-child td,.mwt-formtab tr:first-child th {border-top:none;}
 .mwt-formtab .tips {color: #999; word-break: break-all;}
+
+.mwt-formtab th>label {display:block;white-space:nowrap;}

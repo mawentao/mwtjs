@@ -3,8 +3,9 @@
  * author: mawentao
  * create: 2017-12-08 11:23:11
  **/
-require('./ajaxfileupload.js');
+
 require('./excel.css');
+require('./ajaxfileupload.js');
 
 MWT.ExcelImport = function(opt)
 {
@@ -15,6 +16,9 @@ MWT.ExcelImport = function(opt)
     var tiphtml='';     //!< 提示信息
     var lineProcFun;    //!< 行处理函数
     var checkFun;       //!< 校验函数(在处理数据前调用)
+    var afterFun;       //!< 收尾函数(在数据全部处理完后条用)
+    var totalnum=0;     //!< 总记录数统计
+    var succnum=0;      //!< 成功导入记录数统计
     var popover;
 
     if (opt) {
@@ -24,6 +28,7 @@ MWT.ExcelImport = function(opt)
         if(opt.tiphtml) tiphtml=opt.tiphtml;
         if(opt.lineProcFun) lineProcFun=opt.lineProcFun;
         if(opt.checkFun) checkFun=opt.checkFun;
+        if(opt.afterFun) afterFun=opt.afterFun;
     }
 
     // 创建
@@ -113,7 +118,11 @@ MWT.ExcelImport = function(opt)
             var checkres = 0;
             if (checkFun) checkFun(data);
             appendInfo(code);
+            ////////////////////////////////
+            // 逐行导入
+            succnum = 0;
             importLine(0,data.root);
+            ////////////////////////////////
         } catch (e) {
             appendError(e);
             afterUpload();
@@ -125,8 +134,9 @@ MWT.ExcelImport = function(opt)
     function importLine(ix,list) {
         // 导入结束
         if (ix>=list.length) {
-            appendInfo('导入结束');
+            appendInfo('导入结束，总行数：'+list.length+'，成功导入：'+succnum);
             afterUpload();
+            if (afterFun) afterFun(succnum,list.length);
             return;
         }
         // 处理当前行
@@ -135,6 +145,7 @@ MWT.ExcelImport = function(opt)
         var line = list[ix].join(' ');
         if (res==0) {
             appendSuccess('第'+(ix+1)+'行 [导入成功] - '+line);
+            ++succnum;
         } else {
             appendError('第'+(ix+1)+'行 [导入失败:'+res+'] - '+line);
         }
@@ -171,3 +182,4 @@ MWT.ExcelImport = function(opt)
 };
 
 MWT.extends(MWT.ExcelImport, MWT.Event);
+

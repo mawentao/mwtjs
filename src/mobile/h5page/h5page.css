@@ -1,0 +1,26 @@
+
+.mwt-h5page {
+    position:fixed;
+    top:0;bottom:0;/*left:0;right:0;*/
+    margin:0 auto;padding: 0;
+    width:100%;
+    max-width:640px;
+    bottom:0;
+    overflow: auto;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background:#fff;
+}
+
+.mwt-h5page-head {
+
+}
+
+.mwt-h5page-body {
+
+}
+
+

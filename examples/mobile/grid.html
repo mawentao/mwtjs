@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>移动端表格</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt_mobile.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt_mobile.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h3>移动端表格</h3>
+
+  <pre><code>
+store = new mwt.Store({
+    proxy: new mwt.HttpProxy({
+        url    : '../data/list.txt',
+        method : 'POST',
+        async  : true,   // 异步请求
+    })
+});
+grid = new MWT.Grid({
+    render   : "grid-div-1",
+    store    : store,
+    pagebar  : true,  // false 表示不分页
+    bordered : true,  // false 不显示列边框
+    pageSize : 10,    // 默认每页大小
+    cm: new MWT.Grid.ColumnModel([
+        {head:"ID",   dataIndex:"id", width:80, sort:true},
+        {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+        {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+            return v==1 ? "男" : "女";
+        }}
+    ]),
+    tbarStyle: 'margin-bottom:10px;',
+    tbar: [
+        {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+        {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
+        '->',
+        {label:"Add",handler:function(){alert("Add");}}
+    ]
+});
+grid.create();
+grid.load();
+  </code></pre>  
+  <div id='grid-div-1'></div>
+
+<script>
+
+function init_grid_1()
+{
+    store = new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+      render      : "grid-div-1",
+      store       : store,
+      pagebar     : true,  // false 表示不分页
+      bordered    : true,  // false 不显示列边框
+      pageSize    : 10,    // 默认每页大小
+      multiSelect : true,  // 多选
+      cm: new MWT.Grid.ColumnModel([
+          {head:"ID",   dataIndex:"id", width:80, sort:true},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+              return v==1 ? "男" : "女";
+          }}
+      ]),
+      tbarStyle: 'margin-bottom:10px;',
+      tbar: [
+          {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+          {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
+          '->',
+          {label:"Add",handler:function(){alert("Add");}}
+      ]
+    });
+    grid.create();
+    grid.load();
+}
+
+function query()
+{
+    store.baseParams = {
+        sex: mwt.get_select_value('sex-sel'),
+        key: mwt.get_value('so-key')
+    };
+    grid.load();
+    //print_r(store.baseParams);
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init_grid_1();
+});
+</script>
+</body>
+</html>
