@@ -12,8 +12,10 @@ MWT.Flow=function(opt)
     var pagebar;
     var pageSize=10;
     var itemRenderFun = null;
+	var itemClickFun = null;
     var cls = '';
     var thiso=this;
+	var cache = [];
 
     if(opt){
         if(opt.render)render=opt.render;
@@ -24,6 +26,7 @@ MWT.Flow=function(opt)
         }
         if(isset(opt.pageSize)) pageSize=opt.pageSize;
         if(isset(opt.itemRenderFun)) itemRenderFun=opt.itemRenderFun;
+        if(isset(opt.itemClickFun)) itemClickFun=opt.itemClickFun;
         if(isset(opt.emptyMsg)) emptyMsg=opt.emptyMsg;
     }
 
@@ -54,14 +57,17 @@ MWT.Flow=function(opt)
             jmorebtn.hide();
             return;
         }
+		var offset = (pagebar.pageNum-1) * pagebar.pageSize;
+		if (offset==0) cache=[];
         var ls = [];
         for (var i=0;i<this.store.size();++i) {
             var im = this.store.get(i);
             var code = itemRenderFun ? itemRenderFun(im,i) : '';
             if (!code.startWith('<tr><td>')) {
-                code = '<tr><td>'+code+'</td></tr>';
+                code = '<tr><td name="row-'+render+'" data-idx="'+(offset+i)+'">'+code+'</td></tr>';
             }
             ls.push(code);
+			cache.push(im);
         }
         jarea.append(ls.join(''));
 
@@ -77,6 +83,14 @@ MWT.Flow=function(opt)
         } else {
             jmorebtn.hide();
         }
+		// 点击item事件
+		if (itemClickFun) {
+			jQuery('[name="row-'+render+'"]').unbind('click').click(function(){
+				var idx = jQuery(this).data('idx');
+				var item = cache[idx];
+				itemClickFun(item);
+			});
+		}
     };
     
     // 获取记录

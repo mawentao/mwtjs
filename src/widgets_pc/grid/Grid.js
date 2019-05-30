@@ -23,12 +23,12 @@ MWT.Grid=function(opt)
 
     this.tbar=null;
     this.cm={};
-    this.cls="mwt-table";
+    this.cls="";
     this.bordered=false;
     this.multiSelect=false;//!<多选按钮
 
     var filename="";    //!< 导出文件名
-    var striped=true;  //!< 奇偶行变色
+    var striped=false;  //!< 奇偶行变色
     var noheader=false; //!< 不显示表头 
     var notoolbox=false;//!< 不显示工具箱（导出,刷新,奇偶变色）
     var tableid='';
@@ -73,7 +73,7 @@ MWT.Grid=function(opt)
         
         // 相对布局
         var fiexd = position=='relative' ? '' : ' mwt-grid-fixed';
-        var code='<div class="mwt-grid'+fiexd+'">';
+        var code='<div class="mwt-grid'+fiexd+' '+this.cls+'">';
 
         // tbar
 		var tbarid=render+'-tbar';
@@ -372,5 +372,68 @@ MWT.Grid.RowNumberer=function(opt)
         if (pagebar) linen += pagebar.start;
         return linen+'.';
     };
+};
+
+// 表格字段渲染函数
+MWT.GridRender = {
+    money: function(v) {
+        var n = parseFloat(v);
+        if (n<1000) {
+            n =  parseInt(n*100)/100;
+            return n+'元';
+        } else {
+            n = n/10000;
+            n = parseInt(n*100)/100;
+            return n+'万元';
+        }
+    },
+    integer: function(v) {
+        return number_format(v);
+    },
+    percent: function(v) {
+        var n = v*100;
+        return number_format(n,2)+'%';
+    },
+    datetime: function(v,color) {
+        if (!v) return '';
+        if (!color || !is_string(color)) color = '#999';
+        return '<span style="color:'+color+';font: 12px Tahoma;">'+v.substr(0,16)+'</span>';
+    },
+    date: function(v,color) {
+        if (!v) return '';
+        var dt = v.substr(0,10);
+        if (dt=='0000-00-00'||dt=='1970-01-01') {
+            return '';
+        }   
+        if (!color || !is_string(color)) color = '#999';
+        return '<span style="color:'+color+'">'+dt+'</span>';
+    },
+    second: function(v) {
+        var rs = [];
+        if (v>=86400) {
+            rs.push(parseInt(v/86400)+'天');
+            v = v%86400;
+        }
+        if (v>=3600) {
+            rs.push(parseInt(v/3600)+'小时');
+            v = v%3600;
+        }
+        if (v>=60) {
+            rs.push(parseInt(v/60)+'分钟');
+            v = v%60;
+        }
+        if (v!=0 || rs.length==0) {
+            rs.push(v+'秒');
+        }
+        return rs.join('');
+    },
+    fileSize: function(v) {
+        var bytes = parseInt(v);
+        if (bytes === 0) return '0 B';
+        var k = 1024;
+        var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+    },
 };
 

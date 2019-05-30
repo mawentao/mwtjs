@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>工具栏</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>工具栏</h1>
+  <p>工具栏用于放置一些操作控件。</p>
+  
+  <h2>类名：mwt.ToolBar</h2>
+  <h3>配置属性</h3>
+  <div id="property-grid"></div>
+
+  <h3>示例：单行工具栏</h3>
+  <div id="toolbar-div-01"></div>
+
+<script>
+function init_toolbar_1()
+{
+    var option = [{value:0,text:'不限'},{value:1,text:"男"},{value:2,text:"女"}];
+    new mwt.ToolBar({
+        render : 'toolbar-div-01',
+        style  : 'background:#f2f2f2;border:solid 1px #ddd;',
+        items  : [
+            '<label>工具栏 | </label>',
+            {type:'selbox',id:"sex1",label:"性别",width:80,popWidth:80,popHeight:120,value:'0',options:option,handler:query}
+        ]
+    }).create();
+}
+
+function query()
+{
+    var params = {
+        sex1: mwt.get_value('sex1')
+    }
+    print_r(params);
+}
+
+
+
+jQuery(document).ready(function(){
+    initCode();
+    init_toolbar_1();
+});
+</script>
+</body>
+</html>

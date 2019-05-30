@@ -49,10 +49,13 @@ require('./RadiobtnField.js');
 require('./DatepickerField.js');
 require('./DaterangepickerField.js');
 
+require('./SelboxField.js');
 require('./ComboxField.js');
+require('./SelectComboxField.js');
 require('./CheckboxField.js');
 
 require('./FileField.js');
 require('./ImageField.js');
+require('./WebImageField.js');
 
 require('./TimepickerField.js');

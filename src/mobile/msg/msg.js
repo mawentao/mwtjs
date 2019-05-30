@@ -39,7 +39,7 @@ mwt.notify=function(msg,timeout,cls)
         var code = '<div id="'+divid+'">'+
             '<div class="weui_mask_transparent"></div>'+
             '<div class="weui_toast">'+
-              '<i class="'+icon+'" style="margin:15px 0 0;font-size:60px;"></i>'+
+              '<i class="'+icon+'" style="margin:20px 0 0;font-size:60px;"></i>'+
               '<p class="weui_toast_content">'+msg+'</p>'+
             '</div>'+
         '</div>';
@@ -110,36 +110,27 @@ mwt.info = function(msg,callback)
  * 替换window.confirm
  * opt的数据结构:
  * {
- *      top: 100,
  *      msg: '请确认',
- *      animate: 动画效果: bounceInDown, zoomIn, flipInX, rubberBand
  * }
  * callback: 回调函数     
  **/
 MWT.confirm=function(opt,callback){
-    alert(opt);
-/*
-	var top = opt.top ? opt.top : 180;
 	var msg = opt.msg ? opt.msg : opt;
-	var animate = opt.animate ? opt.animate : 'zoomIn';
-	var dialog = new MWT.H5Dialog({
-		render: 'mwt-h5-confirm-div',
-		top: top,
-		animate: animate,
-		body : msg,
-		bodyStyle: 'padding:20px 10px 0;',
+	var dialog = new MWT.Dialog({
+		render     : 'mwt-h5-confirm-div',
+		animate    : 'zoomIn',
+		title      : '<span style="font-size:15px;">请确认</span>',
+		fullscreen : true,
+		style      : 'left:20px;right:20px;top:30%;bottom:auto;',
+		bodyStyle  : 'padding:20px 10px 0;',
+		body       : msg,
+		buttonStyle: 'mobile',
 		buttons: [
-            {label:"确定",cls:'primary',handler:function(){
-				dialog.close();
-				if (callback) {
-					callback();
-				}
-			}},
-			{label:"取消",type:'close'}
+            {label:"确定",style:'color:#0BB20C',handler:function(){dialog.close();callback(true);}},
+			{label:"取消",handler:function(){dialog.close();callback(false);}}
 		]
 	});
 	dialog.open();
-*/
 };
 
 /**
@@ -166,11 +157,12 @@ MWT.prompt=function(opt,callback){
 		render: 'mwt-h5-prompt-div',
 		top: top,
 		title: title,
+		style: 'left:20px;right:20px;',
 		animate: animate,
 		body : code,
 		bodyStyle: 'padding:20px 10px 0;',
 		buttons: [
-            {label:"确定",cls:'primary',handler:function(){
+            {label:"确定",cls:'mwt-btn mwt-btn-primary',handler:function(){
 				var v=get_text_value("mwt-h5-prompt-txt");
 				dialog.close();
 				if (callback) {

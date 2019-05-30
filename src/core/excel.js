@@ -39,19 +39,34 @@ window.export_excel = function(domid,filename,style)
 	var uri = 'data:application/vnd.ms-excel;base64,';
 	var template = '<html><head><title>'+filename+'</title><meta charset="UTF-8">'+
 			'<style>'+
-                'table {font-family:"microsoft yahei";font-size:13px;border:solid 8px #ddd;}'+
-                'th,thead td {background:#1D717B;color:#fff;height:25px;}'+
-                'th,td,thead td,tbody td,thead th,tbody th {border:solid 1px #ddd;vertical-align:middle;}'+
+                'table {font-size:12px;border-collapse:collapse;border-color:#ddd;}'+
+                'th,thead td {background:#333;color:#fff;font-weight:normal;}'+
+                'th,td {height:25px;vertical-align:middle;mso-number-format:"\@";border-color:#ddd;text-align:center;}'+
                 style+
             '</style>'+
 		'</head><body><table border="1">{table}</table></body></html>';
     var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m,p) {return c[p];}) };
 	var table = document.getElementById(domid);
-	var ctx = {worksheet:'Worksheet', table:table.innerHTML};
+	///////////////////////////////////////////////
+	var tripTags = new RegExp("(<\/?table.*?>|<input.*?>)","gi");//!< 删除这些标签
+	var tableHtml = table.innerHTML.replace(tripTags,"");
+	var cleanTh = new RegExp("<th .*?>","gi");  //!< 删除th标签的属性
+	tableHtml = tableHtml.replace(cleanTh,"<th>");
+	var cleanTd = new RegExp("<td .*?>","gi");  //!< 删除td标签的属性
+	tableHtml = tableHtml.replace(cleanTd,"<td>");
+	///////////////////////////////////////////////
+	var ctx = {worksheet:'Worksheet', table:tableHtml};
+	var code = base64(format(template,ctx));
+	var fsize = code.length;
+	//console.log(fsize);
+	if (fsize>=2*1024*1024) {
+		mwt.alert("导出的数据不能超过2MB");
+		return;
+	}
 	
 	var aLink = document.createElement('a'); 
 	aLink.download = filename;
-	aLink.href = uri + base64(format(template, ctx));//dataurl格式的字符串 
+	aLink.href = uri + code;//dataurl格式的字符串 
 	var evt = document.createEvent("MouseEvents");//建立一个事件 
 	evt.initEvent("click", false, false);//这是一个单击事件 
 	aLink.dispatchEvent(evt);//触发事件 

@@ -28,7 +28,7 @@ MWT.RadioField=function(opt)
         var rdoes = [];
         for (var i=0;i<options.length;++i) {
             var item=options[i];
-            var cb='<label class="'+this.cls+'">'+
+            var cb='<label class="'+this.cls+'" style="display:inline-block">'+
                 '<input type="radio" name="'+rdoname+'" value="'+item.value+'"><span>'+item.text+'</span></label>';
             rdoes.push(cb);
         }

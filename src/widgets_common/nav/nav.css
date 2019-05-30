@@ -73,3 +73,6 @@
 }
 
 
+.mwt-nav-li {display:block;font-size:13px;text-decoration:none;padding:2px 8px;color:#000;}
+.mwt-nav-li:hover {background:#eee;}
+

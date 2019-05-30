@@ -24,6 +24,7 @@ mwt.Dialog = function(opt)
     var body=null;
     var bodyStyle;
     var style;
+	var buttonStyle = 'pc';
 	
 	if (opt)
 	{
@@ -39,6 +40,7 @@ mwt.Dialog = function(opt)
         if (opt.bodyStyle) bodyStyle=opt.bodyStyle;
 		if (opt.fullscreen) fullscreen=true;
         if (opt.style) style=opt.style;
+		if (opt.buttonStyle) buttonStyle=opt.buttonStyle;
 	}
 
     function dig_mdown(e){
@@ -113,12 +115,21 @@ mwt.Dialog = function(opt)
 		        "<div class='content' onmousedown='' style='height:"+height+";"+bodyStyle+"' id='"+dialog_content_id+"'>"+content_html+"</div>";
 		}
         if(buttons&&buttons.length>0){
-            htmlcode+="<div id='d-foot-"+eleid+"' class='dialog-foot'>";
+			var btns = [];
             for(var i=0;i<buttons.length;i++){
                 var cls=isset(buttons[i].cls)?buttons[i].cls:"mwt-btn-default";
-                htmlcode+=" <button class='mwt-btn "+cls+" mwt-btn-sm' style='border-radius:2px;' id='"+eleid+i+"btn'>"+buttons[i].label+"</button>";
+				if (buttonStyle=='mobile') {
+					cls += ' mwt-col-fill';
+				} else {
+					cls += ' mwt-btn-sm radius';
+				}
+				var sty = buttons[i].style ? ' style="'+buttons[i].style+'"' : '';
+				var btn = '<button id="'+eleid+i+'btn" class="mwt-btn '+cls+'"'+sty+'>'+buttons[i].label+'</button>';
+				btns.push(btn);
             }
-            htmlcode+="&nbsp;</div>";
+			var cls = 'dialog-foot mwt-border-top';
+			if (buttonStyle=='mobile') cls += ' mwt-row-flex';
+            htmlcode+="<div id='d-foot-"+eleid+"' class='"+cls+"'>"+btns.join('')+"</div>";
         }
 		htmlcode+="</div></div>";
 		dom.innerHTML=htmlcode;
@@ -140,9 +151,11 @@ mwt.Dialog = function(opt)
                 }
             }
         }
-        jQuery("#d-head-"+eleid).mousedown(dig_mdown)
+        if (!fullscreen) {
+            jQuery("#d-head-"+eleid).mousedown(dig_mdown)
                                 .mousemove(dig_mmove)
                                 .mouseup(dig_mup);
+        }
 	};
 	
 	/* 打开窗口 */

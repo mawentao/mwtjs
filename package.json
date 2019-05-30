@@ -6,8 +6,8 @@
   "license": "ISC",
   "main": "langui.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js --optimize-minimize",
-    "dev": "webpack-dev-server --config webpack.config.js --compress --hot --host 0.0.0.0 --port 8081",
+    "build": "webpack --config webpack.config/build.js --optimize-minimize",
+    "dev": "webpack-dev-server --config webpack.config/dev.js --compress --hot --host 0.0.0.0 --port 8081",
     "output": "npm run build && gulp tar"
   },
   "devDependencies": {
@@ -40,6 +40,7 @@
     "webpack-dev-server": "^1.15.1"
   },
   "dependencies": {
-    "normalize.css": "^4.2.0"
+    "normalize.css": "^4.2.0",
+    "webpack-merge": "^4.1.4"
   }
 }

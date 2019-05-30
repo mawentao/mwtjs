@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>图片预览控件</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+  <style>
+    img {max-width:200px;max-height:200px;}
+  </style>
+</head>
+<body>
+  <h1>图片预览控件</h1>
+
+  <img src="../../static/demo.jpg" class="mwt-image-view"/>
+  <img src="../../static/demo2.jpg" class="mwt-image-view"/>
+
+  <pre><code>
+// 使用方法: 
+// 1. img元素的class指定为"mwt-image-view"
+// 2. 然后调用 mwt.initImageView(); 方法 
+
+<img src="../../static/demo.jpg" class="mwt-image-view"/>
+<img src="../../static/demo2.jpg" class="mwt-image-view"/>
+
+<script>
+    mwt.initImageView();
+</script>
+  </code></pre>
+<script>
+
+jQuery(document).ready(function(){
+    initCode();
+    mwt.initImageView();
+});
+</script>
+</body>
+</html>

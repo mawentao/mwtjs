@@ -12,7 +12,7 @@ define(function(require){
             {name:'通用', submenu:[
                 {name:'图标',action:'Icon'},
                 {name:'按钮',action:'Button'},
-                {name:'导航',action:'Nav'}
+                {name:'导航',action:'Nav'},
             ]},
             {name:'布局', submenu:[
                 {name:'栅格布局',action:'GridLayout'},
@@ -42,14 +42,16 @@ define(function(require){
             {name:'其他', submenu:[
                 {name:'wall',action:'wall'},
                 {name:'ExcelImport',action:'excel'},
-                {name:'ImageUpload',action:'imgup'}
+                {name:'ImageUpload',action:'imgup'},
+                {name:'图片浏览',action:'imageview'}
             ]},
             {name:'Mobile', submenu:[
                 {name:'图标&按钮',action:'wxicon'},
                 {name:'消息',action:'wxmsg'},
                 {name:'列表',action:'wxflow'},
                 {name:'侧边栏',action:'sidebar'},
-                {name:'滑动菜单',action:'scrollbar'}
+                {name:'滑动菜单',action:'scrollbar'},
+				{name:'工具栏',action:'bar'}
             ]}
         ],
 		// url路由
@@ -81,11 +83,13 @@ define(function(require){
             '/'+control+'/wxicon',
             '/'+control+'/wxmsg',
             '/'+control+'/wxflow',
+            '/'+control+'/bar',
 
 
             '/'+control+'/wall',
             '/'+control+'/excel',
             '/'+control+'/imgup',
+            '/'+control+'/imageview',
             '/'+control+'/scrollbar',
             '/'+control+'/sidebar',
 			'/'+control+'/index'
@@ -131,6 +135,9 @@ define(function(require){
     o.wxflowAction=function() {example.show('mobile/flow.html');}
     o.sidebarAction=function() {example.show('mobile/sidebar.html');}
     o.scrollbarAction=function() {example.show('mobile/scrollbar.html');}
+    o.barAction=function() {example.show('mobile/toolbar.html');}
+
+    o.imageviewAction=function() {example.show('common/imagebox.html');}
     
 
 	return o;

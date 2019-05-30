@@ -110,6 +110,7 @@ MWT.ToolBar=function(cnf)
             var cellid = id+'-cell';
             switch(type) {
                 case "select"          : renderSelect(item,id,cellid); break;
+				case "selbox"          : renderSelbox(item,id,cellid); break;
                 case "radiobtn"        : renderRadiobtn(item,id,cellid); break;
                 case "search"          : renderSearch(item,id,cellid); break;
                 case "datepicker"      : renderDatepicker(item,id,cellid); break;
@@ -149,6 +150,25 @@ MWT.ToolBar=function(cnf)
             value   : item.value,
             cls     : item.cls,
             style   : item.style
+        }); 
+        field.create();
+        if(item.handler){
+            field.on("change",item.handler);
+        };
+    }/*}}}*/
+	// Selbox
+	function renderSelbox(item,id,cellid)
+    {/*{{{*/
+        var field=new MWT.SelboxField({
+            render  : cellid,
+            id      : id,
+            options : item.options ? item.options : [],
+            value   : item.value,
+            cls     : item.cls,
+            style   : item.style,
+			width   : item.width ? item.width : 100,
+			popWidth: item.popWidth ? item.popWidth : 130,
+			popHeight: item.popHeight ? item.popHeight : 170
         }); 
         field.create();
         if(item.handler){

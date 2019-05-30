@@ -20,7 +20,8 @@
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     -moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;
 }
-.mwt-field:focus {
+textarea.mwt-field {padding:5px;line-height:18px;}
+.mwt-field:hover,.mwt-field:focus {
     border-color: #66afe9;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
@@ -43,6 +44,15 @@ label.mwt-field {
 }
 
 /* 上传图片 */
-.mwt-upimg {border:solid 1px #ddd;max-width:80px;max-height:80px;cursor:pointer;}
+.mwt-upimg {border:solid 1px #ddd;max-width:70px;max-height:70px;cursor:pointer;}
+
+/* selbox */
+.mwt-selbox {padding:0 5px;text-align:left;text-decoration:none;}
+.mwt-selbox span {overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;}
+.mwt-selbox-pop {border:solid 1px #aaa;border-radius:0;}
+.mwt-selbox-bar {position:absolute;top:0;left:0;right:0;height:33px;padding:3px;background:#f1f2f3;text-align:center;border-bottom:solid 1px #ddd;}
+
+.mwt-web-img-field {}
+.mwt-web-img-field img {max-width:100px;max-height:72px;border:solid 1px #ccc;}
 
 

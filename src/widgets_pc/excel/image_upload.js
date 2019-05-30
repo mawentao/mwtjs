@@ -11,11 +11,13 @@ MWT.ImageUpload = function(opt)
     var ajaxapi;        //!< 上传接口
     var popover;
     var filesel,callbackfun;
+    var acceptFiletype = 'image/*';
 
     if (opt) {
         if(opt.render)render=opt.render;
         if(opt.ajaxapi) ajaxapi=opt.ajaxapi;
         if(ajaxapi.indexOf('fileElementId')<0) ajaxapi+='&fileElementId='+fileElementId;
+        if(opt.acceptFiletype) acceptFiletype = opt.acceptFiletype;
     }
 
     // 创建form
@@ -23,7 +25,7 @@ MWT.ImageUpload = function(opt)
         if (!render) return;
         mwt.createDiv(render);
         var code = '<form method="POST" enctype="multipart/form-data">'+
-            '<input type="file" id="'+fileElementId+'" name="'+fileElementId+'" accept="image/*" style="display:none;"/>'+
+            '<input type="file" id="'+fileElementId+'" name="'+fileElementId+'" accept="'+acceptFiletype+'" style="display:none;"/>'+
         '</form>';
         jQuery("#"+render).html(code);
         filesel = jQuery('#'+fileElementId);

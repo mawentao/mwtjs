@@ -83,8 +83,8 @@ mwt.confirm=function(msg,callfun)
         bodyStyle: 'max-height:450px',
         animate : msg.animate ? msg.animate : 'bounceInDown',
         buttons  : [ 
-            {"label":"取消",cls:'mwt-btn-default',handler:function(){dialog.close();callfun(false);}},
-            {"label":"确认",cls:'mwt-btn-primary',handler:function(){dialog.close();callfun(true);}}
+            {label:"确认",cls:'mwt-btn-primary',handler:function(){dialog.close();callfun(true);}},
+            {label:"取消",cls:'mwt-btn-default',handler:function(){dialog.close();callfun(false);}}
         ]   
     }); 
     dialog.open();

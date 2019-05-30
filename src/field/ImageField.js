@@ -61,11 +61,11 @@ MWT.ImageField=function(opt)
             success: function(res,status) {
                     //data['filename'] = imgfile;
                     //callbackfun(data);  
-                    if (res.retcode!=0) {
-                        MWT.alert(res.retmsg);
-                    } else {
+                    //if (res.retcode!=0) {
+                    //    MWT.alert(res.retmsg);
+                    //} else {
                         thiso.setValue(res.data.imgurl);
-                    }
+                    //}
                 },  
                 error: function (res, status, e) {
 					MWT.alert(e);

@@ -1,0 +1,25 @@
+/* 工具栏样式 */
+
+.mwt-toolbar {}
+.mwt-toolbar table {width:100%;cellspacing:0px;cellpadding:0px;padding:0;margin:0;}
+.mwt-toolbar hr {margin:0 5px;padding:0;border-bottom:solid 1px #fff;border-top:solid 1px #ccc;border-left-width:0;border-right-width:0;border:none;}
+.mwt-toolbar td {padding:3px 5px !important;text-align:center;color:#fff;height:40px;}
+.mwt-toolbar label {display:block;white-space:nowrap;font-size:13px;color:#fff}
+.mwt-toolbar .mwt-btn {display:inline-block;padding:3px 6px;background:none;border:none;}
+.mwt-toolbar select {background:none;border:none;appearance:none;-moz-appearance:none;-webkit-appearance:none;box-shadow:none;vertical-align: text-bottom;color:#fff;font-size:14px;padding:1px 0;}
+.mwt-toolbar td i {font-size:16px;}
+.mwt-toolbar td input[type=text] {font-size:14px;height:32px;padding:0 5px;}
+
+
+/*
+.mwt-toolbar select {
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+*/
+
+.mwt-tablay {width:100%;}
+.mwt-tablay td.lt {text-align:left;}
+.mwt-tablay td.ct {text-align:center;}
+.mwt-tablay td.rt {text-align:right;}

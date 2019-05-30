@@ -14,5 +14,6 @@ require('./scrollbar/scrollbar.js');
 
 require('./h5page/h5page.js');
 
+require('./bar/Bar.js');
 
 

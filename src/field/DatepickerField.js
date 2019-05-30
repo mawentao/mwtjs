@@ -61,6 +61,7 @@ MWT.DatepickerField=function(opt)
         code+=" id='"+txtid+"' value='"+this.value+"' readonly/><i class='fa fa-calendar'></i>";
         jQuery("#"+this.render).html(code);
         jQuery("#"+txtid).datepicker({
+            changeYear: true,
             changeMonth:true,
             numberOfMonths:1,
             dateFormat: this.format

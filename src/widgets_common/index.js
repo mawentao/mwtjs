@@ -16,3 +16,7 @@ require('./nav/nav.js');
 
 require('./watermark/index.js');
 
+require('./imageview/index.js');
+
+
+

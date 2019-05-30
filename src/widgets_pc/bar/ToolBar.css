@@ -6,7 +6,7 @@
 .mwt-toolbar td {padding:6px 0 6px 8px !important;}
 .mwt-toolbar td:last-child {padding:6px 8px !important;}
 .mwt-toolbar label {display:block;white-space:nowrap;color:#333;font-size:12px;}
-.mwt-toolbar .mwt-btn {display:inline-block;padding:3px 10px;border-radius:2px;font-size:13px;}
+.mwt-toolbar .mwt-btn {display:inline-block;padding:3px 10px;border-radius:2px;font-size:12px;}
 
 /*
 .mwt-toolbar select {

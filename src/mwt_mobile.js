@@ -28,8 +28,9 @@ require('./widgets_common/index.js');
 
 require('./field/Field.js');
 require('./widgets_pc/form.js');
+require('./widgets_pc/pop.js');
 
-require('./widgets_pc/bar/Bar.js');
+//require('./widgets_pc/bar/Bar.js');
 require('./widgets_pc/layout/Layout.js');
 require('./mobile/index.js');
 

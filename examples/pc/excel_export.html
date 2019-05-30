@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>Excel导出</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+
+  <button onClick="export_excel('grid-tab','demo.xls');">导出到Excel</button>
+  <div id="tabdiv"></div>
+
+<script>
+
+
+function randnum(len) {
+	var chars = "0123456789";
+    var str = "";
+	for (var i=0;i<len;++i) {
+		var ri = parseInt(Math.random()*10000) % 10;
+		var c = chars[ri];
+		str += c;
+	}
+	return str.toUpperCase();
+}
+
+function randstr(len) {
+	var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    var str = "";
+	for (var i=0;i<len;++i) {
+		var ri = parseInt(Math.random()*10000) % 36;
+		var c = chars[ri];
+		str += c;
+	}
+	return str.toUpperCase();
+}
+
+function init() {
+    var rows = [];
+	var n = 10100;
+	var n = 100;
+	for (var i=0;i<n;++i) {
+		var row = '<tr>'+
+			'<td class="aaa">'+(i+1)+'</td>'+
+			'<td style="color:red;">'+randnum(15)+'</td>'+
+			'<td>'+(parseInt(Math.random()*10000) % 2==1 ? '男' : '女')+'</td>'+ 
+			'<td>'+randstr(50)+'</td>'+
+		'</tr>';
+		rows.push(row);
+	}
+	var code = '<table class="grid-tab" border="1" id="grid-tab">'+
+		'<tr><th>序号</th><th>ID</th><th>String</th><th>性别</th></tr>'+
+		rows.join('')+'</table>';
+	jQuery('#tabdiv').html(code);
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    init();
+});
+</script>
+</body>
+</html>
