@@ -32,14 +32,14 @@
 .mwt-grid-tbar {margin-bottom:-1px;}
 .mwt-grid-head {}
 .mwt-grid-head tr {border-top:solid 1px #ddd;border-bottom:solid 1px #ddd;}
-.mwt-grid-body {}
+.mwt-grid-body {border-left: solid 1px #ddd;border-right: solid 1px #ddd;}
 .mwt-grid-body tr {border-top:solid 1px #ddd;border-bottom:solid 1px #ddd;}
-.mwt-grid-foot {padding:7px;border-top:solid 1px #9E9E9E;margin-top:-1px;background:#f9f9f9;}
+.mwt-grid-foot {padding:7px;border:solid 1px #ddd;margin-top:-1px;background:#f9f9f9;}
 .mwt-grid-foot tr {height:auto !important;}
 .mwt-grid-foot td {padding:0;}
 
 .mwt-grid-fixed {position:absolute;top:0;bottom:0;left:0;right:0;}
-.mwt-grid-fixed .mwt-grid-head {overflow-y:scroll;}
+.mwt-grid-fixed .mwt-grid-head {border-left: solid 1px #ddd;border-right: solid 1px #ddd;}
 .mwt-grid-fixed .mwt-grid-body {position:absolute;left:0;right:0;top:35px;bottom:30px;overflow-y:scroll;}
 .mwt-grid-fixed .mwt-grid-foot {position:absolute;left:0;right:0;bottom:0;}
 .mwt-grid-fixed .mwt-grid-body tr:first-child {border-top:none;}
