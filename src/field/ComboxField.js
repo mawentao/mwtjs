@@ -53,6 +53,7 @@ MWT.ComboxField=function(opt)
         jQuery("#"+optdivid).click(function(event){
             event.stopPropagation();
         });
+		this.fire('create');
 	};
 	
 	// 弹出层divid

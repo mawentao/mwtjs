@@ -57,5 +57,6 @@ require('./CheckboxField.js');
 require('./FileField.js');
 require('./ImageField.js');
 require('./WebImageField.js');
+require('./MultiImageUploadField.js');
 
 require('./TimepickerField.js');
