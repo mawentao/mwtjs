@@ -1,6 +1,7 @@
 /**
  * 表格
  */
+
 require('./grid.css');
 
 MWT.Grid=function(opt)
@@ -14,10 +15,9 @@ MWT.Grid=function(opt)
     this.page_div=null;
     this.store={};
     this._pagebar = {};
-    this.pagebar=true;         //!< 是否分页
-    this.pageSize=10;          //!< 页面大小
+    this.pagebar=true;
+    this.pageSize=10;
     this.pageStyle=1;          //!< 分页样式(详见PageBar的配置)
-    this.pageSizeList=[10,20,50,100,500,1000,5000];   //!< 分页页面大小选择
     var pagebarSimple=false;   //!< 简单分页条
     var position='relative';   //!< 位置(relative:相对位置,其他:固定头部和尾部)
 
@@ -49,7 +49,6 @@ MWT.Grid=function(opt)
         if(isset(opt.pagebar)) this.pagebar=opt.pagebar;
         if(isset(opt.pageSize)) this.pageSize=opt.pageSize;
         if(isset(opt.pageStyle)) this.pageStyle=opt.pageStyle;
-        if(isset(opt.pageSizeList)) this.pageSizeList=opt.pageSizeList;
         if(isset(opt.multiSelect))this.multiSelect=opt.multiSelect;
         if(isset(opt.tbar))this.tbar=opt.tbar;
         if(opt.striped)striped=true;
@@ -63,78 +62,6 @@ MWT.Grid=function(opt)
         tableid=render+"-tab";
         if(filename=='')filename=tableid;
     }
-    var thiso = this;
-
-    // 获取表格HTML代码
-    function getHtml() 
-    {/*{{{*/
-        //0. 布局
-//        var fiexd = position=='relative' ? '' : ' mwt-table-fixed';
-        var code='<div class="mwt-grid-container">';
-
-        //1. tbar
-		var tbarid=render+'-tbar';
-        if(thiso.tbar && thiso.tbar.length){
-            var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='"+tbarid+"'"+style+"></div>";
-        }
-
-		//2. table
-        var columns=thiso.cm.getColumns();
-        var tbcls = 'mwt-table';
-        if (thiso.bordered) tbcls+=' bordered';
-        if (striped) tbcls+=' striped';
-        if (position=='fixed') tbcls+=' mwt-table-fixed';
-		code += '<table id="'+tableid+'" class="'+tbcls+'">';
-        {
-            //2.1 colgroup
-            code += '<colgroup>';
-            if (thiso.multiSelect) code+='<col style="width:20px;text-align:center;"/>';
-            code += thiso.cm.getColgroupHtml()+'</colgroup>';
-            //2.2 thead
-            var cn=columns.length;
-        	var headcode='';
-        	if (!noheader) {
-            	headcode+='<thead id="head-'+render+'"><tr>';
-            	if(thiso.multiSelect) headcode+="<th ><input type='checkbox' id='ckbox-"+render+"' onchange='mwt.set_checkbox_checked(\""+grid_chkbox_name+"\",this.checked);'/></th>";
-            	var thname = thiso.grid_div+"-th";
-            	for(var i=0;i<cn;++i){
-                    var column=columns[i];
-                	if (column.hide){continue;}
-                    var align = column.align ? column.align : 'left';
-                	headcode+="<th name='"+thname+"' style='text-align:"+align+"'";
-               		if (column.sort) headcode+=" class='grid-sort'";
-                	if (column.poptitle) headcode+=" pop-title='"+column.poptitle+"' ";
-                	headcode+=" data-id='"+column.dataIndex+"'>"+column.head+"</th>";
-            	}
-            	headcode+="</tr></thead>";
-        	}
-            code+=headcode;
-            //2.3 tbody
-			var bodyStyle = opt.bodyStyle?' style="'+opt.bodyStyle+'"':'';
-            code+='<tbody id="body-'+render+'"'+bodyStyle+'></tbody>';
-            //2.4 tfoot
-            if (thiso.pagebar) {
-                var toolbox = '';
-                if (!notoolbox) {
-			        var act = striped ? 'active' : '';
-                    var stripedbtn='<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
-                    var refershbtn='<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
-                    var exportbtn='<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
-                    var btns=[stripedbtn,refershbtn,exportbtn];
-                    toolbox = '<div class="mwt-col-wd mwt-grid-foot-toolbox"><span class="seg"></span>'+btns.join('&nbsp;')+'</div>';
-                }
-                code+='<tfoot id="foot-'+render+'" class="mwt-grid-foot"><tr><td colspan="'+cn+'">'+
-                    '<div class="mwt-row mwt-row-flex">'+
-                      '<div class="mwt-col-fill" id="pagebar-'+render+'"></div>'+toolbox
-                    '</div>'+
-                  '</td></tr></tfoot>';
-            }
-        }
-        code+='</table></div>';
-        return code;
-    }/*}}}*/
-
 
     // 创建
     this.create=function()
@@ -143,90 +70,16 @@ MWT.Grid=function(opt)
         this.page_div="page_div_"+opt.render;
         this.grid_chkbox_id=this.grid_div+"-chkbox-id";
         this.grid_chkbox_name=this.grid_div+"-chkbox";
-
-        //1. 创建Dom元素
-        var htmlcode = getHtml();
-        jQuery("#"+render).html(htmlcode);
         
-        //2. 事件
-        {
-            //2.1 导出按钮
-            jQuery('#'+tableid+'-expbtn').unbind('click').click(this.export_excel);
-            //2.2 奇偶行变色
-            jQuery('#'+tableid+'-trpbtn').unbind('click').click(function(){
-                if (striped) {
-                    jQuery('#'+tableid).removeClass('striped');
-                    jQuery(this).removeClass('active');
-                } else {
-                    jQuery('#'+tableid).addClass('striped');
-                    jQuery(this).addClass('active');
-                }
-                striped = !striped;
-            });
-            //2.3 刷新按钮
-            jQuery('#'+tableid+'-refbtn').unbind('click').click(this.store.load);
-            if (!this.store.beforeLoad) {
-                this.store.beforeLoad = function() {
-                    jQuery('#'+tableid+'-refbtn').unbind('click').
-                        html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
-                };
-            }
-            if (!this.store.afterLoad) {
-                this.store.afterLoad = function() {
-                    jQuery('#'+tableid+'-refbtn').unbind('click')
-                        .html('<i class="fa fa-refresh"></i>')
-                        .click(function(){thiso.store.load();});
-                };
-            }
-            /////////////////////////////////////////////////
-            // 表头事件
-            if (!noheader) {
-                this.initevent();
-                mwt.popinit();
-            }
-            //create tbar
-            if(this.tbar){
-                var tbar=new MWT.ToolBar({render:'tbar-'+render,items:this.tbar});
-                tbar.create();
-            }
-
-            //create pagebar
-            if(this.pagebar){
-                this._pagebar = new MWT.PageBar({
-                    "render"   : 'pagebar-'+render,
-                    "store"    : this.store,
-                    "pageSize" : this.pageSize,
-                    "simple"   : pagebarSimple,
-                    "pageStyle": this.pageStyle,
-                    "pageSizeList": this.pageSizeList
-                });
-            }
-            //
-            else {
-                this.store.on('load',function(res){
-                    var code = '<span style="font-size:12px;color:#777;">共 '+res.totalProperty+' 条记录</span>';
-                    jQuery('#foot-'+render).html(code);
-                });
-            }
-        }
-
-		////////////////////////////////////////////
-		// fixed布局自动计算top和bottom距离
-		this.autolayout();
-        this.store.on('load',thiso.autolayout);
-
-        return;
-
-
-
         // 相对布局
         var fiexd = position=='relative' ? '' : ' mwt-grid-fixed';
         var code='<div class="mwt-grid'+fiexd+' '+this.cls+'">';
 
         // tbar
+		var tbarid=render+'-tbar';
         if(this.tbar && this.tbar.length){
             var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='tbar-"+render+"'"+style+"></div>";
+            code+="<div class='mwt-grid-tbar' id='"+tbarid+"'"+style+"></div>";
         }
 
 		// table
@@ -344,8 +197,7 @@ MWT.Grid=function(opt)
                 "render"   : this.page_div,
                 "pageSize" : this.pageSize,
                 "simple"   : pagebarSimple,
-                "pageStyle": this.pageStyle,
-                "pageSizeList": this.pageSizeList
+                "pageStyle": this.pageStyle
             });
         }
         //
@@ -424,8 +276,8 @@ MWT.Grid=function(opt)
                         v = func(v,item,i,this._pagebar);
                     }
                     html+="<td ";
-                    var width= columns[c].width ? columns[c].width : 'auto';
-                    html+="width='"+width+"' ";
+                    //var width="";
+                    if (columns[c].width){html+="width='"+columns[c].width+"' ";}
                     if (isset(columns[c].align)) html+="align='"+columns[c].align+"' ";
                     if (isset(columns[c].valign))html+="valign='"+columns[c].valign+"' ";
                     if (isset(columns[c].style)) html+="style='"+columns[c].style+"' ";
@@ -434,7 +286,7 @@ MWT.Grid=function(opt)
                 html+="</tr>";
             }
         }
-        jQuery("#body-"+render).html(html);
+        jQuery("#"+this.grid_div).html(html);
         if (rowclick) {
             jQuery("[name="+trname+"]").unbind('click').click(function(){
                 var idx = jQuery(this).data('idx');
@@ -492,9 +344,6 @@ MWT.Grid=function(opt)
 MWT.extends(MWT.Grid, MWT.Event);
 
 
-/**
- * Grid列模型
- **/
 MWT.Grid.ColumnModel=function(opt)
 {
     this.columns=[];
@@ -504,28 +353,6 @@ MWT.Grid.ColumnModel=function(opt)
     }
 
     this.getColumns=function(){return this.columns;};
-
-    // colgroup
-    this.getColgroupHtml=function()
-    {
-        var cols = [];
-        var n = this.columns.length;
-        for (var i=0;i<n;++i) {
-            var column = this.columns[i];
-            if (column.hide){continue;}
-            var code = '<col';
-            // width
-            if(column.width){code+=' width="'+column.width+'"';}
-            // style
-            var align = isset(column.align) ? column.align : 'left';
-            var style = 'text-align:'+align+';';
-            if (isset(column.valign)) style+='vertical-align:'+column.valign+';';
-            if (isset(column.style)) style+=column.style;
-            code+=' style="'+style+'" align="'+align+'"/>';
-            cols.push(code);
-        }
-        return cols.join('');
-    };
 };
 
 MWT.Grid.RowNumberer=function(opt)

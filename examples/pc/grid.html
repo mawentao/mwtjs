@@ -23,6 +23,13 @@
   <a name="column_model"></a>
   <h2>mwt.Grid.ColumnModel （Grid列模型类，定义Grid列）</h2>
 
+  <h2>高度自动伸缩的表格</h2>
+  <div id="grid-div1"></div>
+  
+  <h2>高度固定的表格</h2>
+  <div id="grid-div2" style="position:relative;width:800px;height:250px;margin-top:10px;"></div>
+
+
 <script>
 
 function init_property_grid()
@@ -44,7 +51,7 @@ function init_property_grid()
         store   : store,
         pagebar : false,
         striped : true,
-        bordered: false,
+        bordered: true,
         cm: new MWT.Grid.ColumnModel([
             {head:'属性',dataIndex:0,width:150},
             {head:'取值范围',dataIndex:1,width:200},
@@ -55,9 +62,66 @@ function init_property_grid()
     grid.load();
 }
 
+///////////////////////////
+function init_grid1()
+{
+    var store=new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+      render   : "grid-div1",
+      store    : store,
+      pagebar  : true,  //!< false 表示不分页
+      bordered : false, //!< false 不显示列边框
+      pageSize : 5,     //!< 默认每页大小
+      pageStyle: 1,     //!< 分页样式
+      cm: new MWT.Grid.ColumnModel([
+          new mwt.Grid.RowNumberer({width:40,style:'color:blue;',align:'right'}),
+          {head:"ID",   dataIndex:"id", width:80, sort:true},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+              return v==1 ? "男" : "女";
+          }}
+      ])
+    });
+    grid.create();
+    grid.load();
+}
+
+function init_grid2()
+{
+    var store=new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+      render   : "grid-div2",
+      store    : store,
+      position : 'fixed',
+      pagebar  : true,  //!< false 表示不分页
+      bordered : false, //!< false 不显示列边框
+      pageSize : 20,     //!< 默认每页大小
+      pageStyle: 1,     //!< 分页样式
+      striped  : true,
+      cm: new MWT.Grid.ColumnModel([
+          new mwt.Grid.RowNumberer({width:40,style:'color:blue;',align:'right'}),
+          {head:"ID",   dataIndex:"id", width:80, sort:true},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+              return v==1 ? "男" : "女";
+          }}
+      ])
+    });
+    grid.create();
+    grid.load();
+}
+///////////////////////////
+
+
 jQuery(document).ready(function(){
     initCode();
     init_property_grid();
+    init_grid1();
+    init_grid2();
 });
 </script>
 </body>
