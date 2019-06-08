@@ -29,6 +29,8 @@
   <h2>高度固定的表格</h2>
   <div id="grid-div2" style="position:relative;width:800px;height:250px;margin-top:10px;"></div>
 
+  <h2>带工具栏的表格</h2>
+  <div id="grid-div3" style="position:relative;width:800px;height:250px;margin-top:10px;"></div>
 
 <script>
 
@@ -39,7 +41,15 @@ function init_property_grid()
         ['store','mwt.Store','无','数据'],
         ['striped','true / false','false','奇偶行变色'],
         ['bordered','true / false','false','是否显示单元格边框'],
-        ['cm', 'mwt.Grid.ColumnModel', '无', '<a href="#column_model">Grid列模型</a>']
+        ['multiSelect','true / false','false','是否显示多选框'],
+        ['noheader','true / false','false','是否隐藏表头'],
+        ['notoolbox','true / false','false','是否隐藏工具箱'],
+		['cls','mwt-table-enlarge','无','表格的额外样式(mwt-table-enlarge:放大样式)'],
+		['pagebar','true / false','true','是否分页显示'],
+		['pageSize','10,20,50,100','20','页面大小'],
+		['pageStyle','1,2,3','1','分页样式(1:默认样式,2:简洁样式,3:下拉样式)'],
+		['position','relative / fixed','relative','布局样式'],
+        ['cm', 'mwt.Grid.ColumnModel', '无', '<a href="#column_model">Grid列模型</a>'],
     ];
     var store=new mwt.Store({
         proxy: new mwt.MemoryProxy({
@@ -52,6 +62,7 @@ function init_property_grid()
         pagebar : false,
         striped : true,
         bordered: true,
+		//cls : 'mwt-table-enlarge',
         cm: new MWT.Grid.ColumnModel([
             {head:'属性',dataIndex:0,width:150},
             {head:'取值范围',dataIndex:1,width:200},
@@ -102,6 +113,7 @@ function init_grid2()
       pageSize : 20,     //!< 默认每页大小
       pageStyle: 1,     //!< 分页样式
       striped  : true,
+	  filename : '高度固定的表格',
       cm: new MWT.Grid.ColumnModel([
           new mwt.Grid.RowNumberer({width:40,style:'color:blue;',align:'right'}),
           {head:"ID",   dataIndex:"id", width:80, sort:true},
@@ -116,12 +128,61 @@ function init_grid2()
 }
 ///////////////////////////
 
+var sotre;
+function init_grid3()
+{
+    store=new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+      render   : "grid-div3",
+      store    : store,
+      position : 'fixed',
+      pagebar  : true,  //!< false 表示不分页
+      bordered : false, //!< false 不显示列边框
+      pageSize : 20,     //!< 默认每页大小
+      pageStyle: 1,     //!< 分页样式
+      striped  : true,
+	  filename : '高度固定的表格',
+	  multiSelect: true,
+	  tbarStyle: '',
+      bodyStyle: 'top:75px;',
+	  tbar: [
+        {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+        {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
+        '->',
+        {label:"显示选中行",handler:function(){
+			var records = grid.getSelectedRecords();
+			print_r(records);
+		}}
+      ],
+      cm: new MWT.Grid.ColumnModel([
+          new mwt.Grid.RowNumberer({width:40,style:'color:blue;',align:'right'}),
+          {head:"ID",   dataIndex:"id", width:80, sort:true},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+              return v==1 ? "男" : "女";
+          }}
+      ])
+    });
+    grid.create();
+    grid.load();
+}
+function query() {
+    store.baseParams = {
+        sex: mwt.get_select_value('sex-sel'),
+        key: mwt.get_value('so-key')
+    };
+    grid.load();
+}
+///////////////////////////
 
 jQuery(document).ready(function(){
     initCode();
     init_property_grid();
     init_grid1();
     init_grid2();
+    init_grid3();
 });
 </script>
 </body>

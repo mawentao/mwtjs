@@ -48,7 +48,7 @@ window.export_excel = function(domid,filename,style)
     var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m,p) {return c[p];}) };
 	var table = document.getElementById(domid);
 	///////////////////////////////////////////////
-	var tripTags = new RegExp("(<\/?table.*?>|<input.*?>)","gi");//!< 删除这些标签
+	var tripTags = new RegExp("(<\/?table.*?>|<input.*?>|<colgroup.*?</colgroup>|<tfoot.*?</tfoot>)","gi");//!< 删除这些标签
 	var tableHtml = table.innerHTML.replace(tripTags,"");
 	var cleanTh = new RegExp("<th .*?>","gi");  //!< 删除th标签的属性
 	tableHtml = tableHtml.replace(cleanTh,"<th>");

@@ -51,10 +51,10 @@ grid.load();
   <div id='grid-div-1'></div>
 
 <script>
-
+var store;
 function init_grid_1()
 {
-    var store = new mwt.Store({
+    store = new mwt.Store({
         proxy: getDemoMemoryProxy()
     });
     grid = new MWT.Grid({
@@ -90,8 +90,8 @@ function query()
         sex: mwt.get_select_value('sex-sel'),
         key: mwt.get_value('so-key')
     };
-    //grid.load();
-    print_r(store.baseParams);
+    grid.load();
+    //print_r(store.baseParams);
 }
 
 jQuery(document).ready(function(){

@@ -9,13 +9,10 @@ MWT.Grid=function(opt)
     this.listeners={};
 
     this.grid_div=null;
-    this.grid_chkbox_id=null;
-    this.grid_chkbox_name=null;
-    this.page_div=null;
     this.store={};
     this._pagebar = {};
     this.pagebar=true;         //!< 是否分页
-    this.pageSize=10;          //!< 页面大小
+    this.pageSize=20;          //!< 页面大小
     this.pageStyle=1;          //!< 分页样式(详见PageBar的配置)
     this.pageSizeList=[10,20,50,100,500,1000,5000];   //!< 分页页面大小选择
     var pagebarSimple=false;   //!< 简单分页条
@@ -64,19 +61,18 @@ MWT.Grid=function(opt)
         if(filename=='')filename=tableid;
     }
     var thiso = this;
+	var grid_chkbox_name = 'cbxname-'+render;
 
     // 获取表格HTML代码
     function getHtml() 
     {/*{{{*/
         //0. 布局
-//        var fiexd = position=='relative' ? '' : ' mwt-table-fixed';
         var code='<div class="mwt-grid-container">';
 
         //1. tbar
-		var tbarid=render+'-tbar';
         if(thiso.tbar && thiso.tbar.length){
             var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='"+tbarid+"'"+style+"></div>";
+            code+="<div class='mwt-grid-tbar' id='tbar-"+render+"'"+style+"></div>";
         }
 
 		//2. table
@@ -85,11 +81,12 @@ MWT.Grid=function(opt)
         if (thiso.bordered) tbcls+=' bordered';
         if (striped) tbcls+=' striped';
         if (position=='fixed') tbcls+=' mwt-table-fixed';
+		if (thiso.cls) tbcls+=' '+thiso.cls;
 		code += '<table id="'+tableid+'" class="'+tbcls+'">';
         {
             //2.1 colgroup
             code += '<colgroup>';
-            if (thiso.multiSelect) code+='<col style="width:20px;text-align:center;"/>';
+            if (thiso.multiSelect) code+='<col width="20" style="text-align:center;"/>';
             code += thiso.cm.getColgroupHtml()+'</colgroup>';
             //2.2 thead
             var cn=columns.length;
@@ -124,7 +121,7 @@ MWT.Grid=function(opt)
                     var btns=[stripedbtn,refershbtn,exportbtn];
                     toolbox = '<div class="mwt-col-wd mwt-grid-foot-toolbox"><span class="seg"></span>'+btns.join('&nbsp;')+'</div>';
                 }
-                code+='<tfoot id="foot-'+render+'" class="mwt-grid-foot"><tr><td colspan="'+cn+'">'+
+                code+='<tfoot id="foot-'+render+'" class="mwt-grid-foot"><tr><td colspan="'+(cn+1)+'">'+
                     '<div class="mwt-row mwt-row-flex">'+
                       '<div class="mwt-col-fill" id="pagebar-'+render+'"></div>'+toolbox
                     '</div>'+
@@ -135,14 +132,10 @@ MWT.Grid=function(opt)
         return code;
     }/*}}}*/
 
-
     // 创建
     this.create=function()
     {/*{{{*/
         this.grid_div="grid_div_"+opt.render;
-        this.page_div="page_div_"+opt.render;
-        this.grid_chkbox_id=this.grid_div+"-chkbox-id";
-        this.grid_chkbox_name=this.grid_div+"-chkbox";
 
         //1. 创建Dom元素
         var htmlcode = getHtml();
@@ -151,7 +144,9 @@ MWT.Grid=function(opt)
         //2. 事件
         {
             //2.1 导出按钮
-            jQuery('#'+tableid+'-expbtn').unbind('click').click(this.export_excel);
+            jQuery('#'+tableid+'-expbtn').unbind('click').click(function(){
+				thiso.export_excel();
+			});
             //2.2 奇偶行变色
             jQuery('#'+tableid+'-trpbtn').unbind('click').click(function(){
                 if (striped) {
@@ -164,7 +159,9 @@ MWT.Grid=function(opt)
                 striped = !striped;
             });
             //2.3 刷新按钮
-            jQuery('#'+tableid+'-refbtn').unbind('click').click(this.store.load);
+            jQuery('#'+tableid+'-refbtn').unbind('click').click(function(){
+				thiso.store.load();
+			});
             if (!this.store.beforeLoad) {
                 this.store.beforeLoad = function() {
                     jQuery('#'+tableid+'-refbtn').unbind('click').
@@ -189,7 +186,6 @@ MWT.Grid=function(opt)
                 var tbar=new MWT.ToolBar({render:'tbar-'+render,items:this.tbar});
                 tbar.create();
             }
-
             //create pagebar
             if(this.pagebar){
                 this._pagebar = new MWT.PageBar({
@@ -209,173 +205,7 @@ MWT.Grid=function(opt)
                 });
             }
         }
-
-		////////////////////////////////////////////
-		// fixed布局自动计算top和bottom距离
-		this.autolayout();
-        this.store.on('load',thiso.autolayout);
-
-        return;
-
-
-
-        // 相对布局
-        var fiexd = position=='relative' ? '' : ' mwt-grid-fixed';
-        var code='<div class="mwt-grid'+fiexd+' '+this.cls+'">';
-
-        // tbar
-        if(this.tbar && this.tbar.length){
-            var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='tbar-"+render+"'"+style+"></div>";
-        }
-
-		// table
-		code += '<div id="'+tableid+'">';
-		{
-        	// head
-        	var columns=this.cm.getColumns();
-			var headid=render+'-head';
-        	var headcode='';
-        	if (!noheader) {
-            	headcode+='<thead><tr>';
-            	if(this.multiSelect) headcode+="<th style='width:20px;text-align:center;'><input id='"+this.grid_chkbox_id+"' type='checkbox' onchange='mwt.set_checkbox_checked(\""+this.grid_chkbox_name+"\",this.checked);'/></th>";
-            	var len=columns.length;
-            	var thname = this.grid_div+"-th";
-            	for(var i=0;i<len;++i){
-                	if (columns[i].hide){continue;}
-                	var width="";
-                	if (columns[i].width){width="width='"+columns[i].width+"'";}
-                	//var tdid = this.grid_div+"-"+columns[i].dataIndex+"-"+i;
-                	headcode+="<th "+width+" name='"+thname+"' ";
-					var style = '';
-					if (isset(columns[i].align)) style+='text-align:'+columns[i].align+';';
-					if (isset(columns[i].valign)) style+='vertical-align:'+columns[i].valign+';';
-                	if (isset(columns[i].style)) style+=columns[i].style;
-					headcode+='style="'+style+'"';
-               		if (columns[i].sort) headcode+="class='grid-sort' ";
-                	if (columns[i].poptitle) headcode+="pop-title='"+columns[i].poptitle+"' ";
-                	headcode+="data-id='"+columns[i].dataIndex+"'>"+columns[i].head+"</th>";
-            	}
-            	headcode+="</tr></thead>";
-            	if (position!='relative') {
-                	// fixed布局让head和body在两个table里
-                	code+='<div id="'+headid+'" class="mwt-grid-head"><table>'+headcode+'</table></div>';
-            	}
-        	}
-        	// body
-        	var bordered = this.bordered ? ' bordered' : '';
-			var strip = striped ? ' striped' : '';
-			var style = opt.bodyStyle ? ' style="'+opt.bodyStyle+'"' : '';
-			var bodyid=render+'-body';
-			code += '<div id="'+bodyid+'" class="mwt-grid-body'+bordered+strip+'"'+style+'><table>';
-			if (position=='relative') code+=headcode;
-			code += '<tbody id="'+this.grid_div+'"></tbody></table></div>';
-		}
-		code += '</div>';
-        // foot
-        if (this.pagebar) {
-		    var footid=render+'-foot';
-		    var toolbox = '';
-		    if (!notoolbox) {
-			    var act = striped ? 'active' : '';
-			    var stripedbtn = '<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
-			    var refershbtn = '<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
-			    var exportbtn = '<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
-			    var btns=[stripedbtn,refershbtn,exportbtn];
-			    toolbox = '<td align="right" width="10" style="padding:0;"><div class="mwt-block"><span class="seg"></span>'+btns.join('&nbsp;')+'</div></td>';
-		    }
-            code+='<div id="'+footid+'" class="mwt-grid-foot">'+
-              '<table width="100%"><tr><td id="'+this.page_div+'"></td>'+toolbox+'</tr></table>'+
-            '</div>';
-            code+='</div>';
-        }
-        jQuery("#"+render).html(code);
-
-        /////////////////////////////////////////////////
-        // 导出按钮
-        jQuery('#'+tableid+'-expbtn').unbind('click').click(function(){
-            thiso.export_excel();
-        });
-        // 奇偶行变色
-        jQuery('#'+tableid+'-trpbtn').unbind('click').click(function(){
-            if (striped) {
-                jQuery('#'+tableid).removeClass('striped');
-                jQuery(this).removeClass('active');
-            } else {
-                jQuery('#'+tableid).addClass('striped');
-                jQuery(this).addClass('active');
-            }
-            striped = !striped;
-        });
-        // 刷新按钮
-        jQuery('#'+tableid+'-refbtn').unbind('click').click(function(){
-            thiso.store.load();
-        });
-        if (!this.store.beforeLoad) {
-            this.store.beforeLoad = function() {
-                jQuery('#'+tableid+'-refbtn').unbind('click').
-                    html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
-            };
-        }
-        if (!this.store.afterLoad) {
-            this.store.afterLoad = function() {
-                jQuery('#'+tableid+'-refbtn').unbind('click')
-                    .html('<i class="fa fa-refresh"></i>')
-                    .click(function(){thiso.store.load();});
-            };
-        }
-        /////////////////////////////////////////////////
-        // 表头事件
-        if (!noheader) {
-            this.initevent();
-            mwt.popinit();
-        }
-
-        //create tbar
-        if(this.tbar){
-            var tbar=new MWT.ToolBar({render:tbarid,"items":this.tbar});
-            tbar.create();
-        }
-
-        //create pagebar
-        if(this.pagebar){
-            this._pagebar = new MWT.PageBar({
-                "store"    : this.store,
-                "render"   : this.page_div,
-                "pageSize" : this.pageSize,
-                "simple"   : pagebarSimple,
-                "pageStyle": this.pageStyle,
-                "pageSizeList": this.pageSizeList
-            });
-        }
-        //
-        else {
-            this.store.on('load',function(res){
-                var code = '<span style="font-size:12px;color:#777;">共 '+res.totalProperty+' 条记录</span>';
-                jQuery('#'+thiso.page_div).html(code);
-            });
-        }
-
-		////////////////////////////////////////////
-		// fixed布局自动计算top和bottom距离
-		this.autolayout();
-        this.store.on('load',thiso.autolayout);
     };/*}}}*/
-
-	// fixed布局自动计算top和bottom距离
-	this.autolayout=function() 
-    {/*{{{*/
-		if (position!='relative') {
-            var tbarid=render+'-tbar';
-            var tbarh = jQuery('#'+tbarid).height();
-			var headh = jQuery('#'+tableid).position().top;
-            if (tbarh && headh<tbarh) headh=tbarh-2;
-
-			if(!noheader){headh+=jQuery('#'+render+'-head').height();}
-			var footh = jQuery('#'+render+'-foot').height();
-			jQuery('#'+render+'-body').css({'top':headh+1,'bottom':footh+16});
-		}
-	};/*}}}*/
 
     // 获取记录
     this.getRecord=function(key,value)
@@ -414,7 +244,7 @@ MWT.Grid=function(opt)
                 item.store_index = i;
                 html+="<tr name='"+trname+"' data-idx='"+i+"'>";
                 if(this.multiSelect) 
-                    html+="<td style='width:20px;text-align:center;'><input name='"+this.grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
+                    html+="<td style='width:20px;text-align:center;'><input name='"+grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
                 for(var c=0;c<len;++c){
                     if (columns[c].hide){continue;}
                     var dataidx=columns[c].dataIndex;
@@ -447,7 +277,7 @@ MWT.Grid=function(opt)
     // 获取选中项
     this.getSelectedRecords=function()
     {/*{{{*/
-        var values=mwt.get_checkbox_values(this.grid_chkbox_name);
+        var values=mwt.get_checkbox_values(grid_chkbox_name);
         var records=[];
         for(var i=0;i<values.length;++i){
             var item=this.store.get(values[i]);
