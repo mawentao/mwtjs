@@ -55,9 +55,9 @@ mwt.alert=function(msg,callback)
     var dialog = new mwt.Dialog({
         render  : 'mwt-alert-msg-div',
         title   : msg.title ? msg.title : "消息提示", 
-        width   : 400,
+        width   : msg.width ? msg.width : 400,
         top     : msg.top ? msg.top : 50, 
-        bodyStyle: 'max-height:450px',
+        style   : 'height:'+(msg.height ? msg.height : 250)+'px',
         animate : msg.animate ? msg.animate : 'bounceInDown',
         buttons : [ 
             {"label":"确定",cls:'mwt-btn-primary',type:"close"}

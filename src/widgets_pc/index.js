@@ -10,7 +10,7 @@ require('./bar/Bar.js');
 
 require('./pop.js');
 
-require('./grid/grid.js');
+require('./grid/Grid.js');
 
 require('./form.js');
 

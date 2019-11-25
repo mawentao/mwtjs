@@ -32,7 +32,8 @@ define(function(require){
             {name:'表格', submenu:[
                 {name:'表格简介&API',action:'grid'},
                 {name:'简单表格',action:'grid01'},
-                {name:'带工具栏表格',action:'grid02'}
+                {name:'带工具栏表格',action:'grid02'},
+                {name:'固定列头的表格',action:'grid03'}
             ]},
             {name:'表单', submenu:[
                 {name:'表单简介&API',action:'form'},
@@ -75,6 +76,7 @@ define(function(require){
             '/'+control+'/grid',
             '/'+control+'/grid01',
             '/'+control+'/grid02',
+            '/'+control+'/grid03',
 
             '/'+control+'/form',
             '/'+control+'/fieldCombox',
@@ -121,6 +123,7 @@ define(function(require){
     o.gridAction=function() {example.show('pc/grid.html');}
     o.grid01Action=function() {example.show('pc/grid01.html');}
     o.grid02Action=function() {example.show('pc/grid02.html');}
+    o.grid03Action=function() {example.show('pc/grid03.html');}
 
     o.formAction=function() {example.show('pc/form.html');}
     o.fieldComboxAction=function() {example.show('field/combox.html');}

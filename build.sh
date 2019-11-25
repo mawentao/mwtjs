@@ -21,8 +21,10 @@ function tarfiles()
 		mkdir -p $targetdir
     fi
     for f in $@; do
-		sed -i "" "s/MWT_VERSION/$VERSION/g" dist/$f
-		sed -i "" "1i\\
+		#sed -i "" "s/MWT_VERSION/$VERSION/g" dist/$f
+		sed -i "s/MWT_VERSION/$VERSION/g" dist/$f
+		#sed -i "" "1i\\
+		sed -i "1i\\
 /*! $f v$VERSION | (c) 2013-$NOWYEAR | release:$BUILD_DATE */
 " dist/$f
 		cp -r dist/$f $targetdir

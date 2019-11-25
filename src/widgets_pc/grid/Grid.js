@@ -244,7 +244,7 @@ MWT.Grid=function(opt)
                 item.store_index = i;
                 html+="<tr name='"+trname+"' data-idx='"+i+"'>";
                 if(this.multiSelect) 
-                    html+="<td style='width:20px;text-align:center;'><input name='"+grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
+                    html+="<td style='width:30px;text-align:center;'><input name='"+grid_chkbox_name+"' value='"+i+"' type='checkbox'/></td>";
                 for(var c=0;c<len;++c){
                     if (columns[c].hide){continue;}
                     var dataidx=columns[c].dataIndex;
@@ -310,13 +310,14 @@ MWT.Grid=function(opt)
     // 导出到excel
     this.export_excel=function()
     {/*{{{*/
+		var outfile = filename;
         if (this._pagebar && this._pagebar.pageNum) {
-            filename += "_第"+this._pagebar.pageNum+"页_共"+
+            outfile += "_第"+this._pagebar.pageNum+"页_共"+
                     this._pagebar.pageCount+"页";
         }
         var rg = new RegExp("\\.xls$",'i');
-        if (!rg.test(filename)) filename += ".xls";
-        export_excel(tableid,filename);
+        if (!rg.test(outfile)) outfile += ".xls";
+        export_excel(tableid,outfile);
     };/*}}}*/
 };
 MWT.extends(MWT.Grid, MWT.Event);
