@@ -150,7 +150,7 @@
 }
 .mwt-btn-group>.mwt-btn, .mwt-btn-group-radius>.mwt-btn {
     position: relative;
-    /*float: left;*/
+    float: left;
     margin-left: -1px;
 }
 .mwt-btn-group>.mwt-btn:first-child, .mwt-btn-group-radius>.mwt-btn:first-child {
