@@ -15,7 +15,7 @@
 <body>
   <h3>固定列头的Grid</h3>
   <div id="main-div" class="mwt-layout-fill" style="top:50px;left:10px;right:10px;bottom:10px;"></div>
-
+  <div id="code">
   <pre><code>
 var store = new mwt.Store({
     proxy: new mwt.HttpProxy({
@@ -31,6 +31,7 @@ grid = new MWT.Grid({
     bordered : true,  // false 不显示列边框
     pageSize : 10,    // 默认每页大小
     pageStyle: 1,
+    pageSizeList: [5,10,20,50,100],
     cm: new MWT.Grid.ColumnModel([
         {head:"ID",   dataIndex:"id", width:80, sort:true},
         {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
@@ -49,7 +50,7 @@ grid = new MWT.Grid({
 grid.create();
 grid.load();
   </code></pre>  
-  <div id='grid-div-1'></div>
+  </div>
 
 <script>
 var store;
@@ -62,18 +63,20 @@ function init_grid_1()
       render      : "grid-div",
       store       : store,
       pagebar     : true,  // false 表示不分页
-      bordered    : false,  // false 不显示列边框
+      bordered    : true,  // false 不显示列边框
       pageSize    : 10,    // 默认每页大小
       pageStyle   : 1,
+      pageSizeList: [1,5,10,100],
       multiSelect : true,  // 多选
 	  position    : 'fixed',
 	  bodyStyle: 'top:86px;',
       cm: new MWT.Grid.ColumnModel([
           {head:"ID",   dataIndex:"id", width:80, sort:true},
           {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
-          {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+          {head:"性别", dataIndex:"sex", sort:true, poptitle:'gender 性别', render:function(v){
               return v==1 ? "男" : "女";
-          }}
+          }},
+          {head:"操作", dataIndex:"id", width:80, align:'right'},
       ]),
       tbarStyle: 'margin-bottom:10px;',
       tbar: [
@@ -94,20 +97,24 @@ function query()
         key: mwt.get_value('so-key')
     };
     grid.load();
-    //print_r(store.baseParams);
 }
 
 jQuery(document).ready(function(){
-//    initCode();
+    initCode();
 //    init_grid_1();
 	new mwt.BorderLayout({
 		render : 'main-div',
 		items : [
             {id:'grid-div', region:'north',height:350},
-        	{region:'center',html:'center'}
+        	{id:'code-div',region:'center'}
     	]
 	}).init();
 	init_grid_1();
+
+    var code = jQuery('#code').html();
+    jQuery('#code-div').html(code);
+    mwt.$('code').remove();
+
 });
 </script>
 </body>

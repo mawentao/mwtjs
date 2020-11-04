@@ -40,7 +40,7 @@ window.export_excel = function(domid,filename,style)
 	var template = '<html><head><title>'+filename+'</title><meta charset="UTF-8">'+
 			'<style>'+
                 'table {font-size:12px;border-collapse:collapse;border-color:#ddd;}'+
-                'th,thead td {background:#333;color:#fff;font-weight:normal;}'+
+                'th,thead td {background:#f1f2f3;color:#000;font-weight:normal;}'+
                 'th,td {height:25px;vertical-align:middle;mso-number-format:"\@";border-color:#ddd;text-align:center;}'+
                 style+
             '</style>'+

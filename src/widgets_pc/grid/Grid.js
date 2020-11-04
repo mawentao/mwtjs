@@ -30,7 +30,6 @@ MWT.Grid=function(opt)
     var notoolbox=false;//!< 不显示工具箱（导出,刷新,奇偶变色）
     var tableid='';
     var rowclick=null;  //!< 行点击事件处理函数
-    var thiso=this;
 
     if(opt){
         if(opt.render)render=opt.render;
@@ -39,7 +38,7 @@ MWT.Grid=function(opt)
         if(opt.store){
             this.store=opt.store;
             var thiso=this;
-            this.store.on("load", function(s){
+            this.store.on("load", function(){
                 thiso.display();
             });
         }
@@ -60,94 +59,145 @@ MWT.Grid=function(opt)
         tableid=render+"-tab";
         if(filename=='')filename=tableid;
     }
+    var tbarDomid  = 'tbar-'+render;
+    var theadDomid = 'thead-'+render;
+    var tbodyDomid = 'tbody-'+render;
+    var tfootDomid = 'tfoot-'+render;
     var thiso = this;
 	var grid_chkbox_name = 'cbxname-'+render;
 
-    // 获取表格HTML代码
-    function getHtml() 
-    {/*{{{*/
-        //0. 布局
-        var code='<div class="mwt-grid-container">';
-
+    // 初始化表格布局
+    function initLayout() {
         //1. tbar
+        var tbarHtml = "";
         if(thiso.tbar && thiso.tbar.length){
             var style=opt.tbarStyle ? ' style="'+opt.tbarStyle+'"' : '';
-            code+="<div class='mwt-grid-tbar' id='tbar-"+render+"'"+style+"></div>";
+            tbarHtml+="<div id='"+tbarDomid+"' class='mwt-grid-tbar'"+style+"></div>";
         }
-
-		//2. table
-        var columns=thiso.cm.getColumns();
+        //2. table
+        var tableHtml = "";
         var tbcls = 'mwt-table';
         if (thiso.bordered) tbcls+=' bordered';
         if (striped) tbcls+=' striped';
         if (position=='fixed') tbcls+=' mwt-table-fixed';
-		if (thiso.cls) tbcls+=' '+thiso.cls;
-		code += '<table id="'+tableid+'" class="'+tbcls+'">';
-        {
-            //2.1 colgroup
-            code += '<colgroup>';
-            if (thiso.multiSelect) code+='<col width="20" style="text-align:center;"/>';
-            code += thiso.cm.getColgroupHtml()+'</colgroup>';
-            //2.2 thead
-            var cn=columns.length;
-        	var headcode='';
-        	if (!noheader) {
-            	headcode+='<thead id="head-'+render+'"><tr>';
-            	if(thiso.multiSelect) headcode+="<th ><input type='checkbox' id='ckbox-"+render+"' onchange='mwt.set_checkbox_checked(\""+grid_chkbox_name+"\",this.checked);'/></th>";
-            	var thname = thiso.grid_div+"-th";
-            	for(var i=0;i<cn;++i){
-                    var column=columns[i];
-                	if (column.hide){continue;}
-                    var align = column.align ? column.align : 'left';
-                	headcode+="<th name='"+thname+"' style='text-align:"+align+"'";
-               		if (column.sort) headcode+=" class='grid-sort'";
-                	if (column.poptitle) headcode+=" pop-title='"+column.poptitle+"' ";
-                	headcode+=" data-id='"+column.dataIndex+"'>"+column.head+"</th>";
-            	}
-            	headcode+="</tr></thead>";
-        	}
-            code+=headcode;
-            //2.3 tbody
-			var bodyStyle = opt.bodyStyle?' style="'+opt.bodyStyle+'"':'';
-            code+='<tbody id="body-'+render+'"'+bodyStyle+'></tbody>';
-            //2.4 tfoot
-            if (thiso.pagebar) {
-                var toolbox = '';
-                if (!notoolbox) {
-			        var act = striped ? 'active' : '';
-                    var stripedbtn='<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
-                    var refershbtn='<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
-                    var exportbtn='<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
-                    var btns=[stripedbtn,refershbtn,exportbtn];
-                    toolbox = '<div class="mwt-col-wd mwt-grid-foot-toolbox"><span class="seg"></span>'+btns.join('&nbsp;')+'</div>';
-                }
-                code+='<tfoot id="foot-'+render+'" class="mwt-grid-foot"><tr><td colspan="'+(cn+1)+'">'+
-                    '<div class="mwt-row mwt-row-flex">'+
-                      '<div class="mwt-col-fill" id="pagebar-'+render+'"></div>'+toolbox
-                    '</div>'+
-                  '</td></tr></tfoot>';
-            }
+        if (thiso.cls) tbcls+=' '+thiso.cls;
+        tableHtml = '<table id="'+tableid+'" class="'+tbcls+'">'+
+            '<tbody id="'+theadDomid+'" class="mwt-table-head"></tbody>'+
+            '<tbody id="'+tbodyDomid+'" class="mwt-table-body"></tbody>'+
+            '<tfoot id="'+tfootDomid+'" class="mwt-table-foot"></tfoot>'+
+        '</table>';
+        //9. 合成container
+        var code = '<div id="container-'+render+'" class="mwt-grid-container">'+tbarHtml+tableHtml+'</div>';
+        jQuery("#"+render).html(code);
+    }
+
+    // 初始化tbar
+    function initTbar() {
+        if(thiso.tbar){
+            new MWT.ToolBar({render:tbarDomid,items:thiso.tbar}).create();
         }
-        code+='</table></div>';
-        return code;
-    }/*}}}*/
+    }
 
-    // 创建
-    this.create=function()
-    {/*{{{*/
-        this.grid_div="grid_div_"+opt.render;
+    // 初始化表头
+    function initHead() {
+        // 0.不需要表头
+        if (noheader) {
+            mwt.$(theadDomid).remove();
+            return;
+        }
 
-        //1. 创建Dom元素
-        var htmlcode = getHtml();
-        jQuery("#"+render).html(htmlcode);
-        
-        //2. 事件
-        {
-            //2.1 导出按钮
+        //1. 创建表头元素
+        var columns=thiso.cm.getColumns();
+        var cn = columns.length;
+        var headcode = '<tr style="border-top:none;">';
+        if(thiso.multiSelect) {
+            headcode+='<th '+thiso.cm.getMultiSelectColumnStyle()+'>'+
+                "<input type='checkbox' id='ckbox-"+render+"' onchange='mwt.set_checkbox_checked(\""+grid_chkbox_name+"\",this.checked);'/></th>";
+        }
+        var thname = thiso.grid_div+"-th";
+        for(var i=0;i<cn;++i){
+            var column=columns[i];
+            if (column.hide){continue;}
+            var style = thiso.cm.getColumnStyle(i);
+            headcode+="<th name='"+thname+"' "+style;
+            if (column.sort) headcode+=" class='grid-sort'";
+            if (column.poptitle) headcode+=" pop-title='"+column.poptitle+"' ";
+            headcode+=" data-id='"+column.dataIndex+"'>"+column.head+"</th>";
+        }
+        headcode+="</tr>";
+        jQuery("#"+theadDomid).html(headcode);
+
+        //2. 列标题排序点击事件
+        var jthAll = jQuery('[name='+thname+']');
+        jthAll.unbind('click').click(function(){
+            var jthis = jQuery(this);
+            if (!jthis.hasClass('grid-sort')) return;
+            //1-1. 样式
+            var sortCls = jthis.hasClass('grid-sort-asc') ? 'grid-sort-desc' : 'grid-sort-asc';
+            jthAll.removeClass('grid-sort-asc').removeClass('grid-sort-desc');
+            jthis.addClass(sortCls);
+            //1-2. reload
+            var dir=(sortCls=='grid-sort-asc')?"ASC":"DESC";
+            thiso.store.baseParams["sort"]=jthis.data('id');
+            thiso.store.baseParams["dir"]=dir;
+            thiso.load();
+        });
+
+        mwt.popinit();
+    }
+
+    // 初始化Foot
+    function initFoot() {
+        //0. 不需要footbar
+        if (!thiso.pagebar && thiso.notoolbox) {
+            mwt.$(tfootDomid).remove();
+            return;
+        }
+
+        //1. 初始化foot布局
+        var columns=thiso.cm.getColumns();
+        var cn = columns.length;
+        var  code = '<tr><td colspan="'+(cn+1)+'">'+
+            '<div class="mwt-row mwt-row-flex">'+
+                '<div class="mwt-col-fill" id="pagebar-'+render+'"></div>'+
+                '<div class="mwt-col-wd mwt-grid-foot-toolbox" id="toolbox-'+render+'"></div>'+
+            '</div>'+
+        '</td></tr>';
+        jQuery('#'+tfootDomid).html(code);
+
+        //2. 创建pagebar
+        if (thiso.pagebar) {
+            thiso._pagebar = new MWT.PageBar({
+                "render"   : 'pagebar-'+render,
+                "store"    : thiso.store,
+                "pageSize" : thiso.pageSize,
+                "simple"   : pagebarSimple,
+                "pageStyle": thiso.pageStyle,
+                "pageSizeList": thiso.pageSizeList
+            });
+        } else {
+            thiso.store.on('load',function(res){
+                var code = '<label>共 '+res.totalProperty+' 条记录</label>';
+                jQuery('#pagebar-'+render).html(code);
+            });
+        }
+
+        //3. 创建toolbox
+        if (notoolbox) {
+            mwt.$('toolbox-'+render).remove();
+        } else {
+            var act = striped ? 'active' : '';
+            var stripedbtn='<a href="javascript:;" id="'+tableid+'-trpbtn" class="bara '+act+'"><i class="fa fa-bars"></i></a>';
+            var refershbtn='<a href="javascript:;" id="'+tableid+'-refbtn" class="bara"><i class="fa fa-refresh"></i></a>';
+            var exportbtn='<a href="javascript:;" id="'+tableid+'-expbtn" class="bara"><i class="fa fa-download"></i></a>';
+            var btns=[stripedbtn,refershbtn,exportbtn];
+            jQuery('#toolbox-'+render).html('<span class="seg"></span>'+btns.join('&nbsp;'));
+
+            //3.1 导出按钮
             jQuery('#'+tableid+'-expbtn').unbind('click').click(function(){
-				thiso.export_excel();
-			});
-            //2.2 奇偶行变色
+                thiso.exportExcel();
+            });
+            //3.2 奇偶行变色
             jQuery('#'+tableid+'-trpbtn').unbind('click').click(function(){
                 if (striped) {
                     jQuery('#'+tableid).removeClass('striped');
@@ -158,52 +208,57 @@ MWT.Grid=function(opt)
                 }
                 striped = !striped;
             });
-            //2.3 刷新按钮
+            //3.3 刷新按钮
             jQuery('#'+tableid+'-refbtn').unbind('click').click(function(){
-				thiso.store.load();
-			});
-            if (!this.store.beforeLoad) {
-                this.store.beforeLoad = function() {
-                    jQuery('#'+tableid+'-refbtn').unbind('click').
-                        html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
-                };
-            }
-            if (!this.store.afterLoad) {
-                this.store.afterLoad = function() {
-                    jQuery('#'+tableid+'-refbtn').unbind('click')
-                        .html('<i class="fa fa-refresh"></i>')
-                        .click(function(){thiso.store.load();});
-                };
-            }
-            /////////////////////////////////////////////////
-            // 表头事件
-            if (!noheader) {
-                this.initevent();
-                mwt.popinit();
-            }
-            //create tbar
-            if(this.tbar){
-                var tbar=new MWT.ToolBar({render:'tbar-'+render,items:this.tbar});
-                tbar.create();
-            }
-            //create pagebar
-            if(this.pagebar){
-                this._pagebar = new MWT.PageBar({
-                    "render"   : 'pagebar-'+render,
-                    "store"    : this.store,
-                    "pageSize" : this.pageSize,
-                    "simple"   : pagebarSimple,
-                    "pageStyle": this.pageStyle,
-                    "pageSizeList": this.pageSizeList
-                });
-            }
-            //
-            else {
-                this.store.on('load',function(res){
-                    var code = '<span style="font-size:12px;color:#777;">共 '+res.totalProperty+' 条记录</span>';
-                    jQuery('#foot-'+render).html(code);
-                });
-            }
+                thiso.store.load();
+            });
+        }
+    }
+
+    // 自动排版
+    function autoComposition() {
+        if (position!="fixed") return;
+        if (mwt.$(tbarDomid)) {
+            var tbarHeight = mwt.$(tbarDomid).offsetHeight;
+            var tbarMarginBottom = parseInt(mwt.$(tbarDomid).style.marginBottom);
+            if (!tbarMarginBottom) tbarMarginBottom=0;
+            jQuery('#'+tableid).css({top:tbarHeight+tbarMarginBottom-1});
+        }
+
+        var theadHeight = mwt.$(theadDomid).offsetHeight;
+        var tfootHeight = mwt.$(tfootDomid) ? mwt.$(tfootDomid).offsetHeight : 0;
+        jQuery('#'+tbodyDomid).css({top:theadHeight,bottom:tfootHeight});
+    }
+
+    // 创建
+    this.create=function()
+    {/*{{{*/
+        this.grid_div="grid_div_"+opt.render;
+
+        //1. 初始化布局
+        initLayout();
+
+        //2. 创建Dom元素
+        initTbar();
+        initHead();
+        initFoot();
+
+        //3. 自动排版
+        autoComposition();
+
+        //4. 加载动画
+        if (!this.store.beforeLoad) {
+            this.store.beforeLoad = function() {
+                jQuery('#'+tableid+'-refbtn').unbind('click').
+                html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>');
+            };
+        }
+        if (!this.store.afterLoad) {
+            this.store.afterLoad = function() {
+                jQuery('#'+tableid+'-refbtn').unbind('click')
+                    .html('<i class="fa fa-refresh"></i>')
+                    .click(function(){thiso.store.load();});
+            };
         }
     };/*}}}*/
 
@@ -264,7 +319,7 @@ MWT.Grid=function(opt)
                 html+="</tr>";
             }
         }
-        jQuery("#body-"+render).html(html);
+        jQuery("#"+tbodyDomid).html(html);
         if (rowclick) {
             jQuery("[name="+trname+"]").unbind('click').click(function(){
                 var idx = jQuery(this).data('idx');
@@ -287,28 +342,8 @@ MWT.Grid=function(opt)
         return records;
     };/*}}}*/
 
-    // 初始化事件
-    this.initevent=function()
-    {/*{{{*/
-        //1. 列标题排序点击事件
-        var jthAll = jQuery('[name='+thiso.grid_div+'-th]');
-        jthAll.unbind('click').click(function(){
-            var jthis = jQuery(this);
-            if (!jthis.hasClass('grid-sort')) return;
-            //1-1. 样式
-            var sortCls = jthis.hasClass('grid-sort-asc') ? 'grid-sort-desc' : 'grid-sort-asc';
-            jthAll.removeClass('grid-sort-asc').removeClass('grid-sort-desc');
-            jthis.addClass(sortCls);
-            //1-2. reload
-            var dir=(sortCls=='grid-sort-asc')?"ASC":"DESC";
-            thiso.store.baseParams["sort"]=jthis.data('id');
-            thiso.store.baseParams["dir"]=dir;
-            thiso.load();
-        });
-    };/*}}}*/
-
     // 导出到excel
-    this.export_excel=function()
+    this.exportExcel=function()
     {/*{{{*/
 		var outfile = filename;
         if (this._pagebar && this._pagebar.pageNum) {
@@ -336,26 +371,20 @@ MWT.Grid.ColumnModel=function(opt)
 
     this.getColumns=function(){return this.columns;};
 
-    // colgroup
-    this.getColgroupHtml=function()
-    {
-        var cols = [];
-        var n = this.columns.length;
-        for (var i=0;i<n;++i) {
-            var column = this.columns[i];
-            if (column.hide){continue;}
-            var code = '<col';
-            // width
-            if(column.width){code+=' width="'+column.width+'"';}
-            // style
-            var align = isset(column.align) ? column.align : 'left';
-            var style = 'text-align:'+align+';';
-            if (isset(column.valign)) style+='vertical-align:'+column.valign+';';
-            if (isset(column.style)) style+=column.style;
-            code+=' style="'+style+'" align="'+align+'"/>';
-            cols.push(code);
-        }
-        return cols.join('');
+    // 获取多选框列样式
+    this.getMultiSelectColumnStyle=function() { return 'style="width:30px;text-align:center;"'; };
+
+    // 获取第i列样式
+    this.getColumnStyle=function(idx) {
+        var column = this.columns[idx];
+        var html = "";
+        var width= column.width ? column.width : 'auto';
+        html+="width='"+width+"'";
+        var align = isset(column.align) ? column.align : 'left';
+        html+=" align='"+align+"'";
+        if (isset(column.valign))html+=" valign='"+column.valign+"'";
+        if (isset(column.style)) html+=" style='"+column.style+"'";
+        return html;
     };
 };
 
