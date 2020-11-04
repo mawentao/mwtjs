@@ -47,6 +47,7 @@ MWT.DaterangepickerField=function(opt)
 		var fromdom=jQuery("#"+fromid);
         var todom=jQuery("#"+toid);
         fromdom.datepicker({
+			changeYear: true,
 			changeMonth: true,
 			numberOfMonths: 1,
 			onSelect : function( selectedDate ) {
@@ -54,6 +55,7 @@ MWT.DaterangepickerField=function(opt)
             }
         });
         todom.datepicker({
+			changeYear: true,
 			changeMonth: true,
 			numberOfMonths: 1,
 			onSelect : function( selectedDate ) {

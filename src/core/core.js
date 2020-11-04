@@ -7,8 +7,11 @@ mwt.$=function(id){return document.getElementById(id);};
 
 // 销毁指定ID的dom元素
 mwt.destroy=function(id){
+	jQuery('#'+id).remove();
+	/*
     var dom=mwt.$(id);
     if(dom)dom.remove();
+	*/
 };
 
 // ID生成器(随机生成一个6位长度的id，且document中没有此id的dom元素)
