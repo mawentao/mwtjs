@@ -72,7 +72,8 @@
     flex: 1;
 }
 
-
-.mwt-nav-li {display:block;font-size:13px;text-decoration:none;padding:2px 8px;color:#000;}
-.mwt-nav-li:hover {background:#eee;}
+/* 下拉菜单样式 */
+.mwt-nav-ul {padding:4px 0;box-shadow: 0 2px 8px rgba(0,0,0,.15);overflow:auto;}
+.mwt-nav-li {display:block;font-size:14px;text-decoration:none;padding:5px 12px;color:#000;line-height:22px;}
+.mwt-nav-li:hover,.mwt-nav-li.active {background:#eee;}
 

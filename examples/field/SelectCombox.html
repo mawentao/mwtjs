@@ -26,16 +26,31 @@
 var fd;
 function initField()
 {
-    var store = new mwt.Store({
-        proxy: getDemoMemoryProxy()
-    });
-
     fd = new mwt.SelectComboxField({
         render: 'dom-div',
-        popWidth: '100%',
-        popHeight: 300,
-        store: store,
-        keymap: ['id','name']
+        popWidth: 200,
+        popHeight: 150,
+		options: [
+			{text:"北京",value:1},
+			{text:"上海",value:2},
+			{text:"广州",value:3},
+			{text:"深圳",value:4},
+			{text:"南京",value:5},
+			{text:"杭州",value:6},
+			{text:"武汉",value:7},
+			{text:"成都",value:8},
+			{text:"青岛",value:9},
+			{text:"重庆",value:10},
+			{text:"大连",value:11},
+			{text:"厦门",value:12},
+			{text:"兰州",value:13},
+			{text:"常州",value:14},
+			{text:"无锡",value:15},
+			{text:"徐州",value:16},
+			{text:"镇江",value:17},
+			{text:"苏州",value:18}
+		],
+		value: 1
     });
 
 /*    fd.on('create',function(){
@@ -54,9 +69,9 @@ function initField()
 jQuery(document).ready(function(){
     initCode();
     initField();
-//    jQuery("#set-btn").click(function(){fd.setValue(0);});
-//    jQuery("#get-btn").click(function(){alert(fd.getValue());});
-//    jQuery("#reset-btn").click(function(){fd.reset();});
+    jQuery("#set-btn").click(function(){fd.setValue(3);});
+    jQuery("#get-btn").click(function(){alert(fd.getValue());});
+    jQuery("#reset-btn").click(function(){fd.reset();});
 });
 </script>
 </body>

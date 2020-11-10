@@ -1,5 +1,5 @@
 /**
- * 选择输入自定义弹窗控件
+ * 单选输入控件-支持输入查找选项
  **/
 MWT.SelectComboxField=function(opt)
 {
@@ -12,7 +12,8 @@ MWT.SelectComboxField=function(opt)
     var width = 'auto';   //!< 控件宽度
     var popWidth = 400;   //!< 弹出层宽度
     var popHeight = 300;  //!< 弹出层高度
-	var text="请选择...";
+	var elid='';
+	var options=[];
 	if(opt) {
 		this.construct(opt);
         if(opt.errmsg) errmsg=opt.errmsg;
@@ -21,38 +22,59 @@ MWT.SelectComboxField=function(opt)
         if(opt.width) width=opt.width;
         if(opt.popWidth) popWidth=opt.popWidth;
         if(opt.popHeight) popHeight=opt.popHeight;
-        if(opt.text) text=opt.text;
+		if(opt.options) options=opt.options;
         btnid = this.render+'-btn';
         txtid = this.render+'-btn-txt';
 		optdivid = this.render+'-opt';
+		if(opt.id) elid=opt.id;
     }
+	var thiso=this;
+	var activeOptionIdx=0,queryLen=0;
 
 	// create 
 	this.create = function() {
-        var thiso=this;
-        var spanstyle = 'text-align:left;overflow:hidden;';
-        if (width!='auto') spanstyle += 'width:'+width+'px';
-		var code = '<div>'+
-				'<a id="'+btnid+'" class="mwt-field mwt-btn mwt-btn-default '+this.cls+'" href="javascript:;" style="'+this.style+'">'+
-                  '<span id="'+txtid+'" style="'+spanstyle+'">'+text+'</span><i class="fa fa-caret-down"></i></a>'+
-                '</div>'+
-			'</div>';
-        jQuery("#"+this.render).html(code);
-        errpop = new MWT.Popover({anchor:btnid,html:errmsg,cls:"mwt-popover-danger"});
-        this.setValue(this.value);
+		var code = '<div class="mwt-search"><input id="'+btnid+'" class="mwt-field"><i class="fa fa-caret-down"></i><input type="hidden" id="'+elid+'"></div>';
+		jQuery("#"+this.render).html(code);
+		// 事件绑定
 		jQuery("#"+btnid).click(function(event){
             mwt.showPop(btnid,optdivid,popWidth,popHeight,function(){
-                thiso.fire('pop');
+				// 首次弹出
+				if (!jQuery('#'+optdivid).hasClass('mwt-nav-ul')) {
+					jQuery('#'+optdivid).addClass('mwt-nav-ul');
+					query("");
+				}
             });
-            thiso.fire('pop');
             jQuery(document).on("click", function(){
                 jQuery("#"+optdivid).hide();
-            }); 
+				//todo setvalue
+            });
             event.stopPropagation();
-        }); 
+        });
         jQuery("#"+optdivid).click(function(event){
             event.stopPropagation();
         });
+		// 输入事件
+		jQuery('#'+btnid).unbind('keyup').keyup(function(e){
+			jQuery("#"+optdivid).show();
+			if (e.which==40) {
+				++activeOptionIdx;
+				activeOption();
+			} else if (e.which==38) {
+				--activeOptionIdx;
+				activeOption();
+			} else {
+				if (e.which==13) {	//enter键
+					var jactive = jQuery('[name=li-'+optdivid+']').eq(activeOptionIdx);
+					if (jactive) {
+						thiso.setValue(jactive.data('v'));
+						return;
+					}
+				}
+				query(jQuery(this).val());
+			}
+		});
+		//
+		this.setValue(this.value);
 	};
 	
 	// 弹出层divid
@@ -60,23 +82,62 @@ MWT.SelectComboxField=function(opt)
 
 	this.setValue=function(v){
         this.value=v;
+		jQuery('#'+elid).val(v);
+		var index = -1;
+		for (var i=0;i<options.length;++i) {
+			if (options[i].value==v) {
+				index = i;
+				break;
+			}
+		}
+		if (index>=0) this.setText(options[index].text);
+		else this.setText("");
+		this.fire('change');
     };
 
 	this.setText=function(v) {
-		jQuery('#'+txtid).html(v);
+		jQuery('#'+btnid).val(v);
 		jQuery("#"+optdivid).hide();
 	};
-    
 
 	this.validate=function() {
-        errpop.hide();
+        /*errpop.hide();
         var v = this.value;
         if ( (!empty && v=='')  || (checkfun && !checkfun(this.value))) {
             errpop.pop();
             setTimeout(errpop.hide,2000);
             return false;
-        }
+        }*/
         return true;
     };
+
+	// 本地搜索
+	function query(key) {
+		var lis = [];
+		for(var i=0;i<options.length;++i){
+			var im = options[i];
+			if (key!='' && im.text.indexOf(key)<0) continue;
+			var code = '<a href="javascript:;" name="li-'+optdivid+'" class="mwt-nav-li" data-v="'+im.value+'">'+im.text+'</a>';
+			lis.push(code);
+        }
+		jQuery('#'+optdivid).html(lis.join(''));
+		activeOptionIdx = 0;
+		queryLen = lis.length;
+		activeOption();
+		jQuery('[name=li-'+optdivid+']').unbind('click').click(function(){
+			var value = jQuery(this).data('v');
+			var text = jQuery(this).html();
+			thiso.setValue(value);
+		});
+	}
+
+	// 激活下拉选项
+	function activeOption() {
+		if (activeOptionIdx<=0) activeOptionIdx=0;
+		if (activeOptionIdx>=queryLen) activeOptionIdx=queryLen-1;
+		var jOpts = jQuery('[name=li-'+optdivid+']');
+		jOpts.removeClass('active');
+		jOpts.eq(activeOptionIdx).addClass('active');
+	}
 };
 MWT.extends(MWT.SelectComboxField, MWT.Field);

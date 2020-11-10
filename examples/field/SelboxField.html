@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>SelboxField</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>mwt.SelboxField</h1>
+  <p>选择框输入控件，适合选项比较多的选择场景</p>
+  
+  <div id='dom-div'></div>
+  <br>
+  <button id='set-btn' class='mwt-btn mwt-btn-default'>设值</button>
+  <button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
+  <button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
+
+<script>
+var fd;
+function initField()
+{
+    fd = new mwt.SelboxField({
+        render: 'dom-div',
+        popWidth: 300,
+        popHeight: 300,
+		options: [{text:"男",value:1},{text:"女",value:2}]
+    });
+    fd.create();
+}
+
+jQuery(document).ready(function(){
+    initCode();
+    initField();
+});
+</script>
+</body>
+</html>
