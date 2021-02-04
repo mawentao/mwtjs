@@ -3,7 +3,7 @@
  **/
 .mwt-search {display:inline-block;}
 .mwt-search>input {line-height:20px;padding-right:25px;font-size:12px;}
-.mwt-search>i {color:#999;font-size:14px;cursor:pointer;margin-left:-23px;width:23px;}
+.mwt-search>i {color:#999;font-size:14px;cursor:pointer;margin-left:-32px;width:23px;text-align:right;}
 .mwt-search>input:focus+i, .mwt-text-search>i:hover {color:#666;}
 
 .mwt-search.primary {border-color:#357ebd;}

@@ -24,12 +24,34 @@
   <div id="toolbar-div-01"></div>
   <pre><code>
 var option = [ {value:0,text:"男"},{value:1,text:"女"}];
+var citys = [
+			{text:"北京",value:1},
+			{text:"新疆齐齐哈尔市",value:101},
+			{text:"上海",value:2},
+			{text:"广州",value:3},
+			{text:"深圳",value:4},
+			{text:"南京",value:5},
+			{text:"杭州",value:6},
+			{text:"武汉",value:7},
+			{text:"成都",value:8},
+			{text:"青岛",value:9},
+			{text:"重庆",value:10},
+			{text:"大连",value:11},
+			{text:"厦门",value:12},
+			{text:"兰州",value:13},
+			{text:"常州",value:14},
+			{text:"无锡",value:15},
+			{text:"徐州",value:16},
+			{text:"镇江",value:17},
+			{text:"苏州",value:18}
+];
 new mwt.ToolBar({
     render : 'toolbar-div-01',
     items  : [
         '<label>工具栏 | </label>',
         {label:"add",cls:'mwt-btn-success',handler:function(){alert("add");}},
         {type:'select',id:"sex1",label:"性别",width:50,value:'1',options:option,handler:query},
+		{type:'selbox',id:"city",label:"城市",width:'100px',popWidth:100,value:'1',options:citys,handler:query},
         {type:'radiobtn',id:'sex2',value:'1',width:50,cls:'mwt-btn-danger',options:option,handler:query},
         {type:'search',id:'sokey',width:200,placeholder:'查询关键词',handler:query},
         {type:"datepicker",id:'dt',label:"选择日期",value:-1,handler:query},
@@ -43,6 +65,7 @@ function query()
     var params = {
         sex1: mwt.get_select_value('sex1'),
         sex2: mwt.get_value('sex2'),
+		city: mwt.get_value('city'),
         sokey: mwt.get_value('sokey'),
         day: mwt.get_value('dt'),
         dayrange: mwt.get_value('dt2')
@@ -85,7 +108,28 @@ function init_property_grid()
 }
 function init_toolbar_1()
 {
-    var option = [ {value:0,text:"男"},{value:1,text:"女"}];
+ var citys = [
+			{text:"北京",value:1},
+			{text:"新疆齐齐哈尔市",value:101},
+			{text:"上海",value:2},
+			{text:"广州",value:3},
+			{text:"深圳",value:4},
+			{text:"南京",value:5},
+			{text:"杭州",value:6},
+			{text:"武汉",value:7},
+			{text:"成都",value:8},
+			{text:"青岛",value:9},
+			{text:"重庆",value:10},
+			{text:"大连",value:11},
+			{text:"厦门",value:12},
+			{text:"兰州",value:13},
+			{text:"常州",value:14},
+			{text:"无锡",value:15},
+			{text:"徐州",value:16},
+			{text:"镇江",value:17},
+			{text:"苏州",value:18}
+];
+   var option = [ {value:0,text:"男"},{value:1,text:"女"}];
     new mwt.ToolBar({
         render : 'toolbar-div-01',
         style  : 'background:#f2f2f2;border:solid 1px #ddd;',
@@ -93,6 +137,7 @@ function init_toolbar_1()
             '<label>工具栏 | </label>',
             {label:"add",cls:'mwt-btn-success',handler:function(){alert("add");}},
             {type:'select',id:"sex1",label:"性别",width:50,value:'1',options:option,handler:query},
+			{type:'selbox',id:"city",label:"城市",width:'100px',popWidth:100,value:'1',options:citys,handler:query},
             {type:'radiobtn',id:'sex2',value:'1',width:50,cls:'mwt-btn-danger',options:option,handler:query},
             {type:'search',id:'sokey',width:200,placeholder:'查询关键词',handler:query},
             {type:"datepicker",id:'dt',label:"选择日期",value:-1,handler:query},
@@ -107,6 +152,7 @@ function query()
     var params = {
         sex1: mwt.get_select_value('sex1'),
         sex2: mwt.get_value('sex2'),
+        city: mwt.get_value('city'),
         sokey: mwt.get_value('sokey'),
         day: mwt.get_value('dt'),
         dayrange: mwt.get_value('dt2')

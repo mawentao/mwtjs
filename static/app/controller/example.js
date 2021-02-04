@@ -126,7 +126,7 @@ define(function(require){
     o.grid03Action=function() {example.show('pc/grid03.html');}
 
     o.formAction=function() {example.show('pc/form.html');}
-    o.fieldComboxAction=function() {example.show('field/combox.html');}
+    o.fieldComboxAction=function() {example.show('field/SelectCombox.html');}
     o.fieldCheckboxAction=function() {example.show('field/checkbox.html');}
 
     o.wallAction=function() {example.show('pc/wall.html');}

@@ -4,14 +4,15 @@
 MWT.SelectComboxField=function(opt)
 {
 	this.listeners={};
-	var errpop;           //!< 错误弹框 
-    var errmsg;           //!< 错误信息 
-    var empty=false;      //!< 是否允许为空   
+	var errpop;           //!< 错误弹框
+    var errmsg;           //!< 错误信息
+    var empty=false;      //!< 是否允许为空
     var checkfun;         //!< 自定义校验函数
     var btnid,txtid,optdivid;
-    var width = 'auto';   //!< 控件宽度
+    var width = '100%';   //!< 控件宽度
     var popWidth = 400;   //!< 弹出层宽度
     var popHeight = 300;  //!< 弹出层高度
+	var placeholder = "请选择";
 	var elid='';
 	var options=[];
 	if(opt) {
@@ -27,13 +28,14 @@ MWT.SelectComboxField=function(opt)
         txtid = this.render+'-btn-txt';
 		optdivid = this.render+'-opt';
 		if(opt.id) elid=opt.id;
+		if(opt.placeholder) placeholder=opt.placeholder;
     }
 	var thiso=this;
 	var activeOptionIdx=0,queryLen=0;
 
 	// create 
 	this.create = function() {
-		var code = '<div class="mwt-search"><input id="'+btnid+'" class="mwt-field"><i class="fa fa-caret-down"></i><input type="hidden" id="'+elid+'"></div>';
+		var code = '<div class="mwt-search" style="width:'+width+'"><input type="text" id="'+btnid+'" class="mwt-field" placeholder="'+placeholder+'"><i class="fa fa-caret-down"></i><input type="hidden" id="'+elid+'"></div>';
 		jQuery("#"+this.render).html(code);
 		// 事件绑定
 		jQuery("#"+btnid).click(function(event){
@@ -62,18 +64,26 @@ MWT.SelectComboxField=function(opt)
 			} else if (e.which==38) {
 				--activeOptionIdx;
 				activeOption();
-			} else {
-				if (e.which==13) {	//enter键
-					var jactive = jQuery('[name=li-'+optdivid+']').eq(activeOptionIdx);
-					if (jactive) {
-						thiso.setValue(jactive.data('v'));
-						return;
-					}
+			} else if (e.which==13) {	//enter键
+				var jactive = jQuery('[name=li-'+optdivid+']').eq(activeOptionIdx);
+				if (jactive) {
+					thiso.setValue(jactive.data('v'));
+					return;
 				}
+			} else {
 				query(jQuery(this).val());
 			}
 		});
-		//
+		// 输入框
+		jQuery('#'+btnid).unbind('change').change(function(e){
+			var val = jQuery(this).val().trim();
+			var opt = getOption(val);
+			if (!opt) {
+				thiso.setValue(thiso.value);
+				query("");
+			}
+			else thiso.setValue(opt.value);
+		});
 		this.setValue(this.value);
 	};
 	
@@ -110,6 +120,16 @@ MWT.SelectComboxField=function(opt)
         }*/
         return true;
     };
+
+	// 根据字面获取选项
+	function getOption(v) {
+		for (var i=0;i<options.length;++i) {
+			if (options[i].value==v) {
+				return options[i];
+			}
+		}
+		return null;
+	}
 
 	// 本地搜索
 	function query(key) {

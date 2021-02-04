@@ -159,17 +159,8 @@ MWT.ToolBar=function(cnf)
 	// Selbox
 	function renderSelbox(item,id,cellid)
     {/*{{{*/
-        var field=new MWT.SelboxField({
-            render  : cellid,
-            id      : id,
-            options : item.options ? item.options : [],
-            value   : item.value,
-            cls     : item.cls,
-            style   : item.style,
-			width   : item.width ? item.width : 100,
-			popWidth: item.popWidth ? item.popWidth : 130,
-			popHeight: item.popHeight ? item.popHeight : 170
-        }); 
+		item['render'] = cellid;
+        var field=new MWT.SelectComboxField(item);
         field.create();
         if(item.handler){
             field.on("change",item.handler);

@@ -22,35 +22,61 @@
   <button id='get-btn' class='mwt-btn mwt-btn-default'>取值</button>
   <button id='reset-btn' class='mwt-btn mwt-btn-default'>重置</button>
 
+<pre><code>
+var fd;
+function initField()
+{
+    fd = new mwt.SelectComboxField({
+        render: 'dom-div',
+        width: '200px',
+        popWidth: 200,
+        popHeight: 150,
+        options: [
+            {text:"北京",value:1},
+            {text:"上海",value:2},
+            {text:"苏州",value:18}
+        ],
+        value: 0,
+        placeholder: '请选择城市'
+    });
+    fd.create();
+}
+
+</code></pre>
+
+
 <script>
 var fd;
 function initField()
 {
     fd = new mwt.SelectComboxField({
         render: 'dom-div',
+        width: '200px',
         popWidth: 200,
         popHeight: 150,
-		options: [
-			{text:"北京",value:1},
-			{text:"上海",value:2},
-			{text:"广州",value:3},
-			{text:"深圳",value:4},
-			{text:"南京",value:5},
-			{text:"杭州",value:6},
-			{text:"武汉",value:7},
-			{text:"成都",value:8},
-			{text:"青岛",value:9},
-			{text:"重庆",value:10},
-			{text:"大连",value:11},
-			{text:"厦门",value:12},
-			{text:"兰州",value:13},
-			{text:"常州",value:14},
-			{text:"无锡",value:15},
-			{text:"徐州",value:16},
-			{text:"镇江",value:17},
-			{text:"苏州",value:18}
-		],
-		value: 1
+        options: [
+            {text:"北京",value:1},
+            {text:"新疆齐齐哈尔市",value:101},
+            {text:"上海",value:2},
+            {text:"广州",value:3},
+            {text:"深圳",value:4},
+            {text:"南京",value:5},
+            {text:"杭州",value:6},
+            {text:"武汉",value:7},
+            {text:"成都",value:8},
+            {text:"青岛",value:9},
+            {text:"重庆",value:10},
+            {text:"大连",value:11},
+            {text:"厦门",value:12},
+            {text:"兰州",value:13},
+            {text:"常州",value:14},
+            {text:"无锡",value:15},
+            {text:"徐州",value:16},
+            {text:"镇江",value:17},
+            {text:"苏州",value:18}
+        ],
+        value: 0,
+        placeholder: '请选择城市'
     });
 
 /*    fd.on('create',function(){
