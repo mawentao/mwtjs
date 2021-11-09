@@ -28,6 +28,7 @@
 	-webkit-font-smoothing:antialiased;
 	-moz-osx-font-smoothing:grayscale;
 	font-smoothing:antialiased;
+	word-break: break-all;
 }
 
 .mwt-popover>.arrow,

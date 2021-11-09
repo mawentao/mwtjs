@@ -43,7 +43,7 @@ MWT.ComboxField=function(opt)
 		jQuery("#"+btnid).click(function(event){
             mwt.showPop(btnid,optdivid,popWidth,popHeight,function(){
                 thiso.fire('pop');
-            });
+            },"mwt-combox-pop");
             thiso.fire('pop');
             jQuery(document).on("click", function(){
                 jQuery("#"+optdivid).hide();

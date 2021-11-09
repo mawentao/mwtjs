@@ -1,6 +1,20 @@
 /**
  * 操作html元素的工具函数
  */
+mwt.disableInput=function(elid) {
+    var el = mwt.$(elid);
+    if (el) {
+        el.disabled = "disabled";
+		el.setAttribute("readonly","readonly");
+    }
+}
+mwt.enableInput=function(elid) {
+	var el = mwt.$(elid);
+	if (el) {
+		el.disabled = "";
+		el.removeAttribute("readonly");
+	}
+}
 
 mwt.set_html=function(eleid, value)
 {/*{{{*/

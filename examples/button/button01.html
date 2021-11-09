@@ -168,9 +168,30 @@
 </div>
   </code></pre>
 
+<div id="mwtbtns"></div>
+<pre>
+  <code>
+new mwt.ButtonGroup({
+    cls: 'mwt-btn-group',
+    style: 'margin-top:10px',
+    btns: [
+      {name:'editbtn',label:'编辑',icon:'sicon-pencil',cls:'mwt-btn-primary-o'},
+      {name:'viewbtn',id:'viewbtn-1',icon:'fa fa-dashboard',style:"color:red;",href:'https://www.baidu.com',target:'_blank'}
+    ]
+}).generateHTML();
+  </code>
+</pre>
+
 <script>
 jQuery(document).ready(function(){
     initCode();
+	new mwt.ButtonGroup({
+		render: "mwtbtns",
+	    btns: [
+	      {name:'editbtn',label:'编辑',icon:'sicon-pencil',cls:'mwt-btn-primary-o'},
+	      {name:'viewbtn',icon:'fa fa-dashboard',style:"color:red;",href:'https://www.baidu.com',target:'_blank'}
+        ]	
+	}).create();
 });
 </script>
 </body>

@@ -6,7 +6,7 @@
 .mwt-toolbar td {padding:6px 0 6px 8px !important;}
 .mwt-toolbar td:last-child {padding:6px 8px !important;}
 .mwt-toolbar label {display:block;white-space:nowrap;color:#333;font-size:12px;}
-.mwt-toolbar .mwt-btn {display:inline-block;padding:0px 10px;border-radius:4px;font-size:12px;line-height:28px;}
+.mwt-toolbar .mwt-btn {display:inline-block;padding:0px 10px;border-radius:4px;font-size:13px;line-height:33px;}
 
 /*
 .mwt-toolbar select {
@@ -20,3 +20,15 @@
 .mwt-tablay td.lt {text-align:left;}
 .mwt-tablay td.ct {text-align:center;}
 .mwt-tablay td.rt {text-align:right;}
+
+/* 底部分页工具栏 */
+.mwt-simple-pagebar {
+    text-align: center;
+}
+.mwt-simple-pagebar .mwt-btn {
+    padding: 0;
+    width: 20px;
+    border-radius: 2px;
+    vertical-align: baseline;
+    line-height: 19px;
+}

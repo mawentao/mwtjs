@@ -142,7 +142,7 @@
 }
 
 /* 按钮组 */
-.mwt-btn-group, .mwt-btn-group-radius {
+.mwt-btn-group, .mwt-btn-group-radius, .mwt-btn-group-split {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -182,6 +182,8 @@
     border-top-right-radius: 4px;
 }
 
+.mwt-btn-group-split>.mwt-btn {margin-right:10px;}
+.mwt-btn-group-split>.mwt-btn:last-child {margin-right:0;}
 
 
 /* 块级button */

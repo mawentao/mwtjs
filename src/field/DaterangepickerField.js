@@ -113,9 +113,9 @@ MWT.DaterangepickerField=function(opt)
     // create
     this.create=function()
 	{/*{{{*/
-        var style=" style=\"width:165px;font:normal 12px Arial;\" ";
+        var style="";
         if(this.style!="")style=" style=\""+this.style+"\" ";
-        var code= "<input type='text' class='mwt-field mwt-datepicker'"+style+"id='"+txtid+"' "+
+        var code= "<input type='text' class='mwt-field mwt-datepicker mwt-datepicker-range'"+style+"id='"+txtid+"' "+
                     "value='"+this.value+"' placeholder='请选择时间区间' readonly/>"+
                     '<i class="fa fa-calendar"></i>';
         jQuery("#"+this.render).html(code);

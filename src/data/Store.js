@@ -72,6 +72,7 @@ MWT.Store=function(cnf)
         var thiso=this;
         this.proxy.load(this.baseParams,function(data){
             if (isset(data.totalProperty)) thiso.totalProperty=data.totalProperty;
+            else if (isset(data.total_property)) thiso.totalProperty=data.total_property;
             if (isset(data.root)) thiso.root=data.root;
             if (isset(data.annex)) thiso.annex=data.annex;
             thiso.fire('load');

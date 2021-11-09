@@ -30,3 +30,7 @@
 .mwt-layout-border-collapse-vertical {top:50%;height:50px;margin-top:-25px;width:7px;}
 .mwt-layout-border-collapse-vertical:before {margin-left:-3px;}
 
+
+.mwt-cell-tab {width:100%;border-collapse:separate;}
+.mwt-cell-tab td {padding:0;}
+.mwt-cell {position:relative;}

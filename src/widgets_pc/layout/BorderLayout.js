@@ -31,10 +31,11 @@ MWT.BorderLayout=function(opt)
     function getCssLengh(num) { return /[%|px]$/i.test(num) ? num : num+'px'; }
 
     // 获取HTML代码
-    function getCode(_id,_layout,_style,_html) 
+    function getCode(_id,_layout,_style,_html,_cls)
     {/*{{{*/
         var id = _id=='' ? '' : ' id="'+_id+'"';
         var cls = _layout=='' ? 'mwt-layout-fit' : 'mwt-layout-'+_layout;
+        if (_cls && _cls!="") cls+=" "+_cls;
         var style = _style ? ' style="'+_style+'"' : '';
         var html = _html ? _html : '';
         return '<div'+id+' class="'+cls+'"'+style+'>'+html+'</div>';
@@ -83,7 +84,7 @@ MWT.BorderLayout=function(opt)
                 var height = getCssLengh(im.height);
                 if (!im.style) im.style='';
                 im.style='height:'+height+';'+im.style;
-                itemHtmls.push(getCode(im.id,'border-'+im.region,im.style,im.html));
+                itemHtmls.push(getCode(im.id,'border-'+im.region,im.style,im.html,im.cls));
                 im.split = im.split ? 1 : 0;
                 if (im.collapsible || im.split) {
                     var barid = im.id+'-bar';
@@ -111,7 +112,7 @@ MWT.BorderLayout=function(opt)
                     itemHtmls.push('<div id="'+barid+'" '+
                         'style="'+lrk+':'+height+';height:'+splitWidth+'px;cursor:'+cursor+';'+splitStyle+'" '+
                         'class="mwt-layout-border-split-horizontal" '+
-                        'data-targetl="'+lid+'" data-targetr="'+rid+'" data-split="'+im.split+'">'+collapseBtn+'</div>');
+                        'data-targetl="'+lid+'" data-position="'+ns+'" data-targetr="'+rid+'" data-split="'+im.split+'">'+collapseBtn+'</div>');
                     height = getCssLengh(parseInt(height)+splitWidth);
                 }
                 sideHeightMap[ns] = height;
@@ -125,7 +126,7 @@ MWT.BorderLayout=function(opt)
             var im = borderItemMap['center'];
             if (!im.style) im.style='';
             im.style = centerStyle+im.style;
-            itemHtmls.push(getCode(im.id,'border-'+im.region,im.style,im.html));
+            itemHtmls.push(getCode(im.id,'border-'+im.region,im.style,im.html,im.cls));
         }
         // show
         jQuery('#'+containerId).html(itemHtmls.join('')).css({'overflow-y':'hidden'});
@@ -177,7 +178,7 @@ MWT.BorderLayout=function(opt)
                     itemHtmls.push('<div id="'+barid+'" '+
                         'style="'+lrk+':'+width+';width:'+splitWidth+'px;cursor:'+cursor+';'+splitStyle+'" '+
                         'class="mwt-layout-border-split-vertical" '+
-                        'data-targetl="'+lid+'" data-targetr="'+rid+'" data-split="'+im.split+'">'+collapseBtn+'</div>');
+                        'data-targetl="'+lid+'" data-position="'+ea+'" data-targetr="'+rid+'" data-split="'+im.split+'">'+collapseBtn+'</div>');
                     width = getCssLengh(parseInt(width)+splitWidth);
                 }
                 sideWidthMap[ea] = width;
@@ -227,7 +228,7 @@ MWT.BorderLayout=function(opt)
             e.stopPropagation();
             var x = e.clientX;
             var wOff = x-xs;
-            if (jts.css('left')!='auto') {
+            if (jts.data('position')=='west') {
                 var bl = parseInt(left)+wOff;
                 if (bl<0) bl=0;     //!< 越界
                 jts.css({left:bl+'px'});
@@ -275,7 +276,7 @@ MWT.BorderLayout=function(opt)
         .mousemove(function(e){
             var x = e.clientY;
             var wOff = x-xs;
-            if (jts.css('top')!='auto') {
+            if (jts.data('position')=='north') {
                 var bl = parseInt(left)+wOff;
                 if (bl<0) bl=0;     //!< 越界
                 jts.css({top:bl+'px'});

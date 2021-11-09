@@ -13,6 +13,7 @@ define(function(require){
                 {name:'图标',action:'Icon'},
                 {name:'按钮',action:'Button'},
                 {name:'导航',action:'Nav'},
+                {name:'标签',action:'Tag'},
             ]},
             {name:'布局', submenu:[
                 {name:'栅格布局',action:'GridLayout'},
@@ -33,7 +34,8 @@ define(function(require){
                 {name:'表格简介&API',action:'grid'},
                 {name:'简单表格',action:'grid01'},
                 {name:'带工具栏表格',action:'grid02'},
-                {name:'固定列头的表格',action:'grid03'}
+                {name:'固定列头的表格',action:'grid03'},
+                {name:'固定列表格',action:'grid04'}
             ]},
             {name:'表单', submenu:[
                 {name:'表单简介&API',action:'form'},
@@ -60,6 +62,7 @@ define(function(require){
 			'/'+control+'/Icon',
 			'/'+control+'/Button',
 			'/'+control+'/Nav',
+			'/'+control+'/Tag',
 
 			'/'+control+'/GridLayout',
 			'/'+control+'/FillLayout',
@@ -77,6 +80,7 @@ define(function(require){
             '/'+control+'/grid01',
             '/'+control+'/grid02',
             '/'+control+'/grid03',
+            '/'+control+'/grid04',
 
             '/'+control+'/form',
             '/'+control+'/fieldCombox',
@@ -107,6 +111,7 @@ define(function(require){
     o.IconAction=function() {example.show('icon/icon01.html');}
     o.ButtonAction=function() {example.show('button/button01.html');}
     o.NavAction=function() {example.show('nav/nav01.html');}
+    o.TagAction=function() {example.show('tag.html');}
 
     o.GridLayoutAction=function() {example.show('common/flex.html');}
     o.FillLayoutAction=function() {example.show('pc/layout_fill.html');}
@@ -124,6 +129,7 @@ define(function(require){
     o.grid01Action=function() {example.show('pc/grid01.html');}
     o.grid02Action=function() {example.show('pc/grid02.html');}
     o.grid03Action=function() {example.show('pc/grid03.html');}
+    o.grid04Action=function() {example.show('pc/grid04.html');}
 
     o.formAction=function() {example.show('pc/form.html');}
     o.fieldComboxAction=function() {example.show('field/SelectCombox.html');}

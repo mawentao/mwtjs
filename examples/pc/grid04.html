@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>固定列Grid</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h3>固定列Grid</h3>
+  <div id="main-div" class="mwt-layout-fill" style="top:50px;left:10px;right:10px;bottom:10px;"></div>
+  <div id="code">
+  <pre><code>
+var store = new mwt.Store({
+    proxy: new mwt.HttpProxy({
+        url    : '../data/list.txt',
+        method : 'POST',
+        async  : true,   // 异步请求
+    })
+});
+grid = new MWT.Grid({
+    render   : "grid-div-1",
+    store    : store,
+    pagebar  : true,  // false 表示不分页
+    bordered : true,  // false 不显示列边框
+    pageSize : 10,    // 默认每页大小
+    pageStyle: 1,
+    pageSizeList: [5,10,20,50,100],
+    cm: new MWT.Grid.ColumnModel([
+        {head:"ID",   dataIndex:"id", width:80, sort:true,fixed:true},
+        {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+        {head:"性别", dataIndex:"sex", sort:true, render:function(v){
+            return v==1 ? "男" : "女";
+        }},
+        {head:"操作", dataIndex:"id", width:80, sort:true,fixed:true}
+    ]),
+    tbarStyle: 'margin-bottom:10px;',
+    tbar: [
+        {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+        {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
+        '->',
+        {label:"Add",handler:function(){alert("Add");}}
+    ]
+});
+grid.create();
+grid.load();
+  </code></pre>  
+  </div>
+
+<script>
+var store;
+function init_grid_1()
+{
+    store = new mwt.Store({
+        proxy: getDemoMemoryProxy()
+    });
+    grid = new MWT.Grid({
+      render      : "grid-div",
+      store       : store,
+      pagebar     : true,  // false 表示不分页
+      bordered    : true,  // false 不显示列边框
+      pageSize    : 10,    // 默认每页大小
+      pageStyle   : 1,
+      pageSizeList: [1,5,10,100],
+      multiSelect : true,  // 多选
+	  position    : 'fixed',
+	  bodyStyle: 'top:86px;',
+      cm: new MWT.Grid.ColumnModel([
+          {head:"ID",   dataIndex:"id", width:80, sort:true,fixed:"left",style:"left:31px;"},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300, render:function (v) {
+              return v+'<br>'+v+'<br>'+v+'<br>'+v;
+          }},
+          {head:"姓名", dataIndex:"name", style:'color:red', align:'center', sort:true, valign:'top', width:300},
+          {head:"性别", dataIndex:"sex", sort:true, poptitle:'gender 性别',width:300,render:function(v){
+              return v==1 ? "男" : "女";
+          }},
+          {head:"操作", dataIndex:"id", width:80, align:'center',fixed:"right"},
+      ]),
+      tbarStyle: 'margin-bottom:10px;',
+      tbar: [
+          {type:"select",label:"性别",id:"sex-sel",options:[{value:1,text:"男"},{value:0,text:"女"}],handler:query},
+          {type:"search",id:"so-key",width:300,placeholder:'查询关键词',handler:query},
+          '->',
+          {label:"Add",handler:function(){alert("Add");}}
+      ]
+    });
+    grid.create();
+    grid.load();
+}
+
+function query()
+{
+    store.baseParams = {
+        sex: mwt.get_select_value('sex-sel'),
+        key: mwt.get_value('so-key')
+    };
+    // grid.load();
+    print_r(store.baseParams);
+}
+
+jQuery(document).ready(function(){
+    initCode();
+//    init_grid_1();
+	new mwt.BorderLayout({
+		render : 'main-div',
+		items : [
+            {id:'grid-div', region:'north',height:350},
+        	{id:'code-div',region:'center'}
+    	]
+	}).init();
+	init_grid_1();
+
+    var code = jQuery('#code').html();
+    jQuery('#code-div').html(code);
+    mwt.$('code').remove();
+
+});
+</script>
+</body>
+</html>

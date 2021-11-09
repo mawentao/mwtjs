@@ -29,14 +29,15 @@ mwt.HttpProxy=function(cnf)
             url      : url,
             type     : method, 
             async    : async,
-            data     : params,
+            data     : JSON.stringify(params),  //params,（提交给php）
             dataType : dataType, 
             complete: function() {
                 if(afterLoad) afterLoad();
             },  
             success: function (res) {
                 var data = res;
-                if (res.data) data=res.data;
+                //if (res.data) data=res.data;
+                if (res.result) data=res.result;
                 if (callback) callback(data);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

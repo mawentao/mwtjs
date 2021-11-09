@@ -5,13 +5,13 @@
 require('./watermark.css');
 
 // 显示全局水印
-mwt.showWaterMark=function(text)
-{/*{{{*/
+mwt.showWaterMark=function(text,xgap,ygap)
+{
     var domid = mwt.createDiv('watermark');
-    var rows = Math.ceil(screen.height/150);
-    var cols = Math.ceil(screen.width/250);
-    var xgap = 250;
-    var ygap = 150;
+	if (!xgap) xgap = 120;
+	if (!ygap) ygap = 60;
+    var rows = Math.ceil(screen.height/ygap);
+    var cols = Math.ceil(screen.width/xgap);
     var ls = []; 
     for (var i=0;i<rows;++i) {
         for (var j=0;j<cols;++j) {
@@ -21,5 +21,5 @@ mwt.showWaterMark=function(text)
         }   
     }   
     jQuery('#'+domid).html(ls.join(''));
-}/*}}}*/
+}
 

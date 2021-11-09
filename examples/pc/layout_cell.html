@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../static/mwtjs.png" type="image/png">
+  <title>Cell布局</title>
+  <link rel="stylesheet" type="text/css" href="../../dist/mwt.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../example.css"/>
+  <script type="text/javascript" src="../../static/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="../../dist/mwt.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../example.js"></script>
+</head>
+<body>
+  <h1>Layout布局</h1>
+  <p>协助进行页面级整体布局。</p>
+  
+  <h2>Cell布局</h2>
+  <div id="cell-div" style="width:400px;height:250px;border:solid 1px #ccc;position:relative"></div>
+  <pre><code>
+new mwt.CellLayout({
+    render     : 'cell-div',
+    rowCells   : 2,  //每行个数
+    cellHeight : 60, //格子高度
+    cellSpacing: 5,  //格子间隔
+    items : [
+        {id:'cell1',style:'background:#acd2f1',html:'#acd2f1'},
+        {id:'cell2',style:'background:#aeedf5',html:'#aeedf5'},
+        {id:'cell3',style:'background:#fbbdb9',html:'#fbbdb9'},
+        {id:'cell4',style:'background:#ffdba5',html:'#ffdba5'},
+        {id:'cell5',style:'background:#d9f9b4',html:'#d9f9b4'},
+        {id:'cell6',style:'background:#b0e2de',html:'#b0e2de'}
+    ]
+}).init();
+  </code></pre>
+
+<script>
+jQuery(document).ready(function(){
+    initCode();
+    new mwt.CellLayout({
+        render     : 'cell-div',
+        rowCells   : 3,  //每行个数
+        cellHeight : 60, //格子高度
+		cellSpacing: 5,  //格子间隔
+        items : [
+            {id:'cell1',style:'background:#acd2f1',html:'#acd2f1'},
+            {id:'cell2',style:'background:#aeedf5',html:'#aeedf5'},
+            {id:'cell3',style:'background:#fbbdb9',html:'#fbbdb9'},
+            {id:'cell4',style:'background:#ffdba5',html:'#ffdba5'},
+            {id:'cell5',style:'background:#d9f9b4',html:'#d9f9b4'},
+            {id:'cell6',style:'background:#b0e2de',html:'#b0e2de'}
+        ]
+    }).init();
+});
+</script>
+</body>
+</html>

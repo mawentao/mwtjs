@@ -12,12 +12,13 @@ require('./pop.css');
  * height: 弹出层高度
  * popBackFun: 弹出后的回调函数
  **/
-mwt.showPop=function(anchor,targetid,width,height,popBackFun)
+mwt.showPop=function(anchor,targetid,width,height,popBackFun,cls)
 {/*{{{*/
     if (!mwt.$(targetid)) {
         mwt.createDiv(targetid);
         var dom = mwt.$(targetid);
         dom.className = 'mwt-pop mwt-motion-popdown';
+        if (cls) dom.className += " "+cls;
         dom.style.width = width+'px';
         dom.style.height = height+'px';
         // 弹出层截获点击事件

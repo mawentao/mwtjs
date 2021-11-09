@@ -171,9 +171,9 @@ MWT.PageBar=function(cnf)
                 var t=list[i].text;
                 var v=list[i].value;
                 var c=list[i].active ? "" : "disabled";
-                var margin_left = (i==0) ? 0 : 1;
+                var margin_left = (i==0) ? 0 : 2;
                 var btncode = "<button name='"+pname+"' "+c+" value='"+v+"' "+
-                    "class='mwt-btn mwt-btn-default mwt-btn-xs' style='border-radius:0;margin-left:"+margin_left+"px;'>"+t+
+                    "class='mwt-btn mwt-btn-default mwt-btn-xs' style='margin-left:"+margin_left+"px;'>"+t+
                   "</button>";
                 pagebtns.push(btncode);
             }

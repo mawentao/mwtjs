@@ -1,0 +1,44 @@
+
+.mwt-tag {
+	display:inline-block;
+	padding:0 8px;
+	font-size:12px;
+	color:#fff;
+	background:#9e9e9e;
+	position:relative;
+	height:22px;line-height:22px;
+	font-family: Helvetica Neue,Luxi Sans,DejaVu Sans,Tahoma,Hiragino Sans GB,STHeiti,Microsoft YaHei;
+	margin-left:7px;
+}
+.mwt-tag:after {
+	content: "";
+	border:11px solid #9e9e9e;
+	border-left-color   : transparent;
+	border-top-color  : transparent;
+	border-bottom-color: transparent;
+	width              : 0px;
+	height             : 0px;
+	position           : absolute;
+	left               :0;
+	top      : 0;
+	margin-left:-22px;		
+}
+
+.mwt-tag-primary {background:#428bca;}
+.mwt-tag-primary:after {border-right-color:#428bca;}
+
+.mwt-tag-secondary {background:#3bb4f2;}
+.mwt-tag-secondary:after {border-right-color:#3bb4f2;}
+
+.mwt-tag-danger {background:#d9534f;}
+.mwt-tag-danger:after {border-right-color:#d9534f;}
+
+.mwt-tag-warning {background:#f0ad4e;}
+.mwt-tag-warning:after {border-right-color:#f0ad4e;}
+
+.mwt-tag-success {background:#4cae4c;}
+.mwt-tag-success:after {border-right-color:#4cae4c;}
+
+.mwt-tag-info {background:#46b8da;}
+.mwt-tag-info:after {border-right-color:#46b8da;}
+

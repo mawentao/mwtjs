@@ -31,7 +31,11 @@ MWT.TextField=function(opt)
         var code;
         if (type=='textarea') {
             code = '<textarea id="'+tid+'" class="form-control '+this.cls+'" placeholder="'+placeholder+'"'+
-             ' style="'+this.style+'"></textarea>';
+             ' style="'+this.style+'"></textarea>'+
+			'<div class="mwt-field-textarea-bar">'+
+				'<a name="mwt-field-textarea-bar" href="javascript:;" data-target="'+tid+'" data-step="100"><i class="fa fa-arrow-circle-down"></i></a>'+
+				'<a name="mwt-field-textarea-bar" href="javascript:;" data-target="'+tid+'" data-step="-100"><i class="fa fa-arrow-circle-up"></i></a>'+
+			'</div>';
         } else {
 			code = '<div style="position:relative">'+
 				'<input type="'+type+'" id="'+tid+'" class="form-control '+this.cls+'" placeholder="'+placeholder+'"'+
@@ -43,6 +47,19 @@ MWT.TextField=function(opt)
         }
         jQuery("#"+this.render).html(code);
         errpop = new MWT.Popover({anchor:tid,html:errmsg,cls:"mwt-popover-danger"});
+		if (type=='textarea') {
+			jQuery('[name=mwt-field-textarea-bar]').unbind("click").click(function(){
+				var target = jQuery(this).data('target');
+				var step = jQuery(this).data('step');
+				var jtxrarea = jQuery('#'+target);
+				if (jtxrarea) {
+					var height = jtxrarea.height();
+					var th = height + parseInt(step);
+					if (th<50) return;
+					jtxrarea.height(th);
+				}
+			});
+		}
 
         this.setValue(this.value);
         // bundle event

@@ -30,3 +30,4 @@ MWT.extends(MWT.Layout,MWT.Event);
 
 require('./FillLayout');
 require('./BorderLayout');
+require('./CellLayout');

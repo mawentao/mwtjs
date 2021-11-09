@@ -5,6 +5,7 @@ require('./animate/dialog.css');
 require('./rowcol.css');
 require('./icon.js');
 require('./button.js');
+require('./tag.css');
 require('./search.css');
 require('./pop.js');
 
